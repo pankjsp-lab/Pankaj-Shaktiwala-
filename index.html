@@ -5,33 +5,121 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Pankaj Shaktiwala</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#17233b}
-header{background:#102b59;color:white;padding:22px 15px;text-align:center}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#f4f7fb;
+ color:#17233b
+}
+header{
+ background:#102b59;
+ color:white;
+ padding:22px 15px;
+ text-align:center
+}
 header h1{margin:0;font-size:25px}
 header p{margin:8px 0 0;color:#dbeafe}
-nav{background:#fff;padding:12px;text-align:center;position:sticky;top:0;box-shadow:0 2px 8px #0001}
-button,a{cursor:pointer}
-nav button{border:0;background:#102b59;color:white;padding:10px 15px;border-radius:8px;margin:4px}
-.hero{text-align:center;padding:35px 15px;background:linear-gradient(135deg,#dbeafe,#fff)}
+nav{
+ background:white;
+ padding:12px;
+ text-align:center;
+ position:sticky;
+ top:0;
+ box-shadow:0 2px 8px #0001;
+ z-index:10
+}
+button{cursor:pointer}
+nav button{
+ border:0;
+ background:#102b59;
+ color:white;
+ padding:10px 15px;
+ border-radius:8px;
+ margin:4px
+}
+.hero{
+ text-align:center;
+ padding:35px 15px;
+ background:linear-gradient(135deg,#dbeafe,#fff)
+}
 .hero h2{color:#102b59;font-size:27px}
 .container{max-width:950px;margin:auto;padding:18px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:13px}
-.card{background:white;padding:22px 10px;border-radius:13px;text-align:center;box-shadow:0 3px 12px #0001;border:1px solid #e5eaf2}
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+ gap:13px
+}
+.card{
+ background:white;
+ padding:22px 10px;
+ border-radius:13px;
+ text-align:center;
+ box-shadow:0 3px 12px #0001;
+ border:1px solid #e5eaf2;
+ cursor:pointer
+}
 .card h3{margin:8px 0;color:#102b59;font-size:17px}
 .card p{font-size:13px;color:#64748b}
-section{margin:25px 0}
-.panel{background:white;padding:18px;border-radius:12px;margin:15px 0;box-shadow:0 3px 12px #0001}
-input,textarea,select{width:100%;padding:12px;margin:7px 0 13px;border:1px solid #cbd5e1;border-radius:7px;font-size:15px}
+.panel{
+ background:white;
+ padding:18px;
+ border-radius:12px;
+ margin:15px 0;
+ box-shadow:0 3px 12px #0001
+}
+input,textarea,select{
+ width:100%;
+ padding:12px;
+ margin:7px 0 13px;
+ border:1px solid #cbd5e1;
+ border-radius:7px;
+ font-size:15px
+}
 textarea{min-height:100px}
-.action{background:#102b59;color:white;border:0;padding:12px 18px;border-radius:8px}
-.item{background:white;padding:15px;margin:10px 0;border-radius:10px;border-left:4px solid #2563eb}
+.action{
+ background:#102b59;
+ color:white;
+ border:0;
+ padding:12px 18px;
+ border-radius:8px
+}
+.item{
+ background:white;
+ padding:15px;
+ margin:12px 0;
+ border-radius:10px;
+ border-left:4px solid #2563eb;
+ box-shadow:0 2px 8px #0001
+}
+.item h3{color:#102b59}
 .small{font-size:13px;color:#64748b}
-.hidden{display:none}
-footer{text-align:center;padding:25px;background:#102b59;color:white;margin-top:35px}
+.hidden{display:none!important}
+.video-box{
+ width:100%;
+ aspect-ratio:16/9;
+ margin-top:12px;
+ background:#000;
+ border-radius:10px;
+ overflow:hidden
+}
+.video-box iframe{
+ width:100%;
+ height:100%;
+ border:0
+}
+footer{
+ text-align:center;
+ padding:25px;
+ background:#102b59;
+ color:white;
+ margin-top:35px
+}
 </style>
 </head>
+
 <body>
 
 <header>
@@ -40,62 +128,130 @@ footer{text-align:center;padding:25px;background:#102b59;color:white;margin-top:
 </header>
 
 <nav>
-<button onclick="showSection('home')">होम</button>
-<button onclick="showSection('content')">स्टडी मटेरियल</button>
+<button onclick="showSection('home')">Home</button>
+<button onclick="showSection('content')">Study Material</button>
 <button onclick="showSection('login')">Admin Login</button>
 </nav>
 
 <div id="home">
+
 <div class="hero">
 <h2>आपकी सफलता की शुरुआत यहीं से!</h2>
 <p>सीखिए, अभ्यास कीजिए और अपने लक्ष्य को प्राप्त कीजिए।</p>
 </div>
+
 <div class="container">
+
 <div class="grid">
-<div class="card" onclick="filterContent('करेंट अफेयर्स')"><h3>📰 करेंट अफेयर्स</h3><p>रोज नई जानकारी</p></div>
-<div class="card" onclick="filterContent('नोट्स और PDF')"><h3>📚 नोट्स और PDF</h3><p>स्टडी मटेरियल</p></div>
-<div class="card" onclick="filterContent('ऑनलाइन टेस्ट')"><h3>📝 ऑनलाइन टेस्ट</h3><p>अपनी तैयारी जाँचें</p></div>
-<div class="card" onclick="filterContent('कोर्स')"><h3>🎓 कोर्स</h3><p>सीखें और आगे बढ़ें</p></div>
-<div class="card" onclick="filterContent('ऑडियो और वीडियो')"><h3>🎬 ऑडियो और वीडियो</h3><p>वीडियो लेक्चर</p></div>
-<div class="card" onclick="filterContent('डिजिटल स्टोर')"><h3>🛒 डिजिटल स्टोर</h3><p>डिजिटल सामग्री</p></div>
+
+<div class="card" onclick="filterContent('करेंट अफेयर्स')">
+<h3>📰 करेंट अफेयर्स</h3>
+<p>रोज नई जानकारी</p>
+</div>
+
+<div class="card" onclick="filterContent('नोट्स और PDF')">
+<h3>📚 नोट्स और PDF</h3>
+<p>स्टडी मटेरियल</p>
+</div>
+
+<div class="card" onclick="filterContent('ऑनलाइन टेस्ट')">
+<h3>📝 ऑनलाइन टेस्ट</h3>
+<p>अपनी तैयारी जाँचें</p>
+</div>
+
+<div class="card" onclick="filterContent('कोर्स')">
+<h3>🎓 कोर्स</h3>
+<p>सीखें और आगे बढ़ें</p>
+</div>
+
+<div class="card" onclick="filterContent('ऑडियो और वीडियो')">
+<h3>🎬 ऑडियो और वीडियो</h3>
+<p>वीडियो लेक्चर</p>
+</div>
+
+<div class="card" onclick="filterContent('डिजिटल स्टोर')">
+<h3>🛒 डिजिटल स्टोर</h3>
+<p>डिजिटल सामग्री</p>
+</div>
+
 </div>
 </div>
 </div>
+
+<!-- STUDY MATERIAL -->
 
 <div class="container hidden" id="content">
+
 <h2>📚 स्टडी मटेरियल</h2>
-<div id="contentList"><p>कंटेंट लोड हो रहा है...</p></div>
+
+<button class="action" onclick="showSection('home')">
+← Home पर जाएँ
+</button>
+
+<div id="contentList">
+<p>कंटेंट लोड हो रहा है...</p>
 </div>
+
+</div>
+
+<!-- ADMIN LOGIN -->
 
 <div class="container hidden" id="login">
+
 <div class="panel">
+
 <h2>🔐 Admin Login</h2>
+
 <p class="small">केवल अधिकृत एडमिन लॉगिन करें।</p>
+
 <input id="email" type="email" placeholder="Admin Email">
+
 <input id="password" type="password" placeholder="Password">
+
 <button class="action" onclick="loginAdmin()">Login</button>
+
 <button class="action" onclick="logoutAdmin()">Logout</button>
+
 <p id="loginMessage"></p>
+
 </div>
 
+<!-- ADMIN DASHBOARD -->
+
 <div class="panel hidden" id="adminPanel">
-<h2>Admin Dashboard</h2>
+
+<h2>⚙️ Admin Dashboard</h2>
+
 <p>यहाँ से वेबसाइट पर नया कंटेंट जोड़ें।</p>
+
 <label>कंटेंट का प्रकार</label>
+
 <select id="category">
+
 <option>करेंट अफेयर्स</option>
 <option>नोट्स और PDF</option>
 <option>ऑनलाइन टेस्ट</option>
 <option>कोर्स</option>
 <option>ऑडियो और वीडियो</option>
 <option>डिजिटल स्टोर</option>
+
 </select>
-<label>शीर्षक</label>
-<input id="title" placeholder="कंटेंट का शीर्षक">
+
+<label>कंटेंट का शीर्षक</label>
+
+<input id="title" placeholder="कंटेंट का शीर्षक लिखें">
+
 <label>विवरण या लिंक</label>
-<textarea id="description" placeholder="जानकारी या PDF/वीडियो का लिंक लिखें"></textarea>
-<button class="action" onclick="addContent()">कंटेंट प्रकाशित करें</button>
+
+<textarea id="description"
+placeholder="जानकारी या YouTube/PDF का लिंक लिखें"></textarea>
+
+<button class="action" onclick="addContent()">
+कंटेंट प्रकाशित करें
+</button>
+
 <p id="adminMessage"></p>
+
 </div>
 </div>
 
@@ -106,107 +262,351 @@ footer{text-align:center;padding:25px;background:#102b59;color:white;margin-top:
 </footer>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+
+import {
+ getAuth,
+ signInWithEmailAndPassword,
+ signOut,
+ onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+import {
+ getFirestore,
+ collection,
+ addDoc,
+ getDocs,
+ query,
+ orderBy,
+ serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+
+/* FIREBASE CONFIG */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCJzzHsKAxdCpj5rbwkTDf2g4Jpk3OQp0s",
-  authDomain: "pankaj-shaktiwala.firebaseapp.com",
-  projectId: "pankaj-shaktiwala",
-  storageBucket: "pankaj-shaktiwala.firebasestorage.app",
-  messagingSenderId: "408322202371",
-  appId: "1:408322202371:web:028a30c57a693b61e1e736",
-  measurementId: "G-HXR2HPE3MT"
+
+ apiKey: "AIzaSyCJzzHsKAxdCpj5rbwkTDf2g4Jpk3OQp0s",
+
+ authDomain: "pankaj-shaktiwala.firebaseapp.com",
+
+ projectId: "pankaj-shaktiwala",
+
+ storageBucket: "pankaj-shaktiwala.firebasestorage.app",
+
+ messagingSenderId: "408322202371",
+
+ appId: "1:408322202371:web:028a30c57a693b61e1e736",
+
+ measurementId: "G-HXR2HPE3MT"
+
 };
+
 
 const app = initializeApp(firebaseConfig);
+
 const auth = getAuth(app);
+
 const db = getFirestore(app);
 
+
+/* PAGE NAVIGATION */
+
 window.showSection = function(id){
-  ["home","content","login"].forEach(x =>
-    document.getElementById(x).classList.add("hidden"));
-  document.getElementById(id).classList.remove("hidden");
-  if(id==="content") loadContent();
+
+ ["home","content","login"].forEach(x=>{
+  document.getElementById(x).classList.add("hidden");
+ });
+
+ document.getElementById(id).classList.remove("hidden");
+
+ if(id==="content"){
+  loadContent();
+ }
+
+ window.scrollTo(0,0);
+
 };
+
+
+/* CATEGORY FILTER */
 
 window.filterContent = async function(category){
-  showSection("content");
-  await loadContent(category);
+
+ showSection("content");
+
+ await loadContent(category);
+
 };
+
+
+/* ADMIN LOGIN */
 
 window.loginAdmin = async function(){
-  const email=document.getElementById("email").value;
-  const password=document.getElementById("password").value;
-  try{
-    await signInWithEmailAndPassword(auth,email,password);
-    document.getElementById("loginMessage").textContent="Login सफल!";
-  }catch(e){
-    document.getElementById("loginMessage").textContent="Login नहीं हुआ: "+e.message;
-  }
+
+ const email=document.getElementById("email").value.trim();
+
+ const password=document.getElementById("password").value;
+
+ const message=document.getElementById("loginMessage");
+
+ try{
+
+  await signInWithEmailAndPassword(auth,email,password);
+
+  message.textContent="Login सफल!";
+
+ }catch(error){
+
+  message.textContent="Login नहीं हुआ: "+error.message;
+
+ }
+
 };
+
+
+/* ADMIN LOGOUT */
 
 window.logoutAdmin = async function(){
+
+ try{
+
   await signOut(auth);
+
   document.getElementById("loginMessage").textContent="Logout हो गया।";
+
+ }catch(error){
+
+  document.getElementById("loginMessage").textContent=error.message;
+
+ }
+
 };
+
+
+/* ADMIN PANEL ACCESS */
 
 onAuthStateChanged(auth,user=>{
-  document.getElementById("adminPanel").classList.toggle("hidden",!user);
+
+ document.getElementById("adminPanel")
+ .classList.toggle("hidden",!user);
+
 });
 
+
+/* ADD CONTENT */
+
 window.addContent = async function(){
-  const category=document.getElementById("category").value;
-  const title=document.getElementById("title").value.trim();
-  const description=document.getElementById("description").value.trim();
-  const msg=document.getElementById("adminMessage");
-  if(!title || !description){
-    msg.textContent="शीर्षक और विवरण दोनों भरें।";
-    return;
-  }
-  try{
-    await addDoc(collection(db,"content"),{
-      category,title,description,createdAt:serverTimestamp()
-    });
-    msg.textContent="कंटेंट जोड़ दिया गया!";
-    document.getElementById("title").value="";
-    document.getElementById("description").value="";
-  }catch(e){
-    msg.textContent="अभी कंटेंट नहीं जुड़ा: "+e.message;
-  }
+
+ const category=document.getElementById("category").value;
+
+ const title=document.getElementById("title").value.trim();
+
+ const description=document.getElementById("description").value.trim();
+
+ const msg=document.getElementById("adminMessage");
+
+ if(!title || !description){
+
+  msg.textContent="शीर्षक और विवरण दोनों भरें।";
+
+  return;
+
+ }
+
+ try{
+
+  await addDoc(collection(db,"content"),{
+
+   category:category,
+
+   title:title,
+
+   description:description,
+
+   createdAt:serverTimestamp()
+
+  });
+
+  msg.textContent="कंटेंट सफलतापूर्वक प्रकाशित हो गया!";
+
+  document.getElementById("title").value="";
+
+  document.getElementById("description").value="";
+
+ }catch(error){
+
+  msg.textContent="कंटेंट नहीं जुड़ा: "+error.message;
+
+ }
+
 };
 
-async function loadContent(category=""){
-  const list=document.getElementById("contentList");
-  list.innerHTML="<p>लोड हो रहा है...</p>";
-  try{
-    const q=query(collection(db,"content"),orderBy("createdAt","desc"));
-    const result=await getDocs(q);
-    list.innerHTML="";
-    let count=0;
-    result.forEach(doc=>{
-      const d=doc.data();
-      if(category && d.category!==category)return;
-      count++;
-      const item=document.createElement("div");
-      item.className="item";
-      const heading=document.createElement("h3");
-      heading.textContent=d.title;
-      const type=document.createElement("p");
-      type.className="small";
-      type.textContent=d.category;
-      const detail=document.createElement("p");
-      detail.textContent=d.description;
-      item.append(heading,type,detail);
-      list.appendChild(item);
-    });
-    if(!count)list.textContent="अभी यहाँ कोई कंटेंट उपलब्ध नहीं है।";
-  }catch(e){
-    list.textContent="कंटेंट लोड नहीं हुआ। डेटाबेस Rules सेट करना बाकी हो सकता है।";
+
+/* YOUTUBE VIDEO ID EXTRACTOR */
+
+function getYouTubeId(url){
+
+ try{
+
+  const parsed=new URL(url);
+
+  let id="";
+
+  if(parsed.hostname==="youtu.be"){
+
+   id=parsed.pathname.split("/")[1];
+
   }
+
+  else if(
+   parsed.hostname==="www.youtube.com" ||
+   parsed.hostname==="youtube.com" ||
+   parsed.hostname==="m.youtube.com"
+  ){
+
+   if(parsed.pathname==="/watch"){
+
+    id=parsed.searchParams.get("v") || "";
+
+   }else{
+
+    const parts=parsed.pathname.split("/");
+
+    if(["embed","shorts"].includes(parts[1])){
+
+     id=parts[2] || "";
+
+    }
+
+   }
+
+  }
+
+  return /^[A-Za-z0-9_-]{11}$/.test(id)?id:null;
+
+ }catch{
+
+  return null;
+
+ }
+
 }
+
+
+/* LOAD CONTENT AND VIDEOS */
+
+async function loadContent(category=""){
+
+ const list=document.getElementById("contentList");
+
+ list.innerHTML="<p>लोड हो रहा है...</p>";
+
+ try{
+
+  const q=query(
+   collection(db,"content"),
+   orderBy("createdAt","desc")
+  );
+
+  const result=await getDocs(q);
+
+  list.innerHTML="";
+
+  let count=0;
+
+  result.forEach(doc=>{
+
+   const d=doc.data();
+
+   if(category && d.category!==category){
+
+    return;
+
+   }
+
+   count++;
+
+   const item=document.createElement("div");
+
+   item.className="item";
+
+   const heading=document.createElement("h3");
+
+   heading.textContent=d.title || "";
+
+   const type=document.createElement("p");
+
+   type.className="small";
+
+   type.textContent=d.category || "";
+
+   const detail=document.createElement("div");
+
+   /* VIDEO PLAYER */
+
+   const videoId =
+    d.category==="ऑडियो और वीडियो"
+    ? getYouTubeId(d.description || "")
+    : null;
+
+   if(videoId){
+
+    const videoBox=document.createElement("div");
+
+    videoBox.className="video-box";
+
+    const iframe=document.createElement("iframe");
+
+    iframe.src=
+     "https://www.youtube-nocookie.com/embed/"+videoId;
+
+    iframe.title=d.title || "YouTube video";
+
+    iframe.loading="lazy";
+
+    iframe.allow=
+     "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+
+    iframe.allowFullscreen=true;
+
+    videoBox.appendChild(iframe);
+
+    detail.appendChild(videoBox);
+
+   }else{
+
+    detail.textContent=d.description || "";
+
+   }
+
+   item.append(heading,type,detail);
+
+   list.appendChild(item);
+
+  });
+
+  if(!count){
+
+   list.textContent="अभी यहाँ कोई कंटेंट उपलब्ध नहीं है।";
+
+  }
+
+ }catch(error){
+
+  console.error(error);
+
+  list.textContent=
+   "कंटेंट लोड नहीं हुआ। इंटरनेट और Firestore Rules जाँचें।";
+
+ }
+
+}
+
 </script>
+
 </body>
-  </html>
+                                                         </html>
   
