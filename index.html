@@ -2,318 +2,402 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Pankaj Shaktiwala</title>
-  <style>
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}
-    header{background:#102b55;color:white;text-align:center;padding:24px 12px}
-    header h1{margin:0;font-size:27px}
-    header p{margin:8px 0 0}
-    nav{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;background:#173d70;padding:12px}
-    nav button{background:white;color:#173d70;border:0;padding:10px 16px;border-radius:7px;font-weight:bold}
-    main{max-width:950px;margin:22px auto;padding:0 14px}
-    .hero,.panel,.content-card{background:white;border-radius:12px;padding:18px;margin-bottom:16px;box-shadow:0 2px 9px #00000012}
-    .hero{text-align:center}
-    .hero h2{color:#173d70}
-    .categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:12px}
-    .category{background:#e8f0ff;padding:18px 8px;text-align:center;border-radius:10px;font-weight:bold}
-    h2,h3{color:#173d70}
-    input,textarea,select{width:100%;padding:12px;margin:7px 0 13px;border:1px solid #cbd5e1;border-radius:7px;font-size:16px}
-    textarea{min-height:90px}
-    .action{background:#1559a5;color:white;border:0;border-radius:7px;padding:12px 18px;font-size:15px;font-weight:bold;cursor:pointer}
-    .danger{background:#a52a2a}
-    .content-card h3{margin-top:0}
-    .video-box{position:relative;width:100%;aspect-ratio:16/9;background:#111;border-radius:9px;overflow:hidden;margin-top:12px}
-    .video-box iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-    .description{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.5}
-    .hidden{display:none}
-    .muted{color:#64748b;font-size:14px}
-    footer{text-align:center;background:#102b55;color:white;padding:18px;margin-top:30px}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Pankaj Shaktiwala</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb;color:#172033}
+header{background:#102b55;color:white;text-align:center;padding:25px 12px}
+header h1{margin:0;font-size:27px}
+nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;background:#173d70;padding:12px}
+button{cursor:pointer}
+nav button,.btn{border:0;border-radius:7px;padding:11px 16px;font-weight:bold}
+nav button{background:white;color:#173d70}
+.btn{background:#1559a5;color:white}
+.btn.secondary{background:#64748b}
+.btn.lock{background:#a66a00}
+main{max-width:950px;margin:22px auto;padding:0 14px}
+.panel,.card,.hero{background:white;border-radius:12px;padding:18px;margin-bottom:16px;box-shadow:0 2px 9px #00000012}
+.hero{text-align:center}
+h2,h3{color:#173d70}
+input,textarea,select{width:100%;padding:12px;margin:7px 0 13px;border:1px solid #cbd5e1;border-radius:7px;font-size:16px}
+textarea{min-height:85px}
+.hidden{display:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.tile{background:#e8f0ff;border-radius:10px;padding:17px;text-align:center}
+.tile strong{display:block;margin-bottom:7px}
+.badge{display:inline-block;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:bold}
+.free{background:#d8f5e2;color:#176b36}
+.paid{background:#fff0cf;color:#895600}
+.video{position:relative;aspect-ratio:16/9;width:100%;margin-top:12px;background:#111;border-radius:9px;overflow:hidden}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.muted{color:#64748b;font-size:14px}
+footer{text-align:center;background:#102b55;color:white;padding:18px;margin-top:30px}
+hr{border:0;border-top:1px solid #ddd;margin:20px 0}
+</style>
 </head>
 <body>
 
 <header>
-  <h1>THE PANKAJ SHAKTIWALA</h1>
-  <p>Learn • Practice • Achieve</p>
+<h1>THE PANKAJ SHAKTIWALA</h1>
+<p>Learn • Practice • Achieve</p>
 </header>
 
 <nav>
-  <button onclick="showSection('home')">Home</button>
-  <button onclick="showSection('study')">Study Material</button>
-  <button onclick="showSection('login')">Admin Login</button>
+<button onclick="showSection('home')">Home</button>
+<button onclick="showSection('login')">Student Login</button>
+<button onclick="showSection('register')">Create Account</button>
+<button onclick="showSection('adminLogin')">Admin</button>
 </nav>
 
 <main>
-  <section id="home">
-    <div class="hero">
-      <h2>आपकी सफलता की शुरुआत यहीं से!</h2>
-      <p>पढ़ें, सीखें और अपनी तैयारी को मजबूत बनाएं।</p>
-    </div>
-    <div class="categories">
-      <div class="category">करेंट अफेयर्स</div>
-      <div class="category">नोट्स और PDF</div>
-      <div class="category">ऑनलाइन टेस्ट</div>
-      <div class="category">कोर्स</div>
-      <div class="category">ऑडियो और वीडियो</div>
-      <div class="category">डिजिटल स्टोर</div>
-    </div>
-  </section>
 
-  <section id="study" class="hidden">
-    <div class="panel">
-      <h2>Study Material</h2>
-      <div id="contentList">कंटेंट लोड हो रहा है...</div>
-    </div>
-  </section>
+<section id="home">
+<div class="hero">
+<h2>आपकी सफलता की शुरुआत यहीं से!</h2>
+<p>अपना अकाउंट बनाएँ और पढ़ाई शुरू करें।</p>
+<button class="btn" onclick="showSection('register')">विद्यार्थी अकाउंट बनाएँ</button>
+<button class="btn secondary" onclick="showSection('login')">पहले से अकाउंट है? Login करें</button>
+</div>
+<div class="grid">
+<div class="tile"><strong>करेंट अफेयर्स</strong>Free + Paid</div>
+<div class="tile"><strong>नोट्स और PDF</strong>Free + Paid</div>
+<div class="tile"><strong>ऑनलाइन टेस्ट</strong>Free + Paid</div>
+<div class="tile"><strong>कोर्स</strong>Free + Paid</div>
+<div class="tile"><strong>ऑडियो और वीडियो</strong>Free + Paid</div>
+<div class="tile"><strong>डिजिटल स्टोर</strong>Free + Paid</div>
+</div>
+</section>
 
-  <section id="login" class="hidden">
-    <div class="panel">
-      <h2>Admin Login</h2>
-      <form id="loginForm">
-        <label>ईमेल</label>
-        <input id="email" type="email" required>
-        <label>पासवर्ड</label>
-        <input id="password" type="password" required>
-        <button class="action" type="submit">Login</button>
-      </form>
-      <p id="loginMessage" class="muted"></p>
-    </div>
-  </section>
+<section id="register" class="hidden">
+<div class="panel">
+<h2>विद्यार्थी Registration</h2>
+<form id="registerForm">
+<label>पूरा नाम</label>
+<input id="studentName" type="text" placeholder="अपना नाम लिखें" required>
+<label>Email ID</label>
+<input id="registerEmail" type="email" placeholder="अपनी ईमेल लिखें" required>
+<label>Password</label>
+<input id="registerPassword" type="password" minlength="6" placeholder="कम से कम 6 अक्षर" required>
+<button class="btn" type="submit">Create Account</button>
+</form>
+<p id="registerMessage" class="muted"></p>
+<p>पहले से अकाउंट है? <a href="#" onclick="showSection('login')">Login करें</a></p>
+</div>
+</section>
 
-  <section id="admin" class="hidden">
-    <div class="panel">
-      <h2>Admin Dashboard</h2>
-      <button id="logoutBtn" class="action danger" type="button">Logout</button>
-      <hr>
-      <h3>Add Content</h3>
-      <form id="contentForm">
-        <label>कैटेगरी</label>
-        <select id="category" required>
-          <option value="">कैटेगरी चुनें</option>
-          <option>करेंट अफेयर्स</option>
-          <option>नोट्स और PDF</option>
-          <option>ऑनलाइन टेस्ट</option>
-          <option>कोर्स</option>
-          <option>ऑडियो और वीडियो</option>
-          <option>डिजिटल स्टोर</option>
-        </select>
+<section id="login" class="hidden">
+<div class="panel">
+<h2>Student Login</h2>
+<form id="studentLoginForm">
+<label>Email ID</label>
+<input id="studentEmail" type="email" required>
+<label>Password</label>
+<input id="studentLoginPassword" type="password" required>
+<button class="btn" type="submit">Login</button>
+</form>
+<p id="studentLoginMessage" class="muted"></p>
+</div>
+</section>
 
-        <label>शीर्षक</label>
-        <input id="title" type="text" placeholder="कंटेंट का शीर्षक लिखें" required>
+<section id="studentDashboard" class="hidden">
+<div class="panel">
+<h2>Student Dashboard</h2>
+<p id="welcomeStudent"></p>
+<button class="btn secondary" id="studentLogout">Logout</button>
+<hr>
+<h3>आपकी पढ़ाई के सेक्शन</h3>
+<div class="grid">
+<div class="tile"><strong>करेंट अफेयर्स</strong><span class="badge free">FREE</span> <span class="badge paid">PAID</span></div>
+<div class="tile"><strong>नोट्स और PDF</strong><span class="badge free">FREE</span> <span class="badge paid">PAID</span></div>
+<div class="tile"><strong>ऑनलाइन टेस्ट</strong><span class="badge free">FREE</span> <span class="badge paid">PAID</span></div>
+<div class="tile"><strong>कोर्स</strong><span class="badge free">FREE</span> <span class="badge paid">PAID</span></div>
+<div class="tile"><strong>ऑडियो और वीडियो</strong><span class="badge free">FREE</span> <span class="badge paid">PAID</span></div>
+<div class="tile"><strong>डिजिटल स्टोर</strong><span class="badge free">FREE</span> <span class="badge paid">PAID</span></div>
+</div>
+<p class="muted">अभी Free सामग्री उपलब्ध है। Paid सामग्री जल्द उपलब्ध होगी।</p>
+</div>
+<div class="panel">
+<h2>Study Material</h2>
+<div id="contentList">कंटेंट लोड हो रहा है...</div>
+</div>
+</section>
 
-        <label>विवरण या लिंक</label>
-        <textarea id="description" placeholder="YouTube लिंक या विवरण यहाँ डालें" required></textarea>
+<section id="adminLogin" class="hidden">
+<div class="panel">
+<h2>Admin Login</h2>
+<form id="adminLoginForm">
+<label>Admin Email</label>
+<input id="adminEmail" type="email" required>
+<label>Password</label>
+<input id="adminPassword" type="password" required>
+<button class="btn" type="submit">Admin Login</button>
+</form>
+<p id="adminLoginMessage" class="muted"></p>
+</div>
+</section>
 
-        <button class="action" type="submit">Add Content</button>
-      </form>
-      <p id="adminMessage" class="muted"></p>
-    </div>
-  </section>
+<section id="adminDashboard" class="hidden">
+<div class="panel">
+<h2>Admin Dashboard</h2>
+<button class="btn secondary" id="adminLogout">Logout</button>
+<hr>
+<h3>नया कंटेंट जोड़ें</h3>
+<form id="contentForm">
+<label>कैटेगरी</label>
+<select id="category" required>
+<option value="">कैटेगरी चुनें</option>
+<option>करेंट अफेयर्स</option>
+<option>नोट्स और PDF</option>
+<option>ऑनलाइन टेस्ट</option>
+<option>कोर्स</option>
+<option>ऑडियो और वीडियो</option>
+<option>डिजिटल स्टोर</option>
+</select>
+<label>शीर्षक</label>
+<input id="title" type="text" required>
+<label>विवरण या लिंक</label>
+<textarea id="description" placeholder="YouTube लिंक या विवरण" required></textarea>
+<label>कंटेंट का प्रकार</label>
+<select id="accessType">
+<option value="free">FREE - सभी विद्यार्थियों के लिए</option>
+<option value="paid">PAID - अभी लॉक रहेगा</option>
+</select>
+<button class="btn" type="submit">Add Content</button>
+</form>
+<p id="adminMessage" class="muted"></p>
+</div>
+</section>
+
 </main>
-
 <footer>© 2026 The Pankaj Shaktiwala</footer>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-  import {
-    getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
-  } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-  import {
-    getFirestore, collection, addDoc, getDocs,
-    query, orderBy, serverTimestamp
-  } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+import {
+ getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,
+ onAuthStateChanged,signOut,updateProfile
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import {
+ getFirestore,collection,addDoc,getDocs,query,orderBy,serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyCJzzHsKAxdCpj5rbwkTDf2g4Jpk3OQp0s",
-    authDomain: "pankaj-shaktiwala.firebaseapp.com",
-    projectId: "pankaj-shaktiwala",
-    storageBucket: "pankaj-shaktiwala.firebasestorage.app",
-    messagingSenderId: "408322202371",
-    appId: "1:408322202371:web:028a30c57a693b61e1e736",
-    measurementId: "G-HXR2HPE3MT"
+const firebaseConfig={
+ apiKey:"AIzaSyCJzzHsKAxdCpj5rbwkTDf2g4Jpk3OQp0s",
+ authDomain:"pankaj-shaktiwala.firebaseapp.com",
+ projectId:"pankaj-shaktiwala",
+ storageBucket:"pankaj-shaktiwala.firebasestorage.app",
+ messagingSenderId:"408322202371",
+ appId:"1:408322202371:web:028a30c57a693b61e1e736",
+ measurementId:"G-HXR2HPE3MT"
+};
+
+const ADMIN_UID="qCYZY955m1eRkZ1brmSMTZzznmH3";
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+
+const sections=[
+ "home","register","login","studentDashboard",
+ "adminLogin","adminDashboard"
+];
+
+window.showSection=function(id){
+ sections.forEach(s=>document.getElementById(s).classList.add("hidden"));
+ if(id==="studentDashboard" && !auth.currentUser){
+  id="login";
+ }
+ if(id==="adminDashboard" &&
+   (!auth.currentUser || auth.currentUser.uid!==ADMIN_UID)){
+  id="adminLogin";
+ }
+ document.getElementById(id).classList.remove("hidden");
+ if(id==="studentDashboard")loadContent();
+};
+
+function message(id,text){
+ document.getElementById(id).textContent=text;
+}
+
+document.getElementById("registerForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ message("registerMessage","अकाउंट बनाया जा रहा है...");
+ const name=document.getElementById("studentName").value.trim();
+ const email=document.getElementById("registerEmail").value.trim();
+ const password=document.getElementById("registerPassword").value;
+ try{
+  const result=await createUserWithEmailAndPassword(auth,email,password);
+  await updateProfile(result.user,{displayName:name});
+  message("registerMessage","अकाउंट बन गया! आपका Dashboard खुल रहा है।");
+  showSection("studentDashboard");
+ }catch(error){
+  console.error(error);
+  const errors={
+   "auth/email-already-in-use":"यह Email पहले से रजिस्टर्ड है। Login करें।",
+   "auth/weak-password":"पासवर्ड कम से कम 6 अक्षर का रखें।",
+   "auth/invalid-email":"Email सही नहीं है।",
+   "auth/operation-not-allowed":"Firebase में Email/Password Login चालू करें।"
   };
+  message("registerMessage",errors[error.code]||"अकाउंट नहीं बना। दोबारा कोशिश करें।");
+ }
+});
 
-  const ADMIN_UID = "qCYZY955m1eRkZ1brmSMTZzznmH3";
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  window.showSection = function(section) {
-    ["home","study","login","admin"].forEach(id => {
-      document.getElementById(id).classList.add("hidden");
-    });
-
-    if(section === "admin") {
-      if(auth.currentUser && auth.currentUser.uid === ADMIN_UID) {
-        document.getElementById("admin").classList.remove("hidden");
-      } else {
-        document.getElementById("login").classList.remove("hidden");
-      }
-    } else {
-      document.getElementById(section).classList.remove("hidden");
-    }
-
-    if(section === "study") loadContent();
-  };
-
-  // YouTube URL से वीडियो ID निकालना
-  function getYouTubeId(value) {
-    if(!value) return null;
-
-    try {
-      const url = new URL(value.trim());
-      let id = "";
-
-      if(url.hostname.includes("youtu.be")) {
-        id = url.pathname.split("/").filter(Boolean)[0] || "";
-      } else if(url.hostname.includes("youtube.com") ||
-                url.hostname.includes("youtube-nocookie.com")) {
-        if(url.pathname === "/watch") {
-          id = url.searchParams.get("v") || "";
-        } else {
-          const parts = url.pathname.split("/").filter(Boolean);
-          if(["embed","shorts","live"].includes(parts[0])) {
-            id = parts[1] || "";
-          }
-        }
-      }
-
-      return /^[a-zA-Z0-9_-]{11}$/.test(id) ? id : null;
-    } catch(error) {
-      return null;
-    }
+document.getElementById("studentLoginForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ message("studentLoginMessage","लॉगिन हो रहा है...");
+ try{
+  await signInWithEmailAndPassword(
+   auth,
+   document.getElementById("studentEmail").value.trim(),
+   document.getElementById("studentLoginPassword").value
+  );
+  if(auth.currentUser.uid===ADMIN_UID){
+   showSection("adminDashboard");
+  }else{
+   showSection("studentDashboard");
   }
+ }catch(error){
+  console.error(error);
+  message("studentLoginMessage","लॉगिन नहीं हुआ। Email और Password जाँचें।");
+ }
+});
 
-  function makeText(tag, className, value) {
-    const element = document.createElement(tag);
-    if(className) element.className = className;
-    element.textContent = value || "";
-    return element;
+document.getElementById("adminLoginForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ message("adminLoginMessage","लॉगिन हो रहा है...");
+ try{
+  await signInWithEmailAndPassword(
+   auth,
+   document.getElementById("adminEmail").value.trim(),
+   document.getElementById("adminPassword").value
+  );
+  if(auth.currentUser.uid!==ADMIN_UID){
+   await signOut(auth);
+   message("adminLoginMessage","यह अकाउंट Admin नहीं है।");
+   return;
   }
+  showSection("adminDashboard");
+ }catch(error){
+  console.error(error);
+  message("adminLoginMessage","Admin Email या Password गलत है।");
+ }
+});
 
-  async function loadContent() {
-    const list = document.getElementById("contentList");
-    list.replaceChildren(makeText("p","muted","कंटेंट लोड हो रहा है..."));
+async function logout(){
+ await signOut(auth);
+ showSection("home");
+}
+document.getElementById("studentLogout").addEventListener("click",logout);
+document.getElementById("adminLogout").addEventListener("click",logout);
 
-    try {
-      const q = query(collection(db,"content"),orderBy("createdAt","desc"));
-      const snapshot = await getDocs(q);
-      list.replaceChildren();
-
-      if(snapshot.empty) {
-        list.append(makeText("p","muted","अभी कोई कंटेंट उपलब्ध नहीं है।"));
-        return;
-      }
-
-      snapshot.forEach(docSnap => {
-        const item = docSnap.data();
-        const card = document.createElement("article");
-        card.className = "content-card";
-
-        card.append(makeText("p","muted",item.category || ""));
-        card.append(makeText("h3","",item.title || "बिना शीर्षक"));
-
-        const videoId = getYouTubeId(item.description || "");
-
-        if(videoId) {
-          const videoBox = document.createElement("div");
-          videoBox.className = "video-box";
-
-          const iframe = document.createElement("iframe");
-          iframe.src = "https://www.youtube-nocookie.com/embed/" + videoId;
-          iframe.title = item.title || "YouTube video";
-          iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-          iframe.allowFullscreen = true;
-          iframe.referrerPolicy = "strict-origin-when-cross-origin";
-
-          videoBox.append(iframe);
-          card.append(videoBox);
-        } else if(item.description) {
-          card.append(makeText("p","description",item.description));
-        }
-
-        list.append(card);
-      });
-
-    } catch(error) {
-      console.error(error);
-      list.replaceChildren(makeText("p","muted","कंटेंट लोड नहीं हुआ। इंटरनेट या Firestore Rules जाँचें।"));
-    }
+function getYouTubeId(value){
+ try{
+  const url=new URL(value.trim());
+  let id="";
+  if(url.hostname.includes("youtu.be")){
+   id=url.pathname.split("/").filter(Boolean)[0]||"";
+  }else if(url.hostname.includes("youtube.com")||
+           url.hostname.includes("youtube-nocookie.com")){
+   if(url.pathname==="/watch")id=url.searchParams.get("v")||"";
+   else{
+    const parts=url.pathname.split("/").filter(Boolean);
+    if(["embed","shorts","live"].includes(parts[0]))id=parts[1]||"";
+   }
   }
+  return /^[a-zA-Z0-9_-]{11}$/.test(id)?id:null;
+ }catch{return null}
+}
 
-  document.getElementById("loginForm").addEventListener("submit", async event => {
-    event.preventDefault();
-    const message = document.getElementById("loginMessage");
-    message.textContent = "लॉगिन हो रहा है...";
+function makeText(tag,className,value){
+ const el=document.createElement(tag);
+ el.className=className||"";
+ el.textContent=value||"";
+ return el;
+}
 
-    try {
-      await signInWithEmailAndPassword(
-        auth,
-        document.getElementById("email").value.trim(),
-        document.getElementById("password").value
-      );
-      message.textContent = "लॉगिन सफल!";
-      window.showSection("admin");
-    } catch(error) {
-      console.error(error);
-      message.textContent = "लॉगिन नहीं हुआ। ईमेल और पासवर्ड जाँचें।";
+async function loadContent(){
+ const list=document.getElementById("contentList");
+ list.replaceChildren(makeText("p","muted","कंटेंट लोड हो रहा है..."));
+ try{
+  const q=query(collection(db,"content"),orderBy("createdAt","desc"));
+  const snapshot=await getDocs(q);
+  list.replaceChildren();
+  if(snapshot.empty){
+   list.append(makeText("p","muted","अभी कोई कंटेंट उपलब्ध नहीं है।"));
+   return;
+  }
+  snapshot.forEach(docSnap=>{
+   const item=docSnap.data();
+   const card=document.createElement("article");
+   card.className="card";
+   card.append(makeText("p","muted",item.category||""));
+   card.append(makeText("h3","",item.title||"बिना शीर्षक"));
+
+   if(item.accessType==="paid"){
+    card.append(makeText("span","badge paid","PAID CONTENT"));
+    card.append(makeText("p","muted","यह सामग्री अभी लॉक है। जल्द उपलब्ध होगी।"));
+   }else{
+    card.append(makeText("span","badge free","FREE"));
+    const videoId=getYouTubeId(item.description||"");
+    if(videoId){
+     const box=document.createElement("div");
+     box.className="video";
+     const iframe=document.createElement("iframe");
+     iframe.src="https://www.youtube-nocookie.com/embed/"+videoId;
+     iframe.title=item.title||"YouTube video";
+     iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+     iframe.allowFullscreen=true;
+     iframe.referrerPolicy="strict-origin-when-cross-origin";
+     box.append(iframe);
+     card.append(box);
+    }else{
+     card.append(makeText("p","",item.description||""));
     }
+   }
+   list.append(card);
   });
+ }catch(error){
+  console.error(error);
+  list.replaceChildren(makeText("p","muted","कंटेंट लोड नहीं हुआ। इंटरनेट या Firestore Rules जाँचें।"));
+ }
+}
 
-  document.getElementById("contentForm").addEventListener("submit", async event => {
-    event.preventDefault();
-
-    const message = document.getElementById("adminMessage");
-    const user = auth.currentUser;
-
-    if(!user || user.uid !== ADMIN_UID) {
-      message.textContent = "केवल अधिकृत Admin कंटेंट जोड़ सकता है।";
-      return;
-    }
-
-    const category = document.getElementById("category").value;
-    const title = document.getElementById("title").value.trim();
-    const description = document.getElementById("description").value.trim();
-
-    if(!category || !title || !description) {
-      message.textContent = "सभी जानकारी भरें।";
-      return;
-    }
-
-    message.textContent = "कंटेंट सेव हो रहा है...";
-
-    try {
-      await addDoc(collection(db,"content"), {
-        category,
-        title,
-        description,
-        createdAt: serverTimestamp()
-      });
-
-      document.getElementById("contentForm").reset();
-      message.textContent = "कंटेंट सफलतापूर्वक जुड़ गया!";
-    } catch(error) {
-      console.error(error);
-      message.textContent = "कंटेंट सेव नहीं हुआ। Firestore Rules जाँचें।";
-    }
+document.getElementById("contentForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const user=auth.currentUser;
+ if(!user||user.uid!==ADMIN_UID){
+  message("adminMessage","केवल Admin कंटेंट जोड़ सकता है।");
+  return;
+ }
+ message("adminMessage","कंटेंट सेव हो रहा है...");
+ try{
+  await addDoc(collection(db,"content"),{
+   category:document.getElementById("category").value,
+   title:document.getElementById("title").value.trim(),
+   description:document.getElementById("description").value.trim(),
+   accessType:document.getElementById("accessType").value,
+   createdAt:serverTimestamp()
   });
+  document.getElementById("contentForm").reset();
+  message("adminMessage","कंटेंट सफलतापूर्वक जुड़ गया!");
+ }catch(error){
+  console.error(error);
+  message("adminMessage","कंटेंट सेव नहीं हुआ। Firestore Rules जाँचें।");
+ }
+});
 
-  document.getElementById("logoutBtn").addEventListener("click", async () => {
-    await signOut(auth);
-    window.showSection("home");
-  });
-
-  onAuthStateChanged(auth, user => {
-    if(user && user.uid === ADMIN_UID) {
-      // Admin की पहचान सत्यापित है।
-    }
-  });
-
-  loadContent();
+onAuthStateChanged(auth,user=>{
+ if(user){
+  if(user.uid===ADMIN_UID){
+   document.getElementById("welcomeStudent").textContent="Admin अकाउंट";
+  }else{
+   document.getElementById("welcomeStudent").textContent=
+    "नमस्ते "+(user.displayName||user.email)+"! आपकी पढ़ाई शुरू करें।";
+  }
+ }
+});
 </script>
 </body>
-</html>
+  </html>
+  
