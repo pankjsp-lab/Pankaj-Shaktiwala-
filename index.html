@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="hi">
 <head>
@@ -6,45 +7,38 @@
 <title>The Pankaj Shaktiwala</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb;color:#172033}
-header{background:#102b55;color:white;text-align:center;padding:25px 12px}
-header h1{margin:0;font-size:27px}
-nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;background:#173d70;padding:12px}
-button,.btn{cursor:pointer;border:0;border-radius:7px;padding:11px 16px;font-weight:bold}
+body{margin:0;font-family:Arial,sans-serif;background:#f2f5fa;color:#172033}
+header{background:#102b55;color:white;text-align:center;padding:25px 10px}
+header h1{margin:0}
+nav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;background:#173d70;padding:12px}
+button{cursor:pointer;border:0;border-radius:7px;padding:11px 16px;font-weight:bold}
 nav button{background:white;color:#173d70}
-.btn{background:#1559a5;color:white}
-.btn.secondary{background:#64748b}
-.btn.lock{background:#a66a00}
 main{max-width:950px;margin:22px auto;padding:0 14px}
-.panel,.card,.hero{background:white;border-radius:12px;padding:18px;margin-bottom:16px;box-shadow:0 2px 9px #00000012}
+.panel,.card,.hero{background:white;border-radius:12px;padding:18px;margin-bottom:16px;box-shadow:0 2px 9px #0001}
 .hero{text-align:center}
 h2,h3{color:#173d70}
 input,textarea,select{width:100%;padding:12px;margin:7px 0 13px;border:1px solid #cbd5e1;border-radius:7px;font-size:16px}
-textarea{min-height:85px}
+textarea{min-height:80px}
+.btn{background:#1559a5;color:white}
+.secondary{background:#64748b;color:white}
 .hidden{display:none!important}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
 .tile{background:#e8f0ff;border-radius:10px;padding:17px;text-align:center;cursor:pointer}
 .tile strong{display:block;margin-bottom:7px}
-.badge{display:inline-block;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:bold}
+.muted{color:#64748b;font-size:14px}
+.badge{display:inline-block;padding:5px 10px;border-radius:20px;font-size:12px}
 .free{background:#d8f5e2;color:#176b36}
 .paid{background:#fff0cf;color:#895600}
-.video{position:relative;aspect-ratio:16/9;width:100%;margin-top:12px;background:#111;border-radius:9px;overflow:hidden}
-.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.muted{color:#64748b;font-size:14px}
-footer{text-align:center;background:#102b55;color:white;padding:18px;margin-top:30px}
-hr{border:0;border-top:1px solid #ddd;margin:20px 0}
-.question-editor,.question-card{border:1px solid #dbe3ef;border-radius:10px;padding:14px;margin:12px 0;background:#fbfcff}
-.question-editor h4{margin:0 0 8px;color:#173d70}
+.video{position:relative;aspect-ratio:16/9;width:100%;margin-top:12px}
+.video iframe{position:absolute;width:100%;height:100%;border:0}
+.question-editor,.question-card{border:1px solid #dbe3ef;border-radius:10px;padding:14px;margin:12px 0}
 .option-row{display:flex;align-items:center;gap:8px}
-.option-row input[type=radio]{width:auto;margin:0}
+.option-row input[type=radio]{width:auto}
 .option-row input[type=text]{flex:1}
-.quiz-option{display:flex;gap:9px;align-items:flex-start;padding:11px;border:1px solid #dbe3ef;border-radius:9px;margin:8px 0;cursor:pointer}
-.quiz-option input{width:auto;margin:3px 0 0}
-.quiz-option:has(input:checked){background:#e8f0ff;border-color:#1559a5}
-.result-good{color:#176b36;font-weight:bold}
-.result-bad{color:#b42318;font-weight:bold}
-.timer{font-size:19px;font-weight:bold;color:#b42318;background:#fff0f0;padding:9px 12px;border-radius:8px;display:inline-block}
-@media(max-width:520px){header h1{font-size:22px}.panel,.card{padding:14px}}
+.quiz-option{display:flex;gap:9px;padding:11px;border:1px solid #ddd;border-radius:8px;margin:8px 0}
+.quiz-option input{width:auto}
+.timer{font-size:19px;color:#b42318;font-weight:bold}
+footer{text-align:center;background:#102b55;color:white;padding:18px;margin-top:30px}
 </style>
 </head>
 <body>
@@ -57,7 +51,7 @@ hr{border:0;border-top:1px solid #ddd;margin:20px 0}
 <nav>
 <button onclick="showSection('home')">Home</button>
 <button onclick="showSection('login')">Student Login</button>
-<button onclick="showSection('register')">Create Account</button>
+<button onclick="showSection('register')">Registration</button>
 <button onclick="showSection('adminLogin')">Admin</button>
 </nav>
 
@@ -66,18 +60,17 @@ hr{border:0;border-top:1px solid #ddd;margin:20px 0}
 <section id="home">
 <div class="hero">
 <h2>आपकी सफलता की शुरुआत यहीं से!</h2>
-<p>अपना अकाउंट बनाएँ और पढ़ाई शुरू करें।</p>
-<button class="btn" onclick="showSection('register')">विद्यार्थी अकाउंट बनाएँ</button>
-<button class="btn secondary" onclick="showSection('login')">पहले से अकाउंट है? Login करें</button>
+<p>पढ़ें, सीखें और अपनी तैयारी को मजबूत बनाएँ।</p>
+<button class="btn" onclick="showSection('register')">Create Account</button>
+<button class="btn" onclick="showSection('login')">Student Login</button>
 </div>
-
 <div class="grid">
-<div class="tile" onclick="showSection('login')"><strong>करेंट अफेयर्स</strong>Free + Paid</div>
-<div class="tile" onclick="showSection('login')"><strong>नोट्स और PDF</strong>Free + Paid</div>
-<div class="tile" onclick="showSection('login')"><strong>ऑनलाइन टेस्ट</strong>Free + Paid</div>
-<div class="tile" onclick="showSection('login')"><strong>कोर्स</strong>Free + Paid</div>
-<div class="tile" onclick="showSection('login')"><strong>ऑडियो और वीडियो</strong>Free + Paid</div>
-<div class="tile" onclick="showSection('login')"><strong>डिजिटल स्टोर</strong>Free + Paid</div>
+<div class="tile" onclick="showSection('login')"><strong>करेंट अफेयर्स</strong>Study Material</div>
+<div class="tile" onclick="showSection('login')"><strong>नोट्स और PDF</strong>Study Material</div>
+<div class="tile" onclick="showSection('login')"><strong>ऑनलाइन टेस्ट</strong>MCQ Test</div>
+<div class="tile" onclick="showSection('login')"><strong>कोर्स</strong>Courses</div>
+<div class="tile" onclick="showSection('login')"><strong>वीडियो</strong>Video Classes</div>
+<div class="tile" onclick="showSection('login')"><strong>डिजिटल स्टोर</strong>Digital Store</div>
 </div>
 </section>
 
@@ -86,15 +79,14 @@ hr{border:0;border-top:1px solid #ddd;margin:20px 0}
 <h2>विद्यार्थी Registration</h2>
 <form id="registerForm">
 <label>पूरा नाम</label>
-<input id="studentName" type="text" placeholder="अपना नाम लिखें" required>
-<label>Email ID</label>
-<input id="registerEmail" type="email" placeholder="अपनी ईमेल लिखें" required>
+<input id="studentName" required>
+<label>Email</label>
+<input id="registerEmail" type="email" required>
 <label>Password</label>
-<input id="registerPassword" type="password" minlength="6" placeholder="कम से कम 6 अक्षर" required>
-<button class="btn" type="submit">Create Account</button>
+<input id="registerPassword" type="password" minlength="6" required>
+<button class="btn">Create Account</button>
 </form>
 <p id="registerMessage" class="muted"></p>
-<p>पहले से अकाउंट है? <a href="#" onclick="showSection('login')">Login करें</a></p>
 </div>
 </section>
 
@@ -102,11 +94,11 @@ hr{border:0;border-top:1px solid #ddd;margin:20px 0}
 <div class="panel">
 <h2>Student Login</h2>
 <form id="studentLoginForm">
-<label>Email ID</label>
+<label>Email</label>
 <input id="studentEmail" type="email" required>
 <label>Password</label>
 <input id="studentLoginPassword" type="password" required>
-<button class="btn" type="submit">Login</button>
+<button class="btn">Login</button>
 </form>
 <p id="studentLoginMessage" class="muted"></p>
 </div>
@@ -116,29 +108,21 @@ hr{border:0;border-top:1px solid #ddd;margin:20px 0}
 <div class="panel">
 <h2>Student Dashboard</h2>
 <p id="welcomeStudent"></p>
-<button class="btn secondary" id="studentLogout">Logout</button>
-<hr>
-<h3>आपकी पढ़ाई के सेक्शन</h3>
-<div class="grid">
-<div class="tile"><strong>करेंट अफेयर्स</strong><span class="badge free">FREE</span> <span class="badge paid">PAID</span></div>
-<div class="tile"><strong>नोट्स और PDF</strong><span class="badge free">FREE</span> <span class="badge paid">PAID</span></div>
-<div class="tile" onclick="showStudentTests()"><strong>ऑनलाइन टेस्ट</strong><span class="badge free">FREE</span> <span class="badge paid">PAID</span><p class="muted">टेस्ट देखने के लिए क्लिक करें</p></div>
-<div class="tile"><strong>कोर्स</strong><span class="badge free">FREE</span> <span class="badge paid">PAID</span></div>
-<div class="tile"><strong>ऑडियो और वीडियो</strong><span class="badge free">FREE</span> <span class="badge paid">PAID</span></div>
-<div class="tile"><strong>डिजिटल स्टोर</strong><span class="badge free">FREE</span> <span class="badge paid">PAID</span></div>
+<button class="btn secondary" onclick="logout()">Logout</button>
+<div class="grid" style="margin-top:15px">
+<div class="tile" onclick="showStudentTests()"><strong>ऑनलाइन टेस्ट</strong>MCQ Practice</div>
+<div class="tile"><strong>नोट्स और PDF</strong>Study Material</div>
+<div class="tile"><strong>करेंट अफेयर्स</strong>Daily GK</div>
 </div>
-<p class="muted">अभी Free सामग्री उपलब्ध है। Paid सामग्री जल्द उपलब्ध होगी।</p>
 </div>
-
 <div class="panel">
 <h2>Study Material</h2>
 <div id="contentList">कंटेंट लोड हो रहा है...</div>
 </div>
-
 <div class="panel hidden" id="studentTestPanel">
 <h2>ऑनलाइन टेस्ट</h2>
-<button class="btn secondary" onclick="hideStudentTests()">← Dashboard पर वापस</button>
-<div id="studentTestList" style="margin-top:14px">टेस्ट लोड हो रहे हैं...</div>
+<button class="btn secondary" onclick="hideStudentTests()">वापस जाएँ</button>
+<div id="studentTestList"></div>
 <div id="quizArea" class="hidden"></div>
 <div id="quizResult" class="hidden"></div>
 </div>
@@ -148,11 +132,11 @@ hr{border:0;border-top:1px solid #ddd;margin:20px 0}
 <div class="panel">
 <h2>Admin Login</h2>
 <form id="adminLoginForm">
-<label>Admin Email</label>
+<label>Email</label>
 <input id="adminEmail" type="email" required>
 <label>Password</label>
 <input id="adminPassword" type="password" required>
-<button class="btn" type="submit">Admin Login</button>
+<button class="btn">Admin Login</button>
 </form>
 <p id="adminLoginMessage" class="muted"></p>
 </div>
@@ -161,13 +145,13 @@ hr{border:0;border-top:1px solid #ddd;margin:20px 0}
 <section id="adminDashboard" class="hidden">
 <div class="panel">
 <h2>Admin Dashboard</h2>
-<button class="btn secondary" id="adminLogout">Logout</button>
+<button class="btn secondary" onclick="logout()">Logout</button>
 <hr>
-<h3>नया कंटेंट जोड़ें</h3>
+<h3>Study Material जोड़ें</h3>
 <form id="contentForm">
 <label>कैटेगरी</label>
 <select id="category" required>
-<option value="">कैटेगरी चुनें</option>
+<option value="">चुनें</option>
 <option>करेंट अफेयर्स</option>
 <option>नोट्स और PDF</option>
 <option>ऑनलाइन टेस्ट</option>
@@ -176,52 +160,43 @@ hr{border:0;border-top:1px solid #ddd;margin:20px 0}
 <option>डिजिटल स्टोर</option>
 </select>
 <label>शीर्षक</label>
-<input id="title" type="text" required>
-<label>विवरण या लिंक</label>
-<textarea id="description" placeholder="YouTube लिंक या विवरण" required></textarea>
-<label>कंटेंट का प्रकार</label>
+<input id="title" required>
+<label>विवरण या YouTube लिंक</label>
+<textarea id="description" required></textarea>
+<label>प्रकार</label>
 <select id="accessType">
-<option value="free">FREE - सभी विद्यार्थियों के लिए</option>
-<option value="paid">PAID - अभी लॉक रहेगा</option>
+<option value="free">FREE</option>
+<option value="paid">PAID</option>
 </select>
-<button class="btn" type="submit">Add Content</button>
+<button class="btn">Add Content</button>
 </form>
 <p id="adminMessage" class="muted"></p>
 </div>
 
 <div class="panel">
-<h2>नया MCQ ऑनलाइन टेस्ट बनाएँ</h2>
-<p class="muted">यहाँ प्रश्न, चार विकल्प, सही उत्तर और समय तय करके टेस्ट प्रकाशित करें।</p>
+<h2>नया MCQ टेस्ट बनाएँ</h2>
 <form id="testForm">
 <label>टेस्ट का नाम</label>
-<input id="testTitle" required placeholder="जैसे: भारतीय इतिहास टेस्ट - 1">
-
-<div class="grid">
-<div>
+<input id="testTitle" required>
 <label>समय (मिनट)</label>
-<input id="testDuration" type="number" min="1" max="300" value="20" required>
-</div>
-<div>
+<input id="testDuration" type="number" min="1" value="20" required>
 <label>टेस्ट प्रकार</label>
 <select id="testAccess">
 <option value="free">FREE</option>
-<option value="paid">PAID (लॉक)</option>
+<option value="paid">PAID</option>
 </select>
-</div>
-</div>
-
-<label>विवरण (वैकल्पिक)</label>
-<textarea id="testDescription" placeholder="टेस्ट के बारे में जानकारी"></textarea>
+<label>विवरण</label>
+<textarea id="testDescription"></textarea>
 <div id="questionEditors"></div>
-<button type="button" class="btn secondary" id="addQuestionBtn">+ प्रश्न जोड़ें</button>
-<button type="submit" class="btn">टेस्ट Publish करें</button>
+<button type="button" class="btn secondary" onclick="addQuestion()">+ प्रश्न जोड़ें</button>
+<button class="btn">Publish Test</button>
 </form>
 <p id="testAdminMessage" class="muted"></p>
 </div>
 
 <div class="panel">
 <h2>अपलोड किए गए टेस्ट</h2>
-<div id="adminTestList">टेस्ट लोड हो रहे हैं...</div>
+<div id="adminTestList"></div>
 </div>
 </section>
 
@@ -229,18 +204,108 @@ hr{border:0;border-top:1px solid #ddd;margin:20px 0}
 
 <footer>© 2026 The Pankaj Shaktiwala</footer>
 
+<!-- NAVIGATION: Firebase से अलग रखा गया है -->
+<script>
+const sectionIds=[
+"home","register","login","studentDashboard",
+"adminLogin","adminDashboard"
+];
+
+window.showSection=function(id){
+sectionIds.forEach(s=>{
+document.getElementById(s).classList.add("hidden");
+});
+document.getElementById(id).classList.remove("hidden");
+};
+
+window.logout=async function(){
+if(window.firebaseLogout)await window.firebaseLogout();
+showSection("home");
+};
+
+window.showStudentTests=async function(){
+document.getElementById("studentTestPanel").classList.remove("hidden");
+document.getElementById("studentTestList").classList.remove("hidden");
+document.getElementById("quizArea").classList.add("hidden");
+document.getElementById("quizResult").classList.add("hidden");
+if(window.loadStudentTests)await window.loadStudentTests();
+};
+
+window.hideStudentTests=function(){
+document.getElementById("studentTestPanel").classList.add("hidden");
+};
+
+let questionNumber=0;
+
+window.addQuestion=function(){
+questionNumber++;
+const n=questionNumber;
+const wrap=document.createElement("div");
+wrap.className="question-editor";
+
+const heading=document.createElement("h4");
+heading.textContent="प्रश्न "+n;
+wrap.append(heading);
+
+const q=document.createElement("textarea");
+q.className="q-text";
+q.placeholder="प्रश्न लिखें";
+q.required=true;
+wrap.append(q);
+
+["A","B","C","D"].forEach((letter,i)=>{
+const row=document.createElement("div");
+row.className="option-row";
+const radio=document.createElement("input");
+radio.type="radio";
+radio.name="correct-"+n;
+radio.value=i;
+radio.required=i===0;
+const input=document.createElement("input");
+input.type="text";
+input.className="option-text";
+input.placeholder="विकल्प "+letter;
+input.required=true;
+row.append(radio,input);
+wrap.append(row);
+});
+
+const exp=document.createElement("textarea");
+exp.className="q-explanation";
+exp.placeholder="व्याख्या (वैकल्पिक)";
+wrap.append(exp);
+
+const del=document.createElement("button");
+del.type="button";
+del.className="btn secondary";
+del.textContent="प्रश्न हटाएँ";
+del.onclick=()=>wrap.remove();
+wrap.append(del);
+
+document.getElementById("questionEditors").append(wrap);
+};
+
+window.addEventListener("DOMContentLoaded",()=>{
+addQuestion();
+});
+</script>
+
+<!-- FIREBASE: Navigation के अलग module में -->
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-import {
+try{
+
+const {initializeApp}=await import("https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js");
+
+const {
 getAuth,createUserWithEmailAndPassword,
 signInWithEmailAndPassword,onAuthStateChanged,
 signOut,updateProfile
-} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+}=await import("https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js");
 
-import {
+const {
 getFirestore,collection,addDoc,getDocs,
 query,orderBy,serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+}=await import("https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js");
 
 const firebaseConfig={
 apiKey:"AIzaSyCJzzHsKAxdCpj5rbwkTDf2g4Jpk3OQp0s",
@@ -258,230 +323,76 @@ const auth=getAuth(app);
 const db=getFirestore(app);
 const $=id=>document.getElementById(id);
 
-const sections=[
-"home","register","login","studentDashboard",
-"adminLogin","adminDashboard"
-];
+window.firebaseLogout=()=>signOut(auth);
 
-window.showSection=function(id){
-sections.forEach(s=>$(s).classList.add("hidden"));
+function msg(id,t){$(id).textContent=t;}
 
-if(id==="studentDashboard"&&!auth.currentUser)id="login";
-
-if(id==="adminDashboard"&&
-(!auth.currentUser||auth.currentUser.uid!==ADMIN_UID)){
-id="adminLogin";
-}
-
-$(id).classList.remove("hidden");
-
-if(id==="studentDashboard")loadContent();
-if(id==="adminDashboard")loadAdminTests();
-};
-
-function message(id,text){
-$(id).textContent=text;
-}
-
-/* STUDENT REGISTRATION */
+/* REGISTRATION */
 
 $("registerForm").addEventListener("submit",async e=>{
 e.preventDefault();
-message("registerMessage","अकाउंट बनाया जा रहा है...");
-
+msg("registerMessage","अकाउंट बनाया जा रहा है...");
 try{
 const r=await createUserWithEmailAndPassword(
-auth,
-$("registerEmail").value.trim(),
+auth,$("registerEmail").value.trim(),
 $("registerPassword").value
 );
-
-await updateProfile(r.user,{
-displayName:$("studentName").value.trim()
-});
-
-message("registerMessage","अकाउंट बन गया!");
+await updateProfile(r.user,{displayName:$("studentName").value.trim()});
 showSection("studentDashboard");
-
-}catch(error){
-console.error(error);
-message("registerMessage",error.message||"अकाउंट नहीं बना।");
-}
+}catch(err){msg("registerMessage",err.message);}
 });
 
 /* STUDENT LOGIN */
 
 $("studentLoginForm").addEventListener("submit",async e=>{
 e.preventDefault();
-message("studentLoginMessage","लॉगिन हो रहा है...");
-
+msg("studentLoginMessage","लॉगिन हो रहा है...");
 try{
 await signInWithEmailAndPassword(
-auth,
-$("studentEmail").value.trim(),
+auth,$("studentEmail").value.trim(),
 $("studentLoginPassword").value
 );
-
-showSection(
-auth.currentUser.uid===ADMIN_UID
-?"adminDashboard":"studentDashboard"
-);
-
-}catch(error){
-console.error(error);
-message("studentLoginMessage",error.message||"लॉगिन नहीं हुआ।");
-}
+}catch(err){msg("studentLoginMessage",err.message);}
 });
 
 /* ADMIN LOGIN */
 
 $("adminLoginForm").addEventListener("submit",async e=>{
 e.preventDefault();
-message("adminLoginMessage","लॉगिन हो रहा है...");
-
+msg("adminLoginMessage","लॉगिन हो रहा है...");
 try{
 await signInWithEmailAndPassword(
-auth,
-$("adminEmail").value.trim(),
+auth,$("adminEmail").value.trim(),
 $("adminPassword").value
 );
-
 if(auth.currentUser.uid!==ADMIN_UID){
 await signOut(auth);
-message("adminLoginMessage","यह अकाउंट Admin नहीं है।");
-return;
+msg("adminLoginMessage","यह Admin अकाउंट नहीं है।");
 }
+}catch(err){msg("adminLoginMessage",err.message);}
+});
 
+/* AUTH STATUS */
+
+onAuthStateChanged(auth,user=>{
+if(!user)return;
+if(user.uid===ADMIN_UID){
 showSection("adminDashboard");
-
-}catch(error){
-console.error(error);
-message("adminLoginMessage",error.message||"Admin लॉगिन नहीं हुआ।");
+loadAdminTests();
+}else{
+$("welcomeStudent").textContent="नमस्ते "+(user.displayName||user.email);
+showSection("studentDashboard");
+loadContent();
 }
 });
 
-/* LOGOUT */
-
-async function logout(){
-await signOut(auth);
-showSection("home");
-}
-
-$("studentLogout").addEventListener("click",logout);
-$("adminLogout").addEventListener("click",logout);
-
-/* YOUTUBE VIDEO */
-
-function getYouTubeId(value){
-try{
-const u=new URL(value.trim());
-let id="";
-
-if(u.hostname.includes("youtu.be")){
-id=u.pathname.split("/").filter(Boolean)[0]||"";
-}else if(
-u.hostname.includes("youtube.com")||
-u.hostname.includes("youtube-nocookie.com")
-){
-if(u.pathname==="/watch"){
-id=u.searchParams.get("v")||"";
-}else{
-const p=u.pathname.split("/").filter(Boolean);
-if(["embed","shorts","live"].includes(p[0])){
-id=p[1]||"";
-}
-}
-}
-
-return /^[a-zA-Z0-9_-]{11}$/.test(id)?id:null;
-
-}catch{
-return null;
-}
-}
-
-function textEl(tag,cls,text){
-const e=document.createElement(tag);
-e.className=cls||"";
-e.textContent=text||"";
-return e;
-}
-
-/* STUDY MATERIAL LOAD */
-
-async function loadContent(){
-const list=$("contentList");
-list.textContent="कंटेंट लोड हो रहा है...";
-
-try{
-const snap=await getDocs(
-query(collection(db,"content"),orderBy("createdAt","desc"))
-);
-
-list.replaceChildren();
-
-if(snap.empty){
-list.textContent="अभी कोई कंटेंट उपलब्ध नहीं है।";
-return;
-}
-
-snap.forEach(ds=>{
-const x=ds.data();
-const card=textEl("article","card","");
-
-card.append(
-textEl("p","muted",x.category||""),
-textEl("h3","",x.title||"बिना शीर्षक")
-);
-
-if(x.accessType==="paid"){
-card.append(
-textEl("span","badge paid","PAID CONTENT"),
-textEl("p","muted","यह सामग्री अभी लॉक है।")
-);
-}else{
-card.append(textEl("span","badge free","FREE"));
-
-const id=getYouTubeId(x.description||"");
-
-if(id){
-const box=textEl("div","video","");
-const frame=document.createElement("iframe");
-
-frame.src="https://www.youtube-nocookie.com/embed/"+id;
-frame.title=x.title||"YouTube video";
-frame.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-frame.allowFullscreen=true;
-
-box.append(frame);
-card.append(box);
-
-}else{
-card.append(textEl("p","",x.description||""));
-}
-}
-
-list.append(card);
-});
-
-}catch(err){
-console.error(err);
-list.textContent="कंटेंट लोड नहीं हुआ। Firestore Rules जाँचें।";
-}
-}
-
-/* ADMIN ADD CONTENT */
+/* CONTENT UPLOAD */
 
 $("contentForm").addEventListener("submit",async e=>{
 e.preventDefault();
-
 if(!auth.currentUser||auth.currentUser.uid!==ADMIN_UID){
-message("adminMessage","केवल Admin कंटेंट जोड़ सकता है।");
-return;
+msg("adminMessage","केवल Admin कंटेंट जोड़ सकता है।");return;
 }
-
-message("adminMessage","सेव हो रहा है...");
-
 try{
 await addDoc(collection(db,"content"),{
 category:$("category").value,
@@ -490,135 +401,90 @@ description:$("description").value.trim(),
 accessType:$("accessType").value,
 createdAt:serverTimestamp()
 });
-
 $("contentForm").reset();
-message("adminMessage","कंटेंट सफलतापूर्वक जुड़ गया!");
-
-}catch(err){
-console.error(err);
-message("adminMessage",err.message||"कंटेंट सेव नहीं हुआ।");
-}
+msg("adminMessage","कंटेंट सफलतापूर्वक जुड़ गया!");
+}catch(err){msg("adminMessage",err.message);}
 });
 
-/* MCQ TEST BUILDER */
-
-let questionCount=0;
-
-function addQuestionEditor(){
-
-questionCount++;
-const n=questionCount;
-
-const wrap=textEl("div","question-editor","");
-wrap.dataset.question=n;
-
-wrap.append(textEl("h4","","प्रश्न "+n));
-
-const q=document.createElement("textarea");
-q.className="q-text";
-q.placeholder="प्रश्न लिखें";
-q.required=true;
-wrap.append(q);
-
-["A","B","C","D"].forEach((letter,i)=>{
-
-const row=textEl("div","option-row","");
-
-const radio=document.createElement("input");
-radio.type="radio";
-radio.name="correct-"+n;
-radio.value=String(i);
-radio.required=i===0;
-
-const input=document.createElement("input");
-input.type="text";
-input.className="option-text";
-input.placeholder="विकल्प "+letter;
-input.required=true;
-
-row.append(radio,input);
-wrap.append(row);
-
+async function loadContent(){
+try{
+const snap=await getDocs(query(collection(db,"content"),orderBy("createdAt","desc")));
+const box=$("contentList");
+box.replaceChildren();
+if(snap.empty){box.textContent="अभी कोई सामग्री नहीं है।";return;}
+snap.forEach(d=>{
+const x=d.data();
+const card=document.createElement("div");
+card.className="card";
+const h=document.createElement("h3");
+h.textContent=x.title||"सामग्री";
+const p=document.createElement("p");
+p.textContent=x.category||"";
+card.append(h,p);
+if(x.accessType==="paid"){
+const paid=document.createElement("p");
+paid.textContent="PAID CONTENT - अभी लॉक है";
+card.append(paid);
+}else{
+const url=x.description||"";
+const id=getYouTubeId(url);
+if(id){
+const v=document.createElement("div");
+v.className="video";
+const f=document.createElement("iframe");
+f.src="https://www.youtube-nocookie.com/embed/"+id;
+f.allowFullscreen=true;
+v.append(f);card.append(v);
+}else{
+const desc=document.createElement("p");
+desc.textContent=url;card.append(desc);
+}
+}
+box.append(card);
 });
-
-const exp=document.createElement("textarea");
-exp.className="q-explanation";
-exp.placeholder="उत्तर की व्याख्या (वैकल्पिक)";
-wrap.append(exp);
-
-const del=document.createElement("button");
-del.type="button";
-del.className="btn secondary";
-del.textContent="यह प्रश्न हटाएँ";
-
-del.onclick=()=>{
-wrap.remove();
-renumberQuestions();
-};
-
-wrap.append(del);
-$("questionEditors").append(wrap);
+}catch(err){$("contentList").textContent="कंटेंट लोड नहीं हुआ: "+err.message;}
 }
 
-function renumberQuestions(){
-[...$("questionEditors").children].forEach((el,i)=>{
-el.querySelector("h4").textContent="प्रश्न "+(i+1);
-});
+function getYouTubeId(value){
+try{
+const u=new URL(value);
+let id="";
+if(u.hostname.includes("youtu.be"))id=u.pathname.slice(1);
+else if(u.pathname==="/watch")id=u.searchParams.get("v")||"";
+else{
+const parts=u.pathname.split("/");
+if(["embed","shorts","live"].includes(parts[1]))id=parts[2]||"";
+}
+return /^[\w-]{11}$/.test(id)?id:null;
+}catch{return null;}
 }
 
-$("addQuestionBtn").addEventListener("click",addQuestionEditor);
-addQuestionEditor();
-
-/* PUBLISH TEST */
+/* TEST PUBLISH */
 
 $("testForm").addEventListener("submit",async e=>{
 e.preventDefault();
-
 if(!auth.currentUser||auth.currentUser.uid!==ADMIN_UID){
-message("testAdminMessage","केवल Admin टेस्ट बना सकता है।");
-return;
+msg("testAdminMessage","केवल Admin टेस्ट बना सकता है।");return;
 }
 
 const editors=[...$("questionEditors").children];
-
-if(!editors.length){
-message("testAdminMessage","कम से कम एक प्रश्न जोड़ें।");
-return;
-}
-
 const questions=[];
 
 for(const el of editors){
-
-const question=el.querySelector(".q-text").value.trim();
-
-const options=[
-...el.querySelectorAll(".option-text")
-].map(x=>x.value.trim());
-
-const chosen=el.querySelector('input[type="radio"]:checked');
-
-if(!question||options.some(x=>!x)||!chosen){
-message(
-"testAdminMessage",
-"हर प्रश्न के चारों विकल्प भरें और सही उत्तर चुनें।"
-);
-return;
+const q=el.querySelector(".q-text").value.trim();
+const opts=[...el.querySelectorAll(".option-text")].map(x=>x.value.trim());
+const correct=el.querySelector('input[type="radio"]:checked');
+if(!q||opts.some(x=>!x)||!correct){
+msg("testAdminMessage","सभी प्रश्नों के चार विकल्प और सही उत्तर भरें।");return;
 }
-
 questions.push({
-question,
-options,
-correctIndex:Number(chosen.value),
+question:q,options:opts,
+correctIndex:Number(correct.value),
 explanation:el.querySelector(".q-explanation").value.trim()
 });
-
 }
 
-message("testAdminMessage","टेस्ट सेव हो रहा है...");
-
 try{
-
 await addDoc(collection(db,"tests"),{
 title:$("testTitle").value.trim(),
 durationMinutes:Number($("testDuration").value),
@@ -630,138 +496,199 @@ published:true,
 createdAt:serverTimestamp(),
 createdBy:auth.currentUser.uid
 });
-
 $("testForm").reset();
 $("questionEditors").replaceChildren();
-questionCount=0;
-addQuestionEditor();
-
-message("testAdminMessage","टेस्ट सफलतापूर्वक Publish हो गया!");
+questionNumber=0;
+addQuestion();
+msg("testAdminMessage","टेस्ट Publish हो गया!");
 loadAdminTests();
-
-}catch(err){
-console.error(err);
-message(
-"testAdminMessage",
-"टेस्ट सेव नहीं हुआ: "+(err.message||"Firestore Rules जाँचें")
-);
-}
+}catch(err){msg("testAdminMessage",err.message);}
 });
 
 /* ADMIN TEST LIST */
 
 async function loadAdminTests(){
-
-const box=$("adminTestList");
-if(!box)return;
-
-box.textContent="लोड हो रहा है...";
-
 try{
-
-const snap=await getDocs(
-query(collection(db,"tests"),orderBy("createdAt","desc"))
-);
-
+const snap=await getDocs(query(collection(db,"tests"),orderBy("createdAt","desc")));
+const box=$("adminTestList");
 box.replaceChildren();
-
-if(snap.empty){
-box.textContent="अभी कोई टेस्ट अपलोड नहीं हुआ।";
-return;
-}
-
-snap.forEach(ds=>{
-
-const t=ds.data();
-const card=textEl("div","card","");
-
-card.append(
-textEl("h3","",t.title||"बिना नाम"),
-textEl(
-"p",
-"muted",
-(t.questionCount||t.questions?.length||0)+
-" प्रश्न • "+(t.durationMinutes||0)+
-" मिनट • "+(t.accessType||"free").toUpperCase()
-)
-);
-
-box.append(card);
-
+if(snap.empty){box.textContent="अभी कोई टेस्ट नहीं है।";return;}
+snap.forEach(d=>{
+const x=d.data();
+const p=document.createElement("p");
+p.textContent=(x.title||"टेस्ट")+" — "+(x.questionCount||0)+" प्रश्न";
+box.append(p);
 });
-
-}catch(err){
-console.error(err);
-box.textContent="टेस्ट लोड नहीं हुए: "+err.message;
-}
+}catch(err){$("adminTestList").textContent=err.message;}
 }
 
 /* STUDENT TEST LIST */
 
-let activeTest=null;
-let quizTimer=null;
-let secondsLeft=0;
-
-window.showStudentTests=async()=>{
-
-$("studentTestPanel").classList.remove("hidden");
-$("studentTestList").textContent="टेस्ट लोड हो रहे हैं...";
-$("quizArea").classList.add("hidden");
-$("quizResult").classList.add("hidden");
-
-$("studentTestPanel").scrollIntoView({behavior:"smooth"});
-
+window.loadStudentTests=async function(){
+const box=$("studentTestList");
+box.textContent="टेस्ट लोड हो रहे हैं...";
 try{
-
-const snap=await getDocs(
-query(collection(db,"tests"),orderBy("createdAt","desc"))
-);
-
-$("studentTestList").replaceChildren();
-
-const available=snap.docs
-.map(d=>({id:d.id,...d.data()}))
-.filter(t=>t.published!==false);
-
-if(!available.length){
-$("studentTestList").textContent="अभी कोई ऑनलाइन टेस्ट उपलब्ध नहीं है।";
-return;
-}
-
-available.forEach(t=>{
-
-const card=textEl("div","card","");
-
-card.append(
-textEl("h3","",t.title||"टेस्ट"),
-textEl(
-"p",
-"muted",
-(t.questionCount||t.questions?.length||0)+
-" प्रश्न • "+t.durationMinutes+" मिनट"
-)
-);
-
+const snap=await getDocs(query(collection(db,"tests"),orderBy("createdAt","desc")));
+box.replaceChildren();
+const tests=snap.docs.map(d=>({id:d.id,...d.data()})).filter(t=>t.published!==false);
+if(!tests.length){box.textContent="अभी कोई टेस्ट उपलब्ध नहीं है।";return;}
+tests.forEach(t=>{
+const card=document.createElement("div");
+card.className="card";
+const h=document.createElement("h3");
+h.textContent=t.title;
+card.append(h);
+const p=document.createElement("p");
+p.textContent=(t.questionCount||0)+" प्रश्न • "+t.durationMinutes+" मिनट";
+card.append(p);
 if(t.accessType==="paid"){
-
-card.append(textEl("span","badge paid","PAID • जल्द उपलब्ध"));
-
+const locked=document.createElement("p");
+locked.textContent="PAID TEST - अभी लॉक है";
+card.append(locked);
 }else{
-
-const b=textEl("button","btn","टेस्ट शुरू करें");
+const b=document.createElement("button");
+b.className="btn";
+b.textContent="टेस्ट शुरू करें";
 b.onclick=()=>startQuiz(t);
 card.append(b);
-
 }
-
-$("studentTestList").append(card);
-
+box.append(card);
 });
-
-}catch(err){
-console.error(err);
-$("studentTestList").textContent="टेस्ट लोड नहीं हुए: "+err.message;
-}
+}catch(err){box.textContent="टेस्ट लोड नहीं हुए: "+err.message;}
 };
 
-wi
+/* QUIZ */
+
+let activeTest=null;
+let timer=null;
+let remaining=0;
+
+function startQuiz(t){
+if(!Array.isArray(t.questions)||!t.questions.length)return;
+activeTest=t;
+remaining=(Number(t.durationMinutes)||20)*60;
+$("studentTestList").classList.add("hidden");
+$("quizResult").classList.add("hidden");
+const area=$("quizArea");
+area.classList.remove("hidden");
+area.replaceChildren();
+
+const heading=document.createElement("h3");
+heading.textContent=t.title;
+area.append(heading);
+
+const clock=document.createElement("p");
+clock.className="timer";
+clock.id="quizClock";
+area.append(clock);
+
+const form=document.createElement("form");
+form.id="answerForm";
+
+t.questions.forEach((q,i)=>{
+const block=document.createElement("div");
+block.className="question-card";
+const h=document.createElement("h3");
+h.textContent=(i+1)+". "+q.question;
+block.append(h);
+
+q.options.forEach((opt,j)=>{
+const label=document.createElement("label");
+label.className="quiz-option";
+const input=document.createElement("input");
+input.type="radio";
+input.name="answer"+i;
+input.value=j;
+const span=document.createElement("span");
+span.textContent=opt;
+label.append(input,span);
+block.append(label);
+});
+form.append(block);
+});
+
+const submit=document.createElement("button");
+submit.className="btn";
+submit.textContent="टेस्ट जमा करें";
+form.append(submit);
+form.onsubmit=e=>{e.preventDefault();finishQuiz();};
+area.append(form);
+
+updateClock();
+clearInterval(timer);
+timer=setInterval(()=>{
+remaining--;
+updateClock();
+if(remaining<=0)finishQuiz();
+},1000);
+}
+
+function updateClock(){
+const c=$("quizClock");
+if(c)c.textContent="शेष समय: "+Math.floor(remaining/60)+":"+String(remaining%60).padStart(2,"0");
+}
+
+function finishQuiz(){
+if(!activeTest)return;
+clearInterval(timer);
+timer=null;
+
+const form=$("answerForm");
+let score=0;
+const answers=activeTest.questions.map((q,i)=>{
+const selected=form.querySelector('input[name="answer'+i+'"]:checked');
+return selected?Number(selected.value):-1;
+});
+
+activeTest.questions.forEach((q,i)=>{
+if(answers[i]===Number(q.correctIndex))score++;
+});
+
+$("quizArea").classList.add("hidden");
+const result=$("quizResult");
+result.classList.remove("hidden");
+result.replaceChildren();
+
+const heading=document.createElement("h2");
+heading.textContent="आपका रिजल्ट: "+score+" / "+activeTest.questions.length;
+result.append(heading);
+
+activeTest.questions.forEach((q,i)=>{
+const block=document.createElement("div");
+block.className="question-card";
+const h=document.createElement("h3");
+h.textContent=(i+1)+". "+q.question;
+const p=document.createElement("p");
+p.textContent=answers[i]===Number(q.correctIndex)?"आपका उत्तर सही है।":"आपका उत्तर गलत या छूटा हुआ है।";
+const a=document.createElement("p");
+a.textContent="सही उत्तर: "+q.options[Number(q.correctIndex)];
+block.append(h,p,a);
+if(q.explanation){
+const ex=document.createElement("p");
+ex.textContent="व्याख्या: "+q.explanation;
+block.append(ex);
+}
+result.append(block);
+});
+
+const back=document.createElement("button");
+back.className="btn secondary";
+back.textContent="टेस्ट सूची पर वापस";
+back.onclick=()=>{
+result.classList.add("hidden");
+$("studentTestList").classList.remove("hidden");
+};
+result.append(back);
+}
+
+}catch(error){
+console.error("FirebaseError:",error);
+const p=document.createElement("p");
+p.style.cssText="color:red;padding:15px";
+p.textContent="Firebase लोड नहीं हुआ। इंटरनेट कनेक्शन और Firebase सेटिंग जाँचें। विवरण: "+error.message;
+document.querySelector("main").prepend(p);
+}
+</script>
+
+</body>
+</html>
