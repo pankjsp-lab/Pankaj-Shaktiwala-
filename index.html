@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Pankaj Shaktiwala</title>
+
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,sans-serif;background:#f2f5fa;color:#222}
@@ -12,6 +13,7 @@ header{background:#102b59;color:white;text-align:center;padding:22px 10px}
 header h1{margin:0;font-size:25px}
 nav{display:flex;flex-wrap:wrap;justify-content:center;background:#174a88;padding:10px;gap:8px}
 button{border:0;border-radius:7px;padding:11px 15px;background:white;color:#12345c;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.6;cursor:not-allowed}
 main{padding:18px;max-width:1000px;margin:auto}
 .section{display:none}
 .section.active{display:block}
@@ -24,14 +26,20 @@ main{padding:18px;max-width:1000px;margin:auto}
 input,select,textarea{width:100%;padding:12px;margin:8px 0;border:1px solid #bbb;border-radius:7px;font-size:15px}
 textarea{min-height:100px}
 .primary{background:#174a88;color:white;width:100%;margin-top:10px}
-.danger{background:#b42318;color: yellow}
+.danger{background:#b42318;color:white}
 .switch{color:#0755a5;text-decoration:underline;cursor:pointer}
 .item{background:#f3f6fb;padding:14px;border-radius:8px;margin:12px 0;overflow-wrap:anywhere}
 .item a{color:#0755a5}
-#message{font-weight:bold;overflow-wrap:anywhere}
-footer{background:#102b59;color:yello;text-align:center;padding:18px;margin-top:35px}
+#message,#adminMessage{font-weight:bold;overflow-wrap:anywhere}
+footer{background:#102b59;color:white;text-align:center;padding:18px;margin-top:35px}
+label{display:block;margin-top:8px}
+.quiz-option{display:flex;align-items:center;gap:8px;margin:10px 0}
+.quiz-option input{width:auto;margin:0}
+#quizTimer{color:#b42318;font-size:22px}
+.small{font-size:13px;color:#555}
 </style>
 </head>
+
 <body>
 
 <header>
@@ -52,15 +60,28 @@ footer{background:#102b59;color:yello;text-align:center;padding:18px;margin-top:
 <div class="welcome">
 <h2>Welcome to Our Learning Platform</h2>
 <p>आपकी पढ़ाई, आपकी सफलता!</p>
-<p id="homeStatus">पढ़ाई शुरू करने के लिए Login करें।</p>
+<p id="homeStatus">पढ़ाई शुरू करने के लिए Student Login करें।</p>
 </div>
+
 <div class="cards">
-<div class="card" onclick="openCategory('Current Affairs')"><div class="emoji">📰</div><h3>Current Affairs</h3></div>
-<div class="card" onclick="openCategory('Notes & PDF')"><div class="emoji">📚</div><h3>Notes & PDF</h3></div>
-<div class="card" onclick="openCategory('Online Test')"><div class="emoji">📝</div><h3>Online Test</h3></div>
-<div class="card" onclick="openCategory('Course')"><div class="emoji">🎓</div><h3>Course</h3></div>
-<div class="card" onclick="openCategory('Audio & Video')"><div class="emoji">🎬</div><h3>Audio & Video</h3></div>
-<div class="card" onclick="openCategory('Digital Store')"><div class="emoji">🛒</div><h3>Digital Store</h3></div>
+<div class="card" onclick="openCategory('Current Affairs')">
+<div class="emoji">📰</div><h3>Current Affairs</h3>
+</div>
+<div class="card" onclick="openCategory('Notes & PDF')">
+<div class="emoji">📚</div><h3>Notes & PDF</h3>
+</div>
+<div class="card" onclick="openCategory('Online Test')">
+<div class="emoji">📝</div><h3>Online Test</h3>
+</div>
+<div class="card" onclick="openCategory('Course')">
+<div class="emoji">🎓</div><h3>Course</h3>
+</div>
+<div class="card" onclick="openCategory('Audio & Video')">
+<div class="emoji">🎬</div><h3>Audio & Video</h3>
+</div>
+<div class="card" onclick="openCategory('Digital Store')">
+<div class="emoji">🛒</div><h3>Digital Store</h3>
+</div>
 </div>
 </section>
 
@@ -68,7 +89,7 @@ footer{background:#102b59;color:yello;text-align:center;padding:18px;margin-top:
 <button class="back" onclick="showPage('home')">← Home</button>
 <div class="panel">
 <h2>Study Material</h2>
-<div id="studyLinks"></div>
+<div id="studyLinks">सामग्री लोड हो रही है...</div>
 </div>
 </section>
 
@@ -83,6 +104,7 @@ footer{background:#102b59;color:yello;text-align:center;padding:18px;margin-top:
 <section id="login" class="section">
 <button class="back" onclick="showPage('home')">← Home</button>
 <div class="panel">
+
 <div id="authForms">
 <h2 id="formTitle">Student Login</h2>
 <form id="authForm">
@@ -90,15 +112,24 @@ footer{background:#102b59;color:yello;text-align:center;padding:18px;margin-top:
 <input id="password" type="password" placeholder="Password (कम से कम 6 अक्षर)" minlength="6" required>
 <button class="primary" id="submitButton" type="submit">Login करें</button>
 </form>
-<p id="switchText">नया अकाउंट बनाना है? <span class="switch" onclick="toggleForm()">Registration करें</span></p>
+
+<p id="switchText">
+नया अकाउंट बनाना है?
+<span class="switch" onclick="toggleForm()">Registration करें</span>
+</p>
 <p id="message"></p>
 </div>
+
 <div id="studentPanel" style="display:none">
 <h2>Student Dashboard</h2>
 <p id="studentEmail"></p>
 <button class="primary" onclick="showPage('study')">Study Material देखें</button>
+<button class="primary" onclick="loadStudentTests()">📝 Online Test देखें</button>
+<div id="studentTestList"></div>
+<div id="testRunner" class="panel" style="display:none"></div>
 <button class="primary" onclick="studentLogout()">Logout</button>
 </div>
+
 </div>
 </section>
 
@@ -116,17 +147,19 @@ footer{background:#102b59;color:yello;text-align:center;padding:18px;margin-top:
 </section>
 
 <section id="admin" class="section">
+
 <div class="panel">
 <h2>Admin Dashboard</h2>
 <p id="adminWelcome"></p>
 <button class="primary" onclick="showPage('home')">Home</button>
 <button class="primary" onclick="adminLogout()">Admin Logout</button>
-</div>
+ </div>
 
 <div class="panel">
 <h3>नई सामग्री अपलोड करें</h3>
 
 <form id="uploadForm">
+
 <label>सामग्री का शीर्षक</label>
 <input id="contentTitle" placeholder="जैसे: आज के Current Affairs" required>
 
@@ -140,10 +173,10 @@ footer{background:#102b59;color:yello;text-align:center;padding:18px;margin-top:
 <option value="Digital Store">Digital Store</option>
 </select>
 
-<label>सामग्री का प्रकार</label>
- <label>Current Affairs की तारीख</label>
- 
+<label>Current Affairs की तारीख</label>
 <input type="date" id="currentAffairsDate">
+
+<label>सामग्री का प्रकार</label>
 <select id="contentType">
 <option value="text">Text / सामान्य सामग्री</option>
 <option value="link">PDF / Video Link</option>
@@ -162,198 +195,10 @@ footer{background:#102b59;color:yello;text-align:center;padding:18px;margin-top:
 </div>
 
 <div class="panel">
- <div class="panel">
-  let questionCount = 0;
-
-function addQuestionEditor(){
- questionCount++;
-
- const box = document.createElement('div');
- box.className = 'item';
-
- box.innerHTML = `
- <h3>प्रश्न ${questionCount}</h3>
-
- <label>प्रश्न लिखें</label>
- <textarea class="qText" required></textarea>
-
- <label>विकल्प A</label>
- <input class="qOption" required>
-
- <label>विकल्प B</label>
- <input class="qOption" required>
-
- <label>विकल्प C</label>
- <input class="qOption" required>
-
- <label>विकल्प D</label>
- <input class="qOption" required>
-
- <label>सही उत्तर चुनें</label>
- <select class="qCorrect">
- <option value="0">A</option>
- <option value="1">B</option>
- <option value="2">C</option>
- <option value="3">D</option>
- </select>
- `;
-
- document.getElementById('questionEditors').appendChild(box);
-}
-
-document.getElementById('addQuestionBtn').addEventListener('click',addQuestionEditor);
-
-addQuestionEditor();
 <h3>📝 Online Test बनाएँ</h3>
-let activeTest = null;
-let quizTimer = null;
-let secondsLeft = 0;
 
-window.startOnlineTest = async function(testId) {
-  if (!auth.currentUser || window.isAdmin) {
-    alert('टेस्ट देने के लिए Student Login करें।');
-    return;
-  }
-
-  try {
-    const snapshot = await getDocs(collection(db, 'tests'));
-    const found = snapshot.docs.find(d => d.id === testId);
-
-    if (!found) {
-      alert('टेस्ट नहीं मिला।');
-      return;
-    }
-
-    activeTest = found.data();
-
-    if (!activeTest.questions || !activeTest.questions.length) {
-      alert('इस टेस्ट में प्रश्न उपलब्ध नहीं हैं।');
-      return;
-    }
-
-    clearInterval(quizTimer);
-
-    secondsLeft = Number(activeTest.durationMinutes) * 60;
-
-    const runner = document.getElementById('testRunner');
-    runner.style.display = 'block';
-    runner.innerHTML = '';
-
-    const heading = document.createElement('h2');
-    heading.textContent = activeTest.title;
-
-    const timer = document.createElement('h3');
-    timer.id = 'quizTimer';
-
-    runner.append(heading, timer);
-
-    const form = document.createElement('form');
-    form.id = 'onlineQuizForm';
-
-    activeTest.questions.forEach((q, index) => {
-      const box = document.createElement('div');
-      box.className = 'item';
-
-      const question = document.createElement('h3');
-      question.textContent = (index + 1) + '. ' + q.question;
-      box.appendChild(question);
-
-      q.options.forEach((option, optionIndex) => {
-        const label = document.createElement('label');
-        const radio = document.createElement('input');
-
-        radio.type = 'radio';
-        radio.name = 'question_' + index;
-        radio.value = optionIndex;
-
-        label.append(radio, document.createTextNode(' ' + option));
-        box.appendChild(label);
-      });
-
-      form.appendChild(box);
-    });
-
-    const submit = document.createElement('button');
-    submit.type = 'submit';
-    submit.className = 'primary';
-    submit.textContent = 'टेस्ट Submit करें';
-
-    form.appendChild(submit);
-    runner.appendChild(form);
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      submitOnlineTest();
-    });
-
-    updateQuizTimer();
-
-    quizTimer = setInterval(() => {
-      secondsLeft--;
-      updateQuizTimer();
-
-      if (secondsLeft <= 0) {
-        submitOnlineTest(true);
-      }
-    }, 1000);
-
-    runner.scrollIntoView({ behavior: 'smooth' });
-
-  } catch (error) {
-    alert('टेस्ट शुरू नहीं हुआ: ' + showError(error));
-  }
-};
-
-function updateQuizTimer() {
-  const timer = document.getElementById('quizTimer');
-  if (!timer) return;
-
-  const minutes = Math.floor(secondsLeft / 60);
-  const seconds = secondsLeft % 60;
-
-  timer.textContent = 'शेष समय: ' +
-    minutes + ':' + String(seconds).padStart(2, '0');
-}
-
-function submitOnlineTest(autoSubmit = false) {
-  if (!activeTest) return;
-
-  clearInterval(quizTimer);
-
-  let score = 0;
-  let attempted = 0;
-
-  activeTest.questions.forEach((q, index) => {
-    const selected = document.querySelector(
-      'input[name="question_' + index + '"]:checked'
-    );
-
-    if (selected) {
-      attempted++;
-
-      if (Number(selected.value) === Number(q.correctIndex)) {
-        score++;
-      }
-    }
-  });
-
-  const total = activeTest.questions.length;
-  const runner = document.getElementById('testRunner');
-
-  runner.innerHTML = `
-    <h2>टेस्ट परिणाम</h2>
-    <h3>कुल प्रश्न: ${total}</h3>
-    <h3>हल किए गए: ${attempted}</h3>
-    <h3>सही उत्तर: ${score}</h3>
-    <h3>गलत उत्तर: ${attempted - score}</h3>
-    <h2>आपका स्कोर: ${score} / ${total}</h2>
-    <p>${autoSubmit ? 'समय पूरा होने पर टेस्ट अपने आप जमा हुआ।' : 'टेस्ट सफलतापूर्वक जमा हुआ।'}</p>
-    <button class="primary" onclick="loadStudentTests()">वापस जाएँ</button>
-  `;
-
-  activeTest = null;
-}
 <form id="testForm">
+
 <label>टेस्ट का नाम</label>
 <input id="testTitle" placeholder="जैसे: इतिहास टेस्ट 01" required>
 
@@ -364,304 +209,658 @@ function submitOnlineTest(autoSubmit = false) {
 
 <button type="button" class="primary" id="addQuestionBtn">+ नया प्रश्न जोड़ें</button>
 
-<button type="submit" class="primary">टेस्ट Publish करें</button>
+<button type="submit" class="primary" id="publishTestButton">टेस्ट Publish करें</button>
+
 <p id="testMessage"></p>
 </form>
- </div>
- document.getElementById('uploadForm').addEventListener('submit',async e=>{
+</div>
+
+<div class="panel">
 <h3>अपलोड की गई सामग्री</h3>
 <button class="primary" onclick="loadAdminContent()">Refresh List</button>
 <div id="adminContentList">सूची लोड हो रही है...</div>
 </div>
-</section>
 
+<div class="panel">
+<h3>Published Online Tests</h3>
+<button class="primary" onclick="loadAdminTests()">Refresh Tests</button>
+<div id="adminTestList"></div>
+</div>
+
+</section>
 </main>
 
 <footer>
 <p>© 2026 The Pankaj Shaktiwala</p>
 <p>Learn • Practice • Achieve</p>
 </footer>
+</body>
+ </html>
 
 <script>
-window.currentUser=null;
-window.isAdmin=false;
+window.currentUser = null;
+window.isAdmin = false;
 
-const categories=['Current Affairs','Notes & PDF','Online Test','Course','Audio & Video','Digital Store'];
+function showPage(page) {
+  if ((page === "study" || page === "category") && !window.currentUser) {
+    page = "login";
+  }
 
-function showPage(page){
- const protectedPages=['study','category'];
- if(protectedPages.includes(page) && !window.currentUser){
-  document.getElementById('message').innerText='पहले Student Login करें।';
-  page='login';
- }
- if(page==='admin' && !window.isAdmin) page='adminLogin';
+  if (page === "admin" && !window.isAdmin) {
+    page = "adminLogin";
+  }
 
- document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
- document.getElementById(page).classList.add('active');
- window.scrollTo(0,0);
+  document.querySelectorAll(".section").forEach(section => {
+    section.classList.remove("active");
+  });
+
+  const selected = document.getElementById(page);
+  if (selected) selected.classList.add("active");
 }
 
-function openCategory(name){
- if(!window.currentUser){
-  document.getElementById('message').innerText='पहले Student Login करें।';
-  showPage('login');
-  return;
- }
- document.getElementById('categoryTitle').innerText=name;
- showPage('category');
- window.loadCategoryContent(name);
+function openCategory(name) {
+  window.selectedCategory = name;
+  showPage("category");
+
+  const heading = document.getElementById("categoryTitle");
+  if (heading) heading.textContent = name;
+
+  if (name === "Online Test") {
+    window.loadStudentTests?.();
+  } else {
+    window.loadCategoryContent?.(name);
+  }
 }
 
-document.getElementById('studyLinks').innerHTML=categories.map(name=>
- '<p><button onclick="openCategory(\''+name+'\')">'+name+'</button></p>'
-).join('');
+let isRegistration = false;
 
-let isRegister=false;
-window.toggleForm=function(){
- isRegister=!isRegister;
- document.getElementById('formTitle').innerText=isRegister?'Student Registration':'Student Login';
- document.getElementById('submitButton').innerText=isRegister?'Account बनाएं':'Login करें';
- document.getElementById('switchText').innerHTML=isRegister?
- 'पहले से अकाउंट है? <span class="switch" onclick="toggleForm()">Login करें</span>':
- 'नया अकाउंट बनाना है? <span class="switch" onclick="toggleForm()">Registration करें</span>';
- document.getElementById('message').innerText='';
-};
+function toggleForm() {
+  isRegistration = !isRegistration;
+
+  const heading = document.getElementById("loginHeading");
+  const button = document.getElementById("loginButton");
+  const toggle = document.getElementById("toggleLogin");
+
+  if (heading) heading.textContent = isRegistration ? "Student Registration" : "Student Login";
+  if (button) button.textContent = isRegistration ? "Register" : "Login";
+  if (toggle) toggle.textContent = isRegistration ? "Already registered? Login" : "New student? Register";
+}
+
+function safeText(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
 </script>
 
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+
 import {
- getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,
- signOut,onAuthStateChanged
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
 import {
- getFirestore,collection,addDoc,getDocs,deleteDoc,doc,
- query,orderBy,serverTimestamp
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc,
+  serverTimestamp,
+  getDoc
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-const firebaseConfig={
- apiKey:"AIzaSyCJzzHsKAxdCpj5rbwkTDf2g4Jpk3OQp0s",
- authDomain:"pankaj-shaktiwala.firebaseapp.com",
- projectId:"pankaj-shaktiwala",
- storageBucket:"pankaj-shaktiwala.firebasestorage.app",
- messagingSenderId:"408322202371",
- appId:"1:408322202371:web:028a30c57a693b61e1e736",
- measurementId:"G-HXR2HPE3MT"
+const firebaseConfig = {
+  apiKey: "AIzaSyCJzzHsKAxdCpj5rbwkTDf2g4Jpk3OQp0s",
+  authDomain: "pankaj-shaktiwala.firebaseapp.com",
+  projectId: "pankaj-shaktiwala",
+  storageBucket: "pankaj-shaktiwala.firebasestorage.app",
+  messagingSenderId: "408322202371",
+  appId: "1:408322202371:web:028a30c57a693b61e1e736",
+  measurementId: "G-HXR2HPE3MT"
 };
 
-const ADMIN_UID="qCYZY955m1eRkZ1brmSMTZzznmH3";
-const app=initializeApp(firebaseConfig);
-const auth=getAuth(app);
-const db=getFirestore(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-function showError(error){
- return error.code==='permission-denied'
- ?'Firebase Permission Denied: Firestore Rules जाँचें।'
- :error.message;
+const ADMIN_UID = "qCYZY955m1eRkZ1brmSMTZzznmH3";
+
+const $ = id => document.getElementById(id);
+
+function showMessage(id, message) {
+  const element = $(id);
+  if (element) element.textContent = message;
 }
 
-document.getElementById('authForm').addEventListener('submit',async e=>{
- e.preventDefault();
- const email=document.getElementById('email').value.trim();
- const password=document.getElementById('password').value;
- const message=document.getElementById('message');
- const button=document.getElementById('submitButton');
- button.disabled=true;
- message.innerText='कृपया प्रतीक्षा करें...';
- try{
-  if(isRegister) await createUserWithEmailAndPassword(auth,email,password);
-  else await signInWithEmailAndPassword(auth,email,password);
-  message.innerText='सफलता!';
- }catch(error){
-  const errors={
-   'auth/email-already-in-use':'यह Email पहले से रजिस्टर है।',
-   'auth/invalid-email':'Email सही नहीं है।',
-   'auth/weak-password':'Password कम से कम 6 अक्षर रखें।',
-   'auth/invalid-credential':'Email या Password गलत है।'
-  };
-  message.innerText=errors[error.code]||showError(error);
- }finally{button.disabled=false;}
-});
+// Student Login / Registration
+$("loginForm")?.addEventListener("submit", async event => {
+  event.preventDefault();
 
-document.getElementById('adminForm').addEventListener('submit',async e=>{
- e.preventDefault();
- const message=document.getElementById('adminMessage');
- message.innerText='Login जाँच रहे हैं...';
- try{
-  await signInWithEmailAndPassword(
-   auth,
-   document.getElementById('adminEmail').value.trim(),
-   document.getElementById('adminPassword').value
-  );
-  if(auth.currentUser.uid!==ADMIN_UID){
-   await signOut(auth);
-   message.innerText='chal jhutha';
+  const email = $("loginEmail")?.value.trim();
+  const password = $("loginPassword")?.value;
+
+  try {
+    if (isRegistration) {
+      await createUserWithEmailAndPassword(auth, email, password);
+      showMessage("loginMessage", "Registration successful!");
+    } else {
+      await signInWithEmailAndPassword(auth, email, password);
+      showMessage("loginMessage", "Login successful!");
+    }
+  } catch (error) {
+    showMessage("loginMessage", error.message);
   }
- }catch(error){
-  message.innerText=showError(error);
- }
 });
 
-onAuthStateChanged(auth,user=>{
- window.currentUser=user;
- window.isAdmin=!!user && user.uid===ADMIN_UID;
+// Admin Login
+$("adminLoginForm")?.addEventListener("submit", async event => {
+  event.preventDefault();
 
- const forms=document.getElementById('authForms');
- const student=document.getElementById('studentPanel');
+  try {
+    await signInWithEmailAndPassword(
+      auth,
+      $("adminEmail").value.trim(),
+      $("adminPassword").value
+    );
 
- if(window.isAdmin){
-  forms.style.display='none';
-  student.style.display='none';
-  document.getElementById('adminWelcome').innerText='Admin: '+user.email;
-  showPage('admin');
-  loadAdminContent();
- }else if(user){
-  forms.style.display='none';
-  student.style.display='block';
-  document.getElementById('studentEmail').innerText='Email: '+user.email;
-  document.getElementById('homeStatus').innerText='Login हैं: '+user.email;
-  showPage('home');
- }else{
-  forms.style.display='block';
-  student.style.display='none';
-  document.getElementById('homeStatus').innerText='पढ़ाई शुरू करने के लिए Login करें।';
- }
+    if (auth.currentUser?.uid !== ADMIN_UID) {
+      await signOut(auth);
+      showMessage("adminLoginMessage", "यह अकाउंट Admin नहीं है।");
+      return;
+    }
+
+    showMessage("adminLoginMessage", "Admin Login Successful!");
+  } catch (error) {
+    showMessage("adminLoginMessage", error.message);
+  }
 });
 
-window.studentLogout=async()=>{
- await signOut(auth);
- showPage('home');
-};
+// Login status
+onAuthStateChanged(auth, user => {
+  window.currentUser = user;
+  window.isAdmin = !!user && user.uid === ADMIN_UID;
 
-window.adminLogout=async()=>{
- await signOut(auth);
- showPage('home');
-};
-
-document.getElementById('uploadForm').addEventListener('submit',async e=>{
- e.preventDefault();
- if(!window.isAdmin || !auth.currentUser || auth.currentUser.uid!==ADMIN_UID){
-  alert('केवल Admin सामग्री अपलोड कर सकता है।');
-  return;
- }
-
- const title=document.getElementById('contentTitle').value.trim();
- const category=document.getElementById('contentCategory').value;
- const type=document.getElementById('contentType').value;
- let textContent=document.getElementById('contentBody').value.trim();
- const file=document.getElementById('txtFile').files[0];
- const message=document.getElementById('uploadMessage');
- const button=document.getElementById('uploadButton');
-
- if(type==='txt'){
-  if(!file){message.innerText='पहले TXT फाइल चुनें।';return;}
-  if(file.size>700*1024){message.innerText='TXT फाइल 700 KB से छोटी रखें।';return;}
-  try{textContent=await file.text();}
-  catch(error){message.innerText='TXT फाइल पढ़ी नहीं जा सकी।';return;}
- }
-
- if(!textContent){
-  message.innerText='सामग्री या लिंक लिखें।';
-  return;
- }
-
- if(type==='link' && !/^https?:\/\/\S+/i.test(textContent)){
-  message.innerText='सही HTTP या HTTPS लिंक डालें।';
-  return;
- }
-
- button.disabled=true;
- message.innerText='अपलोड हो रहा है...';
-
- try{
-  await addDoc(collection(db,'content'),{
-   title,category,type,textContent,
-   createdAt:serverTimestamp(),
-   createdBy:auth.currentUser.uid
-  });
-  message.innerText='सामग्री सफलतापूर्वक अपलोड हो गई!';
-  document.getElementById('uploadForm').reset();
-  await loadAdminContent();
- }catch(error){
-  message.innerText=showError(error);
- }finally{button.disabled=false;}
+  if (user) {
+    if (window.isAdmin) {
+      showPage("admin");
+      if ($("adminWelcome")) {
+        $("adminWelcome").textContent = "Welcome Admin";
+      }
+      loadAdminContent();
+      loadAdminTests();
+    } else {
+      showPage("home");
+    }
+  } else {
+    showPage("home");
+  }
 });
 
-window.loadAdminContent=async()=>{
- if(!window.isAdmin)return;
- const list=document.getElementById('adminContentList');
- list.innerText='लोड हो रहा है...';
-
- try{
-  const q=query(collection(db,'content'),orderBy('createdAt','desc'));
-  const snapshot=await getDocs(q);
-  if(snapshot.empty){list.innerText='अभी कोई सामग्री अपलोड नहीं है।';return;}
-
-  list.innerHTML='';
-  snapshot.forEach(item=>{
-   const data=item.data();
-   const box=document.createElement('div');
-   box.className='item';
-
-   const heading=document.createElement('h4');
-   heading.textContent=data.title||'बिना शीर्षक';
-   const info=document.createElement('p');
-   info.textContent=(data.category||'')+' | '+(data.type||'');
-   const del=document.createElement('button');
-   del.className='danger';
-   del.textContent='Delete';
-   del.onclick=()=>window.deleteContent(item.id);
-
-   box.append(heading,info,del);
-   list.appendChild(box);
-  });
- }catch(error){list.innerText=showError(error);}
+// Logout
+window.studentLogout = async function() {
+  await signOut(auth);
+  showPage("home");
 };
 
-window.deleteContent=async id=>{
- if(!window.isAdmin || !confirm('क्या यह सामग्री Delete करनी है?'))return;
- try{
-  await deleteDoc(doc(db,'content',id));
-  await loadAdminContent();
- }catch(error){alert(showError(error));}
+window.adminLogout = async function() {
+  await signOut(auth);
+  showPage("home");
 };
 
-window.loadCategoryContent=async category=>{
- const area=document.getElementById('categoryContent');
- area.innerText='सामग्री लोड हो रही है...';
- try{
-  const snapshot=await getDocs(collection(db,'content'));
-  area.innerHTML='';
-  let count=0;
-  snapshot.forEach(item=>{
-   const data=item.data();
-   if(data.category!==category)return;
-   count++;
-   const box=document.createElement('div');
-   box.className='item';
-   const title=document.createElement('h3');
-   title.textContent=data.title||'सामग्री';
-   box.appendChild(title);
+// Upload content
+$("uploadForm")?.addEventListener("submit", async event => {
+  event.preventDefault();
 
-   if(data.type==='link'){
-    const a=document.createElement('a');
-    a.href=data.textContent;
-    a.target='_blank';
-    a.rel='noopener noreferrer';
-    a.textContent='सामग्री खोलें';
-    box.appendChild(a);
-   }else{
-    const content=document.createElement('p');
-    content.style.whiteSpace='pre-wrap';
-    content.textContent=data.textContent||'';
-    box.appendChild(content);
-   }
-   area.appendChild(box);
-  });
-  if(!count)area.innerText='इस कैटेगरी में अभी कोई सामग्री उपलब्ध नहीं है।';
- }catch(error){area.innerText=showError(error);}
+  if (!window.isAdmin) {
+    showMessage("uploadMessage", "केवल Admin सामग्री अपलोड कर सकता है।");
+    return;
+  }
+
+  const title = $("contentTitle").value.trim();
+  const category = $("contentCategory").value;
+  const type = $("contentType").value;
+  let body = $("contentBody").value.trim();
+
+  try {
+    if (type === "txt") {
+      const file = $("txtFile").files[0];
+
+      if (!file) {
+        showMessage("uploadMessage", "कृपया TXT फाइल चुनें।");
+        return;
+      }
+
+      body = await file.text();
+    }
+
+    if (!body) {
+      showMessage("uploadMessage", "कृपया सामग्री या लिंक भरें।");
+      return;
+    }
+
+    await addDoc(collection(db, "contents"), {
+      title,
+      category,
+      type,
+      body,
+      currentAffairsDate:
+        category === "Current Affairs" ? $("currentAffairsDate").value : "",
+      createdAt: serverTimestamp()
+    });
+
+    $("uploadForm").reset();
+    showMessage("uploadMessage", "सामग्री सफलतापूर्वक अपलोड हो गई!");
+    loadAdminContent();
+
+  } catch (error) {
+    showMessage("uploadMessage", error.message);
+  }
+});
+
+// Display content safely
+function contentHTML(item) {
+  const title = safeText(item.title);
+  const body = String(item.body ?? "");
+
+  if (item.type === "link" && /^https?:\/\//i.test(body)) {
+    return `<h3>${title}</h3><p><a href="${safeText(body)}" target="_blank" rel="noopener">Open Content</a></p>`;
+  }
+
+  return `<h3>${title}</h3><p style="white-space:pre-wrap">${safeText(body)}</p>`;
+}
+
+// Load category content
+window.loadCategoryContent = async function(category) {
+  const container = $("categoryContent");
+  if (!container) return;
+
+  container.textContent = "Loading...";
+
+  try {
+    const snapshot = await getDocs(collection(db, "contents"));
+    const items = snapshot.docs
+      .map(item => ({ id: item.id, ...item.data() }))
+      .filter(item => item.category === category);
+
+    container.innerHTML = items.length
+      ? items.map(item => {
+          const date = item.currentAffairsDate
+            ? `<p>Date: ${safeText(item.currentAffairsDate)}</p>`
+            : "";
+          return `<div class="panel">${contentHTML(item)}${date}</div>`;
+        }).join("")
+      : "अभी इस कैटेगरी में कोई सामग्री नहीं है।";
+
+  } catch (error) {
+    container.textContent = error.message;
+  }
+};
+
+// Admin content list
+window.loadAdminContent = async function() {
+  if (!window.isAdmin) return;
+
+  const container = $("adminContentList");
+  if (!container) return;
+
+  container.textContent = "Loading...";
+
+  try {
+    const snapshot = await getDocs(collection(db, "contents"));
+
+    if (snapshot.empty) {
+      container.textContent = "अभी कोई सामग्री अपलोड नहीं है।";
+      return;
+    }
+
+    container.innerHTML = snapshot.docs.map(item => {
+      const data = item.data();
+
+      return `<div class="panel">
+        <strong>${safeText(data.title)}</strong>
+        <p>${safeText(data.category)}</p>
+        <button class="danger" data-delete-content="${item.id}">Delete</button>
+      </div>`;
+    }).join("");
+
+    container.querySelectorAll("[data-delete-content]").forEach(button => {
+      button.addEventListener("click", async () => {
+        if (!confirm("क्या आप यह सामग्री हटाना चाहते हैं?")) return;
+
+        try {
+          await deleteDoc(doc(db, "contents", button.dataset.deleteContent));
+          loadAdminContent();
+        } catch (error) {
+          alert(error.message);
+        }
+      });
+    });
+
+  } catch (error) {
+    container.textContent = error.message;
+  }
 };
 </script>
+
+// Add question editor
+let questionCount = 0;
+
+function addQuestion() {
+  questionCount++;
+
+  const id = questionCount;
+  const box = document.createElement("div");
+  box.className = "panel";
+
+  box.innerHTML = `
+    <h4>प्रश्न ${id}</h4>
+    <textarea class="questionText" placeholder="प्रश्न लिखें" required></textarea>
+
+    <input class="testOption" placeholder="Option A" required>
+    <input class="testOption" placeholder="Option B" required>
+    <input class="testOption" placeholder="Option C" required>
+    <input class="testOption" placeholder="Option D" required>
+
+    <label>सही उत्तर चुनें</label>
+    <select class="correctAnswer">
+      <option value="0">Option A</option>
+      <option value="1">Option B</option>
+      <option value="2">Option C</option>
+      <option value="3">Option D</option>
+    </select>
+
+    <button type="button" class="danger removeQuestion">प्रश्न हटाएँ</button>
+  `;
+
+  box.querySelector(".removeQuestion").addEventListener("click", () => {
+    box.remove();
+  });
+
+  $("questionEditors").appendChild(box);
+}
+
+$("addQuestionBtn")?.addEventListener("click", addQuestion);
+
+// Publish test
+$("testForm")?.addEventListener("submit", async event => {
+  event.preventDefault();
+
+  if (!window.isAdmin) return;
+
+  const editors = [...document.querySelectorAll("#questionEditors .panel")];
+
+  if (!editors.length) {
+    showMessage("testMessage", "कम से कम एक प्रश्न जोड़ें।");
+    return;
+  }
+
+  try {
+    const questions = editors.map(box => {
+      const options = [...box.querySelectorAll(".testOption")]
+        .map(input => input.value.trim());
+
+      const question = box.querySelector(".questionText").value.trim();
+      const correctIndex = Number(box.querySelector(".correctAnswer").value);
+
+      if (!question || options.some(option => !option)) {
+        throw new Error("सभी प्रश्न और चारों विकल्प भरें।");
+      }
+
+      return { question, options, correctIndex };
+    });
+
+    const title = $("testTitle").value.trim();
+    const durationMinutes = Number($("testDuration").value);
+
+    if (!title || durationMinutes < 1 || durationMinutes > 300) {
+      throw new Error("टेस्ट का नाम और सही समय भरें।");
+    }
+
+    await addDoc(collection(db, "tests"), {
+      title,
+      durationMinutes,
+      questions,
+      published: true,
+      createdAt: serverTimestamp()
+    });
+
+    $("testForm").reset();
+    $("questionEditors").innerHTML = "";
+    questionCount = 0;
+
+    showMessage("testMessage", "टेस्ट सफलतापूर्वक Publish हो गया!");
+    loadAdminTests();
+
+  } catch (error) {
+    showMessage("testMessage", error.message);
+  }
+});
+
+// Admin test list
+window.loadAdminTests = async function() {
+  if (!window.isAdmin) return;
+
+  const container = $("adminTestList");
+  if (!container) return;
+
+  container.textContent = "Loading...";
+
+  try {
+    const snapshot = await getDocs(collection(db, "tests"));
+
+    if (snapshot.empty) {
+      container.textContent = "अभी कोई टेस्ट नहीं है।";
+      return;
+    }
+
+    container.innerHTML = snapshot.docs.map(item => `
+      <div class="panel">
+        <strong>${safeText(item.data().title)}</strong>
+        <p>${item.data().durationMinutes} मिनट</p>
+        <button class="danger" data-delete-test="${item.id}">Delete Test</button>
+      </div>
+    `).join("");
+
+    container.querySelectorAll("[data-delete-test]").forEach(button => {
+      button.addEventListener("click", async () => {
+        if (!confirm("क्या यह टेस्ट हटाना चाहते हैं?")) return;
+
+        try {
+          await deleteDoc(doc(db, "tests", button.dataset.deleteTest));
+          loadAdminTests();
+        } catch (error) {
+          alert(error.message);
+        }
+      });
+    });
+
+  } catch (error) {
+    container.textContent = error.message;
+  }
+};
+
+// Student test list
+window.loadStudentTests = async function() {
+  const containers = [
+    $("studentTestList"),
+    $("categoryTestList")
+  ].filter(Boolean);
+
+  if (!containers.length) return;
+
+  containers.forEach(container => {
+    container.textContent = "Loading tests...";
+  });
+
+  try {
+    const snapshot = await getDocs(collection(db, "tests"));
+
+    const tests = snapshot.docs
+      .filter(item => item.data().published === true);
+
+    const html = tests.length
+      ? tests.map(item => `
+          <div class="panel">
+            <h3>${safeText(item.data().title)}</h3>
+            <p>समय: ${item.data().durationMinutes} मिनट</p>
+            <button class="primary" data-start-test="${item.id}">Start Test</button>
+          </div>
+        `).join("")
+      : "अभी कोई टेस्ट उपलब्ध नहीं है।";
+
+    containers.forEach(container => {
+      container.innerHTML = html;
+
+      container.querySelectorAll("[data-start-test]").forEach(button => {
+        button.addEventListener("click", () => {
+          startTest(button.dataset.startTest);
+        });
+      });
+    });
+
+  } catch (error) {
+    containers.forEach(container => {
+      container.textContent = error.message;
+    });
+  }
+};
+
+// Start test
+async function startTest(testId) {
+  try {
+    if (!window.currentUser) {
+      alert("पहले Student Login करें।");
+      showPage("login");
+      return;
+    }
+
+    const snapshot = await getDoc(doc(db, "tests", testId));
+
+    if (!snapshot.exists() || snapshot.data().published !== true) {
+      alert("यह टेस्ट उपलब्ध नहीं है।");
+      return;
+    }
+
+    const test = snapshot.data();
+    const questions = test.questions || [];
+
+    if (!questions.length) {
+      alert("इस टेस्ट में प्रश्न नहीं हैं।");
+      return;
+    }
+
+    const container = $("testArea");
+    if (!container) {
+      alert("Test Area नहीं मिला।");
+      return;
+    }
+
+    showPage("test");
+
+    container.innerHTML = `
+      <div class="panel">
+        <h2>${safeText(test.title)}</h2>
+        <h3 id="testTimer"></h3>
+        <form id="attemptForm">
+          <div id="attemptQuestions"></div>
+          <button class="primary" type="submit">Submit Test</button>
+        </form>
+        <div id="testResult"></div>
+      </div>
+    `;
+
+    const questionContainer = $("attemptQuestions");
+
+    questionContainer.innerHTML = questions.map((question, index) => `
+      <div class="panel">
+        <h3>Q${index + 1}. ${safeText(question.question)}</h3>
+        ${question.options.map((option, optionIndex) => `
+          <label style="display:block;margin:10px 0">
+            <input type="radio" name="question${index}" value="${optionIndex}">
+            ${safeText(option)}
+          </label>
+        `).join("")}
+      </div>
+    `).join("");
+
+    let remaining = Number(test.durationMinutes) * 60;
+    let submitted = false;
+
+    const timer = setInterval(() => {
+      remaining--;
+
+      const minutes = Math.floor(Math.max(remaining, 0) / 60);
+      const seconds = Math.max(remaining, 0) % 60;
+
+      $("testTimer").textContent =
+        `समय शेष: ${minutes}:${String(seconds).padStart(2, "0")}`;
+
+      if (remaining <= 0) {
+        clearInterval(timer);
+        submitTest();
+      }
+    }, 1000);
+
+    async function submitTest() {
+      if (submitted) return;
+      submitted = true;
+      clearInterval(timer);
+
+      const answers = questions.map((question, index) => {
+        const selected = document.querySelector(
+          `input[name="question${index}"]:checked`
+        );
+
+        return selected ? Number(selected.value) : -1;
+      });
+
+      let score = 0;
+
+      questions.forEach((question, index) => {
+        if (answers[index] === Number(question.correctIndex)) {
+          score++;
+        }
+      });
+
+      $("attemptForm").querySelectorAll("input,button").forEach(element => {
+        element.disabled = true;
+      });
+
+      $("testResult").innerHTML = `
+        <h2>आपका रिजल्ट</h2>
+        <h3>${score} / ${questions.length}</h3>
+        <p>सही उत्तर: ${score}</p>
+        <p>गलत या छोड़े गए प्रश्न: ${questions.length - score}</p>
+        <button class="primary" onclick="showPage('home')">Home</button>
+      `;
+    }
+
+    $("attemptForm").addEventListener("submit", event => {
+      event.preventDefault();
+      submitTest();
+    });
+
+    $("testTimer").textContent =
+      `समय शेष: ${Math.floor(remaining / 60)}:${String(remaining % 60).padStart(2, "0")}`;
+
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+window.startTest = startTest;
+
+</script>
 </body>
- </html>
- 
+     </html>
+     
