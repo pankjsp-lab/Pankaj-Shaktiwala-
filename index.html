@@ -142,21 +142,7 @@ footer{background:#102b59;color:yello;text-align:center;padding:18px;margin-top:
 
 <label>सामग्री का प्रकार</label>
  <label>Current Affairs की तारीख</label>
- await addDoc(collection(db,"content"),{
-category:$("contentCategory").value,
-title:$("contentTitle").value.trim(),
-description:$("contentDescription").value.trim(),
-accessType:$("accessType").value,
-currentAffairsDate:$("contentCategory").value==="करेंट अफेयर्स"?$("currentAffairsDate").value:"",
-createdAt:serverTimestamp()
-});
- div.append(tag,cat,h);
- if(d.category==="करेंट अफेयर्स" && d.currentAffairsDate){
-const date=document.createElement("small");
-date.className="muted";
-date.textContent="📅 तारीख: "+d.currentAffairsDate.split("-").reverse().join("-");
-div.append(date);
-}
+ 
 <input type="date" id="currentAffairsDate">
 <select id="contentType">
 <option value="text">Text / सामान्य सामग्री</option>
@@ -176,6 +162,66 @@ div.append(date);
 </div>
 
 <div class="panel">
+ <div class="panel">
+  let questionCount = 0;
+
+function addQuestionEditor(){
+ questionCount++;
+
+ const box = document.createElement('div');
+ box.className = 'item';
+
+ box.innerHTML = `
+ <h3>प्रश्न ${questionCount}</h3>
+
+ <label>प्रश्न लिखें</label>
+ <textarea class="qText" required></textarea>
+
+ <label>विकल्प A</label>
+ <input class="qOption" required>
+
+ <label>विकल्प B</label>
+ <input class="qOption" required>
+
+ <label>विकल्प C</label>
+ <input class="qOption" required>
+
+ <label>विकल्प D</label>
+ <input class="qOption" required>
+
+ <label>सही उत्तर चुनें</label>
+ <select class="qCorrect">
+ <option value="0">A</option>
+ <option value="1">B</option>
+ <option value="2">C</option>
+ <option value="3">D</option>
+ </select>
+ `;
+
+ document.getElementById('questionEditors').appendChild(box);
+}
+
+document.getElementById('addQuestionBtn').addEventListener('click',addQuestionEditor);
+
+addQuestionEditor();
+<h3>📝 Online Test बनाएँ</h3>
+
+<form id="testForm">
+<label>टेस्ट का नाम</label>
+<input id="testTitle" placeholder="जैसे: इतिहास टेस्ट 01" required>
+
+<label>टेस्ट का समय (मिनट)</label>
+<input id="testDuration" type="number" min="1" max="300" value="20" required>
+
+<div id="questionEditors"></div>
+
+<button type="button" class="primary" id="addQuestionBtn">+ नया प्रश्न जोड़ें</button>
+
+<button type="submit" class="primary">टेस्ट Publish करें</button>
+<p id="testMessage"></p>
+</form>
+ </div>
+ document.getElementById('uploadForm').addEventListener('submit',async e=>{
 <h3>अपलोड की गई सामग्री</h3>
 <button class="primary" onclick="loadAdminContent()">Refresh List</button>
 <div id="adminContentList">सूची लोड हो रही है...</div>
