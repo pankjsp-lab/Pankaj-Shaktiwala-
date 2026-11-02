@@ -153,7 +153,7 @@ label{display:block;margin-top:8px}
 <p id="adminWelcome"></p>
 <button class="primary" onclick="showPage('home')">Home</button>
 <button class="primary" onclick="adminLogout()">Admin Logout</button>
- </div>
+</div>
 
 <div class="panel">
 <h3>नई सामग्री अपलोड करें</h3>
@@ -233,11 +233,7 @@ label{display:block;margin-top:8px}
 <footer>
 <p>© 2026 The Pankaj Shaktiwala</p>
 <p>Learn • Practice • Achieve</p>
-</footer>
-</body>
- </html>
 
-<script>
 window.currentUser = null;
 window.isAdmin = false;
 
@@ -295,6 +291,8 @@ function safeText(value) {
     "'": "&#39;"
   })[char]);
 }
+</script>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
 
@@ -548,7 +546,6 @@ window.loadAdminContent = async function() {
     container.textContent = error.message;
   }
 };
-</script>
 
 // Add question editor
 let questionCount = 0;
@@ -857,8 +854,7 @@ async function startTest(testId) {
 }
 
 window.startTest = startTest;
-
 </script>
 </body>
-     </html>
-     
+</html>
+ 
