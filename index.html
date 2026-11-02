@@ -112,17 +112,13 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f8fafc;padding:12px;
 <h2>MCQ टेस्ट बनाएँ</h2>
 <input id="testTitle" placeholder="टेस्ट का नाम">
 <input id="testTime" type="number" value="20" min="1" placeholder="समय मिनट में">
-<textarea id="testQuestions" placeholder="हर प्रश्न इस format में लिखें:
-
-Q: भारत की राजधानी क्या है?
+<textarea id="testQuestions" placeholder="Q: भारत की राजधानी क्या है?
 A: मुंबई
 B: दिल्ली
 C: लखनऊ
 D: पटना
 ANS: B
-EXPLAIN: भारत की राजधानी नई दिल्ली है।
-
-अगला प्रश्न इसी तरह लिखें।"></textarea>
+EXPLAIN: भारत की राजधानी नई दिल्ली है।"></textarea>
 <button class="action" onclick="publishTest()">टेस्ट प्रकाशित करें</button>
 <p id="testMessage"></p>
 </div>
@@ -233,57 +229,58 @@ let secondsLeft=0;
 const $=id=>document.getElementById(id);
 const message=(id,txt)=>$(id).textContent=txt;
 
-function hideAll(){
- ["home","account","dashboard","content","tests"].forEach(id=>$(id).classList.add("hidden"));
+function isAdmin(){
+ return currentUser && currentUser.uid===ADMIN_UID;
 }
+
 window.go=function(id){
- hideAll();
+ ["home","account","dashboard","content","tests"].forEach(x=>$(x).classList.add("hidden"));
  $(id).classList.remove("hidden");
- if(id==="content")loadContent();
- if(id==="tests")loadTests();
+ if(id==="content")window.loadContent();
+ if(id==="tests")window.loadTests();
 };
+
 window.openCategory=function(category){
  $("contentFilter").value=category;
- go("content");
- loadContent();
+ window.go("content");
 };
+
 window.openDashboard=function(){
- if(!currentUser)return go("account");
- go("dashboard");
+ if(!currentUser)return window.go("account");
+ window.go("dashboard");
 };
-function isAdmin(){return currentUser && currentUser.uid===ADMIN_UID;}
 
 onAuthStateChanged(auth,user=>{
  currentUser=user;
  $("dashNav").classList.toggle("hidden",!user);
  if(user){
-  go("dashboard");
+  window.go("dashboard");
   $("userInfo").textContent=user.email||"";
   $("dashboardTitle").textContent=isAdmin()?"Admin Dashboard":"Student Dashboard";
   $("adminArea").classList.toggle("hidden",!isAdmin());
   $("studentArea").classList.toggle("hidden",isAdmin());
-  if(isAdmin())loadAdminLists();
+  if(isAdmin())window.loadAdminLists();
  }else{
   $("adminArea").classList.add("hidden");
   $("studentArea").classList.add("hidden");
-  if(!$("home").classList.contains("hidden")===false)go("home");
+  window.go("home");
  }
 });
 
 window.registerStudent=async()=>{
- const email=$("studentEmail").value.trim();
- const password=$("studentPassword").value;
  try{
-  await createUserWithEmailAndPassword(auth,email,password);
-  message("authMessage","अकाउंट बन गया। आपका Dashboard खुल रहा है।");
+  await createUserWithEmailAndPassword(auth,$("studentEmail").value.trim(),$("studentPassword").value);
+  message("authMessage","अकाउंट बन गया। Dashboard खुल रहा है।");
  }catch(e){message("authMessage","Registration Error: "+e.message);}
 };
+
 window.loginStudent=async()=>{
  try{
   await signInWithEmailAndPassword(auth,$("studentEmail").value.trim(),$("studentPassword").value);
   message("authMessage","Login सफल।");
  }catch(e){message("authMessage","Login Error: "+e.message);}
 };
+
 window.loginAdmin=async()=>{
  try{
   const result=await signInWithEmailAndPassword(auth,$("adminEmail").value.trim(),$("adminPassword").value);
@@ -295,11 +292,13 @@ window.loginAdmin=async()=>{
   message("authMessage","Admin Login सफल।");
  }catch(e){message("authMessage","Login Error: "+e.message);}
 };
+
 window.logout=async()=>{
  if(timerHandle)clearInterval(timerHandle);
  await signOut(auth);
- go("home");
+ window.go("home");
 };
+
 window.publishContent=async()=>{
  if(!isAdmin()){message("contentMessage","केवल Admin अपलोड कर सकता है।");return;}
  const title=$("contentTitle").value.trim();
@@ -325,14 +324,14 @@ window.publishContent=async()=>{
   $("contentDescription").value="";
   $("contentLink").value="";
   $("txtFile").value="";
-  loadAdminLists();
+  window.loadAdminLists();
  }catch(e){message("contentMessage","Upload Error: "+e.message);}
 };
 
 async function getContentDocs(){
- const q=query(collection(db,"content"),orderBy("createdAt","desc"));
- return await getDocs(q);
+ return await getDocs(query(collection(db,"content"),orderBy("createdAt","desc")));
 }
+
 window.loadContent=async()=>{
  const list=$("contentList");
  list.textContent="लोड हो रहा है...";
@@ -348,10 +347,12 @@ window.loadContent=async()=>{
    const h=document.createElement("h3");h.textContent=d.title||"बिना शीर्षक";
    const cat=document.createElement("p");cat.className="small";cat.textContent=d.category||"";
    box.append(h,cat);
-   if(d.description){const p=document.createElement("p");p.textContent=d.description;box.append(p);}
+   if(d.description){
+    const p=document.createElement("p");p.textContent=d.description;box.append(p);
+   }
    if(d.type==="txt" && d.textContent){
     const b=document.createElement("button");b.className="action";b.textContent="TXT पढ़ें";
-    b.onclick=()=>showTxt(d.title,d.textContent);
+    b.onclick=()=>window.showTxt(d.title,d.textContent);
     box.append(b);
    }
    if(d.link){
@@ -365,7 +366,8 @@ window.loadContent=async()=>{
   if(!count)list.textContent="अभी कोई सामग्री उपलब्ध नहीं है।";
  }catch(e){list.textContent="कंटेंट लोड नहीं हुआ: "+e.message;}
 };
-function showTxt(title,text){
+
+window.showTxt=function(title,text){
  const area=document.createElement("div");area.className="panel";
  const h=document.createElement("h3");h.textContent=title;
  const pre=document.createElement("pre");pre.textContent=text;
@@ -373,21 +375,26 @@ function showTxt(title,text){
  b.onclick=()=>area.remove();
  area.append(h,pre,b);
  $("contentList").prepend(area);
-}
+};
 
 function parseQuestions(raw){
  const blocks=raw.split(/(?=^\s*Q\s*:)/im).map(x=>x.trim()).filter(Boolean);
  return blocks.map(block=>{
-  const get=k=>{const m=block.match(new RegExp("^\\s*"+k+"\\s*:\\s*(.*)$","im"));return m?m[1].trim():"";};
+  const get=k=>{
+   const m=block.match(new RegExp("^\\s*"+k+"\\s*:\\s*(.*)$","im"));
+   return m?m[1].trim():"";
+  };
   const question=get("Q");
   const options=["A","B","C","D"].map(get);
   const ans=get("ANS").toUpperCase();
   const correctIndex=["A","B","C","D"].indexOf(ans);
   const explanation=get("EXPLAIN");
-  if(!question||options.some(x=>!x)||correctIndex<0)throw Error("हर प्रश्न में Q, A, B, C, D और ANS सही भरें।");
+  if(!question||options.some(x=>!x)||correctIndex<0)
+   throw Error("हर प्रश्न में Q, A, B, C, D और ANS सही भरें।");
   return {question,options,correctIndex,explanation};
  });
 }
+
 window.publishTest=async()=>{
  if(!isAdmin())return;
  try{
@@ -400,13 +407,13 @@ window.publishTest=async()=>{
   });
   message("testMessage","टेस्ट प्रकाशित हो गया।");
   $("testTitle").value="";$("testQuestions").value="";
-  loadAdminLists();loadTests();
+  window.loadAdminLists();window.loadTests();
  }catch(e){message("testMessage","त्रुटि: "+e.message);}
 };
+
 window.publishBulkTests=async()=>{
  if(!isAdmin())return;
- const raw=$("bulkTests").value;
- const parts=raw.split(/^\s*TEST\s*:\s*/im).filter(x=>x.trim());
+ const parts=$("bulkTests").value.split(/^\s*TEST\s*:\s*/im).filter(x=>x.trim());
  if(!parts.length){message("bulkMessage","TEST: से शुरू होने वाले टेस्ट लिखें।");return;}
  let success=0;
  try{
@@ -426,12 +433,14 @@ window.publishBulkTests=async()=>{
   }
   message("bulkMessage",success+" टेस्ट सफलतापूर्वक अपलोड हुए।");
   $("bulkTests").value="";
-  loadAdminLists();loadTests();
+  window.loadAdminLists();window.loadTests();
  }catch(e){message("bulkMessage",success+" टेस्ट अपलोड हुए। आगे त्रुटि: "+e.message);}
 };
+
 async function getTestDocs(){
  return await getDocs(query(collection(db,"tests"),orderBy("createdAt","desc")));
 }
+
 window.loadTests=async()=>{
  const list=$("testList");list.textContent="लोड हो रहा है...";
  try{
@@ -444,30 +453,32 @@ window.loadTests=async()=>{
    const h=document.createElement("h3");h.textContent=d.title;
    const p=document.createElement("p");p.textContent=(d.questions||[]).length+" प्रश्न • "+(d.durationMinutes||20)+" मिनट";
    const b=document.createElement("button");b.className="action";b.textContent="टेस्ट शुरू करें";
-   b.onclick=()=>startQuiz(s.id,d);
+   b.onclick=()=>window.startQuiz(s.id,d);
    box.append(h,p,b);list.append(box);
   });
   if(!count)list.textContent="अभी कोई टेस्ट उपलब्ध नहीं है।";
  }catch(e){list.textContent="टेस्ट लोड नहीं हुए: "+e.message;}
 };
-function startQuiz(id,data){
- if(!currentUser){go("account");message("authMessage","टेस्ट देने के लिए पहले Student Login करें।");return;}
+
+window.startQuiz=function(id,data){
+ if(!currentUser){window.go("account");message("authMessage","टेस्ट देने के लिए पहले Student Login करें।");return;}
  if(isAdmin()){alert("विद्यार्थी अकाउंट से टेस्ट दें।");return;}
  activeTest=data;currentQuestion=0;
  answers=new Array(data.questions.length).fill(null);
  secondsLeft=(Number(data.durationMinutes)||20)*60;
  $("testList").classList.add("hidden");
  $("quizArea").classList.remove("hidden");
- showQuestion();
+ window.showQuestion();
  if(timerHandle)clearInterval(timerHandle);
  timerHandle=setInterval(()=>{
   secondsLeft--;
   const t=$("quizTimer");
   if(t)t.textContent="समय शेष: "+Math.floor(secondsLeft/60)+":"+String(secondsLeft%60).padStart(2,"0");
-  if(secondsLeft<=0){clearInterval(timerHandle);finishQuiz();}
+  if(secondsLeft<=0){clearInterval(timerHandle);window.finishQuiz();}
  },1000);
-}
-function showQuestion(){
+};
+
+window.showQuestion=function(){
  const q=activeTest.questions[currentQuestion];
  const area=$("quizArea");area.innerHTML="";
  const timer=document.createElement("h3");timer.id="quizTimer";
@@ -478,17 +489,24 @@ function showQuestion(){
  area.append(timer,heading,counter,question);
  q.options.forEach((opt,i)=>{
   const label=document.createElement("label");label.className="option";
-  const radio=document.createElement("input");radio.type="radio";radio.name="answer";radio.checked=answers[currentQuestion]===i;
+  const radio=document.createElement("input");radio.type="radio";radio.name="answer";
+  radio.checked=answers[currentQuestion]===i;
   radio.onchange=()=>answers[currentQuestion]=i;
   label.append(radio,document.createTextNode(String.fromCharCode(65+i)+". "+opt));area.append(label);
  });
  const prev=document.createElement("button");prev.className="action";prev.textContent="पिछला";
- prev.disabled=currentQuestion===0;prev.onclick=()=>{currentQuestion--;showQuestion();};
- const next=document.createElement("button");next.className="action";next.textContent=currentQuestion===activeTest.questions.length-1?"टेस्ट जमा करें":"अगला";
- next.onclick=()=>{if(currentQuestion===activeTest.questions.length-1)finishQuiz();else{currentQuestion++;showQuestion();}};
+ prev.disabled=currentQuestion===0;
+ prev.onclick=()=>{currentQuestion--;window.showQuestion();};
+ const next=document.createElement("button");next.className="action";
+ next.textContent=currentQuestion===activeTest.questions.length-1?"टेस्ट जमा करें":"अगला";
+ next.onclick=()=>{
+  if(currentQuestion===activeTest.questions.length-1)window.finishQuiz();
+  else{currentQuestion++;window.showQuestion();}
+ };
  area.append(prev,next);
-}
-function finishQuiz(){
+};
+
+window.finishQuiz=function(){
  if(timerHandle)clearInterval(timerHandle);
  let score=0;
  activeTest.questions.forEach((q,i)=>{if(answers[i]===q.correctIndex)score++;});
@@ -505,14 +523,19 @@ function finishQuiz(){
   box.append(p,a,c,e);area.append(box);
  });
  const b=document.createElement("button");b.className="action";b.textContent="दूसरे टेस्ट देखें";
- b.onclick=()=>{$("quizArea").classList.add("hidden");$("testList").classList.remove("hidden");loadTests();};
+ b.onclick=()=>{
+  $("quizArea").classList.add("hidden");
+  $("testList").classList.remove("hidden");
+  window.loadTests();
+ };
  area.append(b);
-}
-async function loadAdminLists(){
+};
+
+window.loadAdminLists=async()=>{
  if(!isAdmin())return;
  try{
   const cs=await getContentDocs();$("adminContentList").innerHTML="";
   cs.forEach(s=>{
    const d=s.data();const box=document.createElement("div");box.className="item";
    const p=document.createElement("p");p.textContent=d.title||"कंटेंट";
-   const b=document.createElement("button");b.className="action dan
+   const b=document.createElement("button");b.
