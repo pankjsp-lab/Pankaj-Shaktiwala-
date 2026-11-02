@@ -24,12 +24,12 @@ main{padding:18px;max-width:1000px;margin:auto}
 input,select,textarea{width:100%;padding:12px;margin:8px 0;border:1px solid #bbb;border-radius:7px;font-size:15px}
 textarea{min-height:100px}
 .primary{background:#174a88;color:white;width:100%;margin-top:10px}
-.danger{background:#b42318;color:white}
+.danger{background:#b42318;color: yellow}
 .switch{color:#0755a5;text-decoration:underline;cursor:pointer}
 .item{background:#f3f6fb;padding:14px;border-radius:8px;margin:12px 0;overflow-wrap:anywhere}
 .item a{color:#0755a5}
 #message{font-weight:bold;overflow-wrap:anywhere}
-footer{background:#102b59;color:white;text-align:center;padding:18px;margin-top:35px}
+footer{background:#102b59;color:yello;text-align:center;padding:18px;margin-top:35px}
 </style>
 </head>
 <body>
@@ -302,7 +302,7 @@ document.getElementById('adminForm').addEventListener('submit',async e=>{
   );
   if(auth.currentUser.uid!==ADMIN_UID){
    await signOut(auth);
-   message.innerText='यह अकाउंट Admin नहीं है।';
+   message.innerText='chal jhutha';
   }
  }catch(error){
   message.innerText=showError(error);
