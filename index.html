@@ -7,293 +7,465 @@
 <title>The Pankaj Shaktiwala</title>
 
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f2f5fa;color:#222}
-header{background:#102b59;color:white;text-align:center;padding:22px 10px}
-header h1{margin:0;font-size:25px}
-nav{display:flex;flex-wrap:wrap;justify-content:center;background:#174a88;padding:10px;gap:8px}
-button{border:0;border-radius:7px;padding:11px 15px;background:white;color:#12345c;font-weight:bold;cursor:pointer}
-button:disabled{opacity:.6;cursor:not-allowed}
-main{padding:18px;max-width:1000px;margin:auto}
-.section{display:none}
-.section.active{display:block}
-.welcome,.panel{background:white;padding:20px;border-radius:12px;margin-bottom:18px}
-.welcome{text-align:center}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px}
-.card{background:white;border-radius:12px;padding:22px 10px;text-align:center;box-shadow:0 2px 8px #0001;cursor:pointer}
-.card .emoji{font-size:32px}
-.back{background:#174a88;color:white;margin-bottom:15px}
-input,select,textarea{width:100%;padding:12px;margin:8px 0;border:1px solid #bbb;border-radius:7px;font-size:15px}
-textarea{min-height:100px}
-.primary{background:#174a88;color:white;width:100%;margin-top:10px}
-.danger{background:#b42318;color:white}
-.switch{color:#0755a5;text-decoration:underline;cursor:pointer}
-.item{background:#f3f6fb;padding:14px;border-radius:8px;margin:12px 0;overflow-wrap:anywhere}
-.item a{color:#0755a5}
-#message,#adminMessage{font-weight:bold;overflow-wrap:anywhere}
-footer{background:#102b59;color:white;text-align:center;padding:18px;margin-top:35px}
-label{display:block;margin-top:8px}
-.quiz-option{display:flex;align-items:center;gap:8px;margin:10px 0}
-.quiz-option input{width:auto;margin:0}
-#quizTimer{color:#b42318;font-size:22px}
-.small{font-size:13px;color:#555}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f2f5fa;
+  color: #222;
+}
+
+header {
+  background: #123c69;
+  color: white;
+  text-align: center;
+  padding: 22px 10px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 25px;
+}
+
+header p {
+  margin: 8px 0 0;
+}
+
+nav {
+  background: #092b4c;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+button {
+  border: none;
+  border-radius: 6px;
+  padding: 11px 15px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+nav button {
+  background: white;
+  color: #123c69;
+  font-weight: bold;
+}
+
+.primary {
+  background: #123c69;
+  color: white;
+}
+
+.danger {
+  background: #c62828;
+  color: white;
+}
+
+.section {
+  display: none;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 12px;
+}
+
+.section.active {
+  display: block;
+}
+
+.panel {
+  background: white;
+  padding: 18px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #00000012;
+}
+
+h2, h3 {
+  color: #123c69;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0 15px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+label {
+  font-weight: bold;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  gap: 12px;
+}
+
+.category-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 22px 10px;
+  text-align: center;
+  font-weight: bold;
+  color: #123c69;
+  cursor: pointer;
+  box-shadow: 0 2px 6px #00000010;
+}
+
+.category-card:hover {
+  background: #e8f1ff;
+}
+
+footer {
+  background: #092b4c;
+  color: white;
+  text-align: center;
+  padding: 18px;
+  margin-top: 30px;
+}
+
+footer p {
+  margin: 5px;
+}
+
+.small-text {
+  font-size: 13px;
+  color: #666;
+}
+
+#testTimer {
+  color: #c62828;
+  font-size: 22px;
+}
+
+@media(max-width:600px) {
+  header h1 {
+    font-size: 21px;
+  }
+
+  .section {
+    padding: 8px;
+  }
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>THE PANKAJ SHAKTIWALA</h1>
-<p>Learn • Practice • Achieve</p>
+  <h1>THE PANKAJ SHAKTIWALA</h1>
+  <p>Learn • Practice • Achieve</p>
 </header>
 
 <nav>
-<button onclick="showPage('home')">Home</button>
-<button onclick="showPage('study')">Study Material</button>
-<button onclick="showPage('login')">Student Login</button>
-<button onclick="showPage('adminLogin')">Admin Login</button>
+  <button onclick="showPage('home')">Home</button>
+  <button onclick="showPage('login')">Student Login</button>
+  <button onclick="showPage('study')">Study Material</button>
+  <button onclick="showPage('adminLogin')">Admin</button>
 </nav>
 
 <main>
 
+<!-- HOME PAGE -->
 <section id="home" class="section active">
-<div class="welcome">
-<h2>Welcome to Our Learning Platform</h2>
-<p>आपकी पढ़ाई, आपकी सफलता!</p>
-<p id="homeStatus">पढ़ाई शुरू करने के लिए Student Login करें।</p>
-</div>
 
-<div class="cards">
-<div class="card" onclick="openCategory('Current Affairs')">
-<div class="emoji">📰</div><h3>Current Affairs</h3>
-</div>
-<div class="card" onclick="openCategory('Notes & PDF')">
-<div class="emoji">📚</div><h3>Notes & PDF</h3>
-</div>
-<div class="card" onclick="openCategory('Online Test')">
-<div class="emoji">📝</div><h3>Online Test</h3>
-</div>
-<div class="card" onclick="openCategory('Course')">
-<div class="emoji">🎓</div><h3>Course</h3>
-</div>
-<div class="card" onclick="openCategory('Audio & Video')">
-<div class="emoji">🎬</div><h3>Audio & Video</h3>
-</div>
-<div class="card" onclick="openCategory('Digital Store')">
-<div class="emoji">🛒</div><h3>Digital Store</h3>
-</div>
-</div>
+  <div class="panel">
+    <h2>Welcome to The Pankaj Shaktiwala</h2>
+    <p>आपका अपना Online Education Platform</p>
+    <p>यहाँ आपको Notes, Current Affairs, Online Tests और Video Classes मिलेंगी।</p>
+    <button class="primary" onclick="showPage('login')">
+      Student Login / Registration
+    </button>
+  </div>
+
+  <h2>Study Categories</h2>
+
+  <div class="grid">
+    <div class="category-card" onclick="openCategory('Current Affairs')">
+      📰<br>Current Affairs
+    </div>
+
+    <div class="category-card" onclick="openCategory('Notes & PDF')">
+      📚<br>Notes & PDF
+    </div>
+
+    <div class="category-card" onclick="openCategory('Online Test')">
+      📝<br>Online Test
+    </div>
+
+    <div class="category-card" onclick="openCategory('Course')">
+      🎓<br>Courses
+    </div>
+
+    <div class="category-card" onclick="openCategory('Audio & Video')">
+      🎥<br>Audio & Video
+    </div>
+
+    <div class="category-card" onclick="openCategory('Digital Store')">
+      🛒<br>Digital Store
+    </div>
+  </div>
 </section>
 
-<section id="study" class="section">
-<button class="back" onclick="showPage('home')">← Home</button>
-<div class="panel">
-<h2>Study Material</h2>
-<div id="studyLinks">सामग्री लोड हो रही है...</div>
-</div>
-</section>
-
-<section id="category" class="section">
-<button class="back" onclick="showPage('home')">← Home</button>
-<div class="panel">
-<h2 id="categoryTitle"></h2>
-<div id="categoryContent">सामग्री लोड हो रही है...</div>
-</div>
-</section>
-
+<!-- STUDENT LOGIN -->
 <section id="login" class="section">
-<button class="back" onclick="showPage('home')">← Home</button>
-<div class="panel">
 
-<div id="authForms">
-<h2 id="formTitle">Student Login</h2>
-<form id="authForm">
-<input id="email" type="email" placeholder="अपना Email लिखें" required>
-<input id="password" type="password" placeholder="Password (कम से कम 6 अक्षर)" minlength="6" required>
-<button class="primary" id="submitButton" type="submit">Login करें</button>
-</form>
+  <div class="panel">
+    <h2 id="loginHeading">Student Login</h2>
 
-<p id="switchText">
-नया अकाउंट बनाना है?
-<span class="switch" onclick="toggleForm()">Registration करें</span>
-</p>
-<p id="message"></p>
-</div>
+    <form id="loginForm">
+      <label>Email Address</label>
+      <input type="email" id="loginEmail" required
+      placeholder="अपना Email लिखें">
 
-<div id="studentPanel" style="display:none">
-<h2>Student Dashboard</h2>
-<p id="studentEmail"></p>
-<button class="primary" onclick="showPage('study')">Study Material देखें</button>
-<button class="primary" onclick="loadStudentTests()">📝 Online Test देखें</button>
-<div id="studentTestList"></div>
-<div id="testRunner" class="panel" style="display:none"></div>
-<button class="primary" onclick="studentLogout()">Logout</button>
-</div>
+      <label>Password</label>
+      <input type="password" id="loginPassword"
+      minlength="6" required placeholder="Password लिखें">
 
-</div>
+      <button type="submit" class="primary" id="loginButton">
+        Login
+      </button>
+    </form>
+
+    <p id="loginMessage"></p>
+
+    <button type="button" onclick="toggleForm()">
+      New Student? Register / Login
+    </button>
+
+    <button type="button" onclick="studentLogout()">
+      Student Logout
+    </button>
+  </div>
 </section>
 
+<!-- ADMIN LOGIN -->
 <section id="adminLogin" class="section">
-<button class="back" onclick="showPage('home')">← Home</button>
-<div class="panel">
-<h2>Admin Login</h2>
-<form id="adminForm">
-<input id="adminEmail" type="email" placeholder="Admin Email" required>
-<input id="adminPassword" type="password" placeholder="Admin Password" required>
-<button class="primary" type="submit">Admin Login करें</button>
-</form>
-<p id="adminMessage"></p>
-</div>
+
+  <div class="panel">
+    <h2>Admin Login</h2>
+
+    <form id="adminLoginForm">
+      <label>Admin Email</label>
+      <input type="email" id="adminEmail" required>
+
+      <label>Password</label>
+      <input type="password" id="adminPassword" required>
+
+      <button type="submit" class="primary">
+        Admin Login
+      </button>
+    </form>
+
+    <p id="adminLoginMessage"></p>
+  </div>
 </section>
 
+<!-- STUDY MATERIAL PAGE -->
+<section id="study" class="section">
+
+  <div class="panel">
+    <h2>Study Material</h2>
+    <p>अपनी पसंद की कैटेगरी चुनें।</p>
+    <button class="primary" onclick="showPage('home')">Home</button>
+  </div>
+
+  <div class="grid">
+    <div class="category-card" onclick="openCategory('Current Affairs')">
+      Current Affairs
+    </div>
+
+    <div class="category-card" onclick="openCategory('Notes & PDF')">
+      Notes & PDF
+    </div>
+
+    <div class="category-card" onclick="openCategory('Online Test')">
+      Online Test
+    </div>
+
+    <div class="category-card" onclick="openCategory('Course')">
+      Course
+    </div>
+
+    <div class="category-card" onclick="openCategory('Audio & Video')">
+      Audio & Video
+    </div>
+
+    <div class="category-card" onclick="openCategory('Digital Store')">
+      Digital Store
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY CONTENT -->
+<section id="category" class="section">
+
+  <div class="panel">
+    <h2 id="categoryTitle">Study Material</h2>
+    <button class="primary" onclick="showPage('study')">
+      Back
+    </button>
+  </div>
+
+  <div id="categoryContent"></div>
+  <div id="categoryTestList"></div>
+
+</section>
+
+<!-- STUDENT TEST LIST -->
+<section id="studentTests" class="section">
+
+  <div class="panel">
+    <h2>Available Online Tests</h2>
+    <div id="studentTestList"></div>
+  </div>
+
+</section>
+
+<!-- TEST ATTEMPT PAGE -->
+<section id="test" class="section">
+  <div id="testArea"></div>
+</section>
+
+<!-- ADMIN DASHBOARD -->
 <section id="admin" class="section">
 
-<div class="panel">
-<h2>Admin Dashboard</h2>
-<p id="adminWelcome"></p>
-<button class="primary" onclick="showPage('home')">Home</button>
-<button class="primary" onclick="adminLogout()">Admin Logout</button>
-</div>
+  <div class="panel">
+    <h2>Admin Dashboard</h2>
+    <p id="adminWelcome">Welcome Admin</p>
 
-<div class="panel">
-<h3>नई सामग्री अपलोड करें</h3>
+    <button class="primary" onclick="showPage('home')">
+      Home
+    </button>
 
-<form id="uploadForm">
+    <button class="danger" onclick="adminLogout()">
+      Admin Logout
+    </button>
+  </div>
 
-<label>सामग्री का शीर्षक</label>
-<input id="contentTitle" placeholder="जैसे: आज के Current Affairs" required>
+  <!-- CONTENT UPLOAD -->
+  <div class="panel">
+    <h3>नई सामग्री अपलोड करें</h3>
 
-<label>कैटेगरी चुनें</label>
-<select id="contentCategory" required>
-<option value="Current Affairs">Current Affairs</option>
-<option value="Notes & PDF">Notes & PDF</option>
-<option value="Online Test">Online Test</option>
-<option value="Course">Course</option>
-<option value="Audio & Video">Audio & Video</option>
-<option value="Digital Store">Digital Store</option>
-</select>
+    <form id="uploadForm">
 
-<label>Current Affairs की तारीख</label>
-<input type="date" id="currentAffairsDate">
+      <label>सामग्री का शीर्षक</label>
+      <input id="contentTitle" type="text"
+      placeholder="सामग्री का नाम" required>
 
-<label>सामग्री का प्रकार</label>
-<select id="contentType">
-<option value="text">Text / सामान्य सामग्री</option>
-<option value="link">PDF / Video Link</option>
-<option value="txt">TXT File</option>
-</select>
+      <label>कैटेगरी चुनें</label>
+      <select id="contentCategory" required>
+        <option value="Current Affairs">Current Affairs</option>
+        <option value="Notes & PDF">Notes & PDF</option>
+        <option value="Online Test">Online Test</option>
+        <option value="Course">Course</option>
+        <option value="Audio & Video">Audio & Video</option>
+        <option value="Digital Store">Digital Store</option>
+      </select>
 
-<label>विवरण या लिंक</label>
-<textarea id="contentBody" placeholder="यहाँ सामग्री लिखें या PDF/Video का लिंक डालें"></textarea>
+      <label>Current Affairs की तारीख</label>
+      <input type="date" id="currentAffairsDate">
 
-<label>TXT फाइल (केवल TXT प्रकार के लिए)</label>
-<input id="txtFile" type="file" accept=".txt,text/plain">
+      <label>सामग्री का प्रकार</label>
+      <select id="contentType">
+        <option value="text">Text</option>
+        <option value="link">PDF / Video Link</option>
+        <option value="txt">TXT File</option>
+      </select>
 
-<button class="primary" id="uploadButton" type="submit">सामग्री अपलोड करें</button>
-<p id="uploadMessage"></p>
-</form>
-</div>
+      <label>सामग्री या लिंक</label>
+      <textarea id="contentBody"
+      placeholder="यहाँ सामग्री या लिंक लिखें"></textarea>
 
-<div class="panel">
-<h3>📝 Online Test बनाएँ</h3>
+      <label>TXT File</label>
+      <input type="file" id="txtFile" accept=".txt">
 
-<form id="testForm">
+      <button type="submit" class="primary" id="uploadButton">
+        Upload Content
+      </button>
 
-<label>टेस्ट का नाम</label>
-<input id="testTitle" placeholder="जैसे: इतिहास टेस्ट 01" required>
+      <p id="uploadMessage"></p>
+    </form>
+  </div>
 
-<label>टेस्ट का समय (मिनट)</label>
-<input id="testDuration" type="number" min="1" max="300" value="20" required>
+  <!-- TEST CREATION -->
+  <div class="panel">
+    <h3>Online Test बनाएँ</h3>
 
-<div id="questionEditors"></div>
+    <form id="testForm">
 
-<button type="button" class="primary" id="addQuestionBtn">+ नया प्रश्न जोड़ें</button>
+      <label>टेस्ट का नाम</label>
+      <input type="text" id="testTitle"
+      placeholder="जैसे: इतिहास टेस्ट 01" required>
 
-<button type="submit" class="primary" id="publishTestButton">टेस्ट Publish करें</button>
+      <label>टेस्ट का समय (मिनट)</label>
+      <input type="number" id="testDuration"
+      min="1" max="300" value="20" required>
 
-<p id="testMessage"></p>
-</form>
-</div>
+      <div id="questionEditors"></div>
 
-<div class="panel">
-<h3>अपलोड की गई सामग्री</h3>
-<button class="primary" onclick="loadAdminContent()">Refresh List</button>
-<div id="adminContentList">सूची लोड हो रही है...</div>
-</div>
+      <button type="button" class="primary" id="addQuestionBtn">
+        + नया प्रश्न जोड़ें
+      </button>
 
-<div class="panel">
-<h3>Published Online Tests</h3>
-<button class="primary" onclick="loadAdminTests()">Refresh Tests</button>
-<div id="adminTestList"></div>
-</div>
+      <button type="submit" class="primary" id="publishTestButton">
+        Publish Test
+      </button>
+
+      <p id="testMessage"></p>
+    </form>
+  </div>
+
+  <!-- ADMIN CONTENT LIST -->
+  <div class="panel">
+    <h3>अपलोड की गई सामग्री</h3>
+
+    <button type="button" class="primary"
+    onclick="loadAdminContent()">
+      Refresh Content
+    </button>
+
+    <div id="adminContentList"></div>
+  </div>
+
+  <!-- ADMIN TEST LIST -->
+  <div class="panel">
+    <h3>Published Online Tests</h3>
+
+    <button type="button" class="primary"
+    onclick="loadAdminTests()">
+      Refresh Tests
+    </button>
+
+    <div id="adminTestList"></div>
+  </div>
 
 </section>
+
 </main>
 
 <footer>
-<p>© 2026 The Pankaj Shaktiwala</p>
-<p>Learn • Practice • Achieve</p>
-
-window.currentUser = null;
-window.isAdmin = false;
-
-function showPage(page) {
-  if ((page === "study" || page === "category") && !window.currentUser) {
-    page = "login";
-  }
-
-  if (page === "admin" && !window.isAdmin) {
-    page = "adminLogin";
-  }
-
-  document.querySelectorAll(".section").forEach(section => {
-    section.classList.remove("active");
-  });
-
-  const selected = document.getElementById(page);
-  if (selected) selected.classList.add("active");
-}
-
-function openCategory(name) {
-  window.selectedCategory = name;
-  showPage("category");
-
-  const heading = document.getElementById("categoryTitle");
-  if (heading) heading.textContent = name;
-
-  if (name === "Online Test") {
-    window.loadStudentTests?.();
-  } else {
-    window.loadCategoryContent?.(name);
-  }
-}
-
-let isRegistration = false;
-
-function toggleForm() {
-  isRegistration = !isRegistration;
-
-  const heading = document.getElementById("loginHeading");
-  const button = document.getElementById("loginButton");
-  const toggle = document.getElementById("toggleLogin");
-
-  if (heading) heading.textContent = isRegistration ? "Student Registration" : "Student Login";
-  if (button) button.textContent = isRegistration ? "Register" : "Login";
-  if (toggle) toggle.textContent = isRegistration ? "Already registered? Login" : "New student? Register";
-}
-
-function safeText(value) {
-  return String(value ?? "").replace(/[&<>"']/g, char => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[char]);
-}
-</script>
-
+  <p>© 2026 The Pankaj Shaktiwala</p>
+  <p>Learn • Practice • Achieve</p>
+          </footer>
+  
 <script type="module">
+
+// FIREBASE IMPORTS
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
 
 import {
@@ -315,6 +487,7 @@ import {
   getDoc
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
+// FIREBASE CONFIGURATION
 const firebaseConfig = {
   apiKey: "AIzaSyCJzzHsKAxdCpj5rbwkTDf2g4Jpk3OQp0s",
   authDomain: "pankaj-shaktiwala.firebaseapp.com",
@@ -333,240 +506,481 @@ const ADMIN_UID = "qCYZY955m1eRkZ1brmSMTZzznmH3";
 
 const $ = id => document.getElementById(id);
 
+// USER STATUS
+window.currentUser = null;
+window.isAdmin = false;
+
+let isRegistration = false;
+
+// SAFE TEXT
+function safeText(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+// MESSAGE
 function showMessage(id, message) {
   const element = $(id);
   if (element) element.textContent = message;
 }
 
-// Student Login / Registration
-$("loginForm")?.addEventListener("submit", async event => {
+// PAGE NAVIGATION
+window.showPage = function(page) {
+
+  if (
+    ["study", "category", "studentTests", "test"].includes(page) &&
+    !window.currentUser
+  ) {
+    page = "login";
+  }
+
+  if (page === "admin" && !window.isAdmin) {
+    page = "adminLogin";
+  }
+
+  document.querySelectorAll(".section").forEach(section => {
+    section.classList.remove("active");
+  });
+
+  const selected = $(page);
+
+  if (selected) {
+    selected.classList.add("active");
+  }
+
+  if (page === "studentTests") {
+    window.loadStudentTests();
+  }
+};
+
+// CATEGORY NAVIGATION
+window.openCategory = function(name) {
+
+  if (!window.currentUser) {
+    window.showPage("login");
+    return;
+  }
+
+  window.selectedCategory = name;
+  window.showPage("category");
+
+  if ($("categoryTitle")) {
+    $("categoryTitle").textContent = name;
+  }
+
+  if (name === "Online Test") {
+    window.loadStudentTests();
+  } else {
+    window.loadCategoryContent(name);
+  }
+};
+
+// REGISTRATION / LOGIN SWITCH
+window.toggleForm = function() {
+
+  isRegistration = !isRegistration;
+
+  $("loginHeading").textContent =
+    isRegistration ? "Student Registration" : "Student Login";
+
+  $("loginButton").textContent =
+    isRegistration ? "Register" : "Login";
+};
+
+// STUDENT LOGIN
+$("loginForm").addEventListener("submit", async event => {
+
   event.preventDefault();
 
-  const email = $("loginEmail")?.value.trim();
-  const password = $("loginPassword")?.value;
+  const email = $("loginEmail").value.trim();
+  const password = $("loginPassword").value;
 
   try {
+
     if (isRegistration) {
-      await createUserWithEmailAndPassword(auth, email, password);
-      showMessage("loginMessage", "Registration successful!");
+
+      await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      showMessage("loginMessage", "Registration सफल हुआ!");
+
     } else {
-      await signInWithEmailAndPassword(auth, email, password);
-      showMessage("loginMessage", "Login successful!");
+
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      showMessage("loginMessage", "Login सफल हुआ!");
     }
+
   } catch (error) {
+
     showMessage("loginMessage", error.message);
+
   }
 });
 
-// Admin Login
-$("adminLoginForm")?.addEventListener("submit", async event => {
+// ADMIN LOGIN
+$("adminLoginForm").addEventListener("submit", async event => {
+
   event.preventDefault();
 
   try {
-    await signInWithEmailAndPassword(
+
+    const result = await signInWithEmailAndPassword(
       auth,
       $("adminEmail").value.trim(),
       $("adminPassword").value
     );
 
-    if (auth.currentUser?.uid !== ADMIN_UID) {
+    if (result.user.uid !== ADMIN_UID) {
+
       await signOut(auth);
-      showMessage("adminLoginMessage", "यह अकाउंट Admin नहीं है।");
+
+      showMessage(
+        "adminLoginMessage",
+        "यह अकाउंट Admin नहीं है।"
+      );
+
       return;
     }
 
-    showMessage("adminLoginMessage", "Admin Login Successful!");
+    showMessage(
+      "adminLoginMessage",
+      "Admin Login सफल हुआ!"
+    );
+
   } catch (error) {
+
     showMessage("adminLoginMessage", error.message);
+
   }
+
 });
 
-// Login status
+// LOGIN STATUS
 onAuthStateChanged(auth, user => {
+
   window.currentUser = user;
   window.isAdmin = !!user && user.uid === ADMIN_UID;
 
-  if (user) {
-    if (window.isAdmin) {
-      showPage("admin");
-      if ($("adminWelcome")) {
-        $("adminWelcome").textContent = "Welcome Admin";
-      }
-      loadAdminContent();
-      loadAdminTests();
-    } else {
-      showPage("home");
+  if (window.isAdmin) {
+
+    window.showPage("admin");
+
+    if ($("adminWelcome")) {
+      $("adminWelcome").textContent = "Welcome Admin";
     }
+
+    window.loadAdminContent();
+    window.loadAdminTests();
+
+  } else if (user) {
+
+    window.showPage("home");
+
   } else {
-    showPage("home");
+
+    window.showPage("home");
+
   }
+
 });
 
-// Logout
+// STUDENT LOGOUT
 window.studentLogout = async function() {
-  await signOut(auth);
-  showPage("home");
+
+  try {
+    await signOut(auth);
+    window.showPage("home");
+  } catch (error) {
+    alert(error.message);
+  }
+
 };
 
+// ADMIN LOGOUT
 window.adminLogout = async function() {
-  await signOut(auth);
-  showPage("home");
+
+  try {
+    await signOut(auth);
+    window.showPage("home");
+  } catch (error) {
+    alert(error.message);
+  }
+
 };
 
-// Upload content
-$("uploadForm")?.addEventListener("submit", async event => {
+// CONTENT UPLOAD
+$("uploadForm").addEventListener("submit", async event => {
+
   event.preventDefault();
 
   if (!window.isAdmin) {
-    showMessage("uploadMessage", "केवल Admin सामग्री अपलोड कर सकता है।");
+    showMessage("uploadMessage", "केवल Admin अपलोड कर सकता है।");
     return;
   }
 
   const title = $("contentTitle").value.trim();
   const category = $("contentCategory").value;
   const type = $("contentType").value;
+
   let body = $("contentBody").value.trim();
 
   try {
+
     if (type === "txt") {
+
       const file = $("txtFile").files[0];
 
       if (!file) {
-        showMessage("uploadMessage", "कृपया TXT फाइल चुनें।");
+        showMessage("uploadMessage", "TXT फाइल चुनें।");
         return;
       }
 
       body = await file.text();
     }
 
-    if (!body) {
-      showMessage("uploadMessage", "कृपया सामग्री या लिंक भरें।");
+    if (!title || !body) {
+      showMessage("uploadMessage", "सभी जरूरी जानकारी भरें।");
       return;
     }
 
     await addDoc(collection(db, "contents"), {
-      title,
-      category,
-      type,
-      body,
+
+      title: title,
+      category: category,
+      type: type,
+      body: body,
+
       currentAffairsDate:
-        category === "Current Affairs" ? $("currentAffairsDate").value : "",
+        category === "Current Affairs"
+          ? $("currentAffairsDate").value
+          : "",
+
       createdAt: serverTimestamp()
+
     });
 
     $("uploadForm").reset();
-    showMessage("uploadMessage", "सामग्री सफलतापूर्वक अपलोड हो गई!");
-    loadAdminContent();
+
+    showMessage(
+      "uploadMessage",
+      "सामग्री सफलतापूर्वक अपलोड हो गई!"
+    );
+
+    window.loadAdminContent();
 
   } catch (error) {
+
     showMessage("uploadMessage", error.message);
+
   }
+
 });
 
-// Display content safely
+// CONTENT DISPLAY
 function contentHTML(item) {
+
   const title = safeText(item.title);
   const body = String(item.body ?? "");
 
-  if (item.type === "link" && /^https?:\/\//i.test(body)) {
-    return `<h3>${title}</h3><p><a href="${safeText(body)}" target="_blank" rel="noopener">Open Content</a></p>`;
+  if (
+    item.type === "link" &&
+    /^https?:\/\//i.test(body)
+  ) {
+
+    return `
+      <h3>${title}</h3>
+      <p>
+        <a href="${safeText(body)}"
+        target="_blank" rel="noopener">
+          Open Content
+        </a>
+      </p>
+    `;
+
   }
 
-  return `<h3>${title}</h3><p style="white-space:pre-wrap">${safeText(body)}</p>`;
+  return `
+    <h3>${title}</h3>
+    <p style="white-space:pre-wrap">${safeText(body)}</p>
+  `;
+
 }
 
-// Load category content
+// STUDENT CATEGORY CONTENT
 window.loadCategoryContent = async function(category) {
+
   const container = $("categoryContent");
+
   if (!container) return;
 
   container.textContent = "Loading...";
 
   try {
-    const snapshot = await getDocs(collection(db, "contents"));
+
+    const snapshot = await getDocs(
+      collection(db, "contents")
+    );
+
     const items = snapshot.docs
-      .map(item => ({ id: item.id, ...item.data() }))
+      .map(item => ({
+        id: item.id,
+        ...item.data()
+      }))
       .filter(item => item.category === category);
 
-    container.innerHTML = items.length
-      ? items.map(item => {
-          const date = item.currentAffairsDate
-            ? `<p>Date: ${safeText(item.currentAffairsDate)}</p>`
-            : "";
-          return `<div class="panel">${contentHTML(item)}${date}</div>`;
-        }).join("")
-      : "अभी इस कैटेगरी में कोई सामग्री नहीं है।";
+    if (!items.length) {
+      container.textContent =
+        "अभी इस कैटेगरी में कोई सामग्री नहीं है।";
+      return;
+    }
+
+    container.innerHTML = items.map(item => {
+
+      const date = item.currentAffairsDate
+        ? `<p>Date: ${safeText(item.currentAffairsDate)}</p>`
+        : "";
+
+      return `
+        <div class="panel">
+          ${contentHTML(item)}
+          ${date}
+        </div>
+      `;
+
+    }).join("");
 
   } catch (error) {
+
     container.textContent = error.message;
+
   }
+
 };
 
-// Admin content list
+// ADMIN CONTENT LIST
 window.loadAdminContent = async function() {
+
   if (!window.isAdmin) return;
 
   const container = $("adminContentList");
+
   if (!container) return;
 
   container.textContent = "Loading...";
 
   try {
-    const snapshot = await getDocs(collection(db, "contents"));
+
+    const snapshot = await getDocs(
+      collection(db, "contents")
+    );
 
     if (snapshot.empty) {
-      container.textContent = "अभी कोई सामग्री अपलोड नहीं है।";
+      container.textContent = "अभी कोई सामग्री नहीं है।";
       return;
     }
 
     container.innerHTML = snapshot.docs.map(item => {
+
       const data = item.data();
 
-      return `<div class="panel">
-        <strong>${safeText(data.title)}</strong>
-        <p>${safeText(data.category)}</p>
-        <button class="danger" data-delete-content="${item.id}">Delete</button>
-      </div>`;
+      return `
+        <div class="panel">
+          <strong>${safeText(data.title)}</strong>
+          <p>${safeText(data.category)}</p>
+          <button
+            class="danger"
+            data-delete-content="${item.id}">
+            Delete
+          </button>
+        </div>
+      `;
+
     }).join("");
 
-    container.querySelectorAll("[data-delete-content]").forEach(button => {
+    container.querySelectorAll(
+      "[data-delete-content]"
+    ).forEach(button => {
+
       button.addEventListener("click", async () => {
-        if (!confirm("क्या आप यह सामग्री हटाना चाहते हैं?")) return;
+
+        if (!confirm("क्या आप यह सामग्री हटाना चाहते हैं?")) {
+          return;
+        }
 
         try {
-          await deleteDoc(doc(db, "contents", button.dataset.deleteContent));
-          loadAdminContent();
+
+          await deleteDoc(
+            doc(db, "contents", button.dataset.deleteContent)
+          );
+
+          window.loadAdminContent();
+
         } catch (error) {
+
           alert(error.message);
+
         }
+
       });
+
     });
 
   } catch (error) {
+
     container.textContent = error.message;
+
   }
+
 };
 
-// Add question editor
+// 
+// =====================================
+// ONLINE TEST SYSTEM
+// =====================================
+
 let questionCount = 0;
 
+// ADD QUESTION
 function addQuestion() {
+
   questionCount++;
 
-  const id = questionCount;
   const box = document.createElement("div");
   box.className = "panel";
 
   box.innerHTML = `
-    <h4>प्रश्न ${id}</h4>
-    <textarea class="questionText" placeholder="प्रश्न लिखें" required></textarea>
+    <h3>प्रश्न ${questionCount}</h3>
 
-    <input class="testOption" placeholder="Option A" required>
-    <input class="testOption" placeholder="Option B" required>
-    <input class="testOption" placeholder="Option C" required>
-    <input class="testOption" placeholder="Option D" required>
+    <textarea class="questionText"
+      placeholder="प्रश्न लिखें" required></textarea>
+
+    <input class="testOption"
+      placeholder="Option A" required>
+
+    <input class="testOption"
+      placeholder="Option B" required>
+
+    <input class="testOption"
+      placeholder="Option C" required>
+
+    <input class="testOption"
+      placeholder="Option D" required>
 
     <label>सही उत्तर चुनें</label>
+
     <select class="correctAnswer">
       <option value="0">Option A</option>
       <option value="1">Option B</option>
@@ -574,59 +988,84 @@ function addQuestion() {
       <option value="3">Option D</option>
     </select>
 
-    <button type="button" class="danger removeQuestion">प्रश्न हटाएँ</button>
+    <button type="button" class="danger removeQuestion">
+      प्रश्न हटाएँ
+    </button>
   `;
 
-  box.querySelector(".removeQuestion").addEventListener("click", () => {
-    box.remove();
-  });
+  box.querySelector(".removeQuestion").addEventListener(
+    "click",
+    () => box.remove()
+  );
 
   $("questionEditors").appendChild(box);
 }
 
-$("addQuestionBtn")?.addEventListener("click", addQuestion);
+// ADD QUESTION BUTTON
+$("addQuestionBtn").addEventListener("click", addQuestion);
 
-// Publish test
-$("testForm")?.addEventListener("submit", async event => {
+
+// PUBLISH TEST
+$("testForm").addEventListener("submit", async event => {
+
   event.preventDefault();
 
-  if (!window.isAdmin) return;
+  if (!window.isAdmin) {
+    showMessage("testMessage", "केवल Admin टेस्ट बना सकता है।");
+    return;
+  }
 
-  const editors = [...document.querySelectorAll("#questionEditors .panel")];
+  const editors = [
+    ...document.querySelectorAll("#questionEditors .panel")
+  ];
 
-  if (!editors.length) {
+  if (editors.length === 0) {
     showMessage("testMessage", "कम से कम एक प्रश्न जोड़ें।");
     return;
   }
 
   try {
-    const questions = editors.map(box => {
-      const options = [...box.querySelectorAll(".testOption")]
-        .map(input => input.value.trim());
 
-      const question = box.querySelector(".questionText").value.trim();
-      const correctIndex = Number(box.querySelector(".correctAnswer").value);
+    const questions = editors.map(box => {
+
+      const question =
+        box.querySelector(".questionText").value.trim();
+
+      const options = [
+        ...box.querySelectorAll(".testOption")
+      ].map(input => input.value.trim());
+
+      const correctIndex = Number(
+        box.querySelector(".correctAnswer").value
+      );
 
       if (!question || options.some(option => !option)) {
         throw new Error("सभी प्रश्न और चारों विकल्प भरें।");
       }
 
-      return { question, options, correctIndex };
+      return {
+        question,
+        options,
+        correctIndex
+      };
+
     });
 
     const title = $("testTitle").value.trim();
     const durationMinutes = Number($("testDuration").value);
 
     if (!title || durationMinutes < 1 || durationMinutes > 300) {
-      throw new Error("टेस्ट का नाम और सही समय भरें।");
+      throw new Error("टेस्ट का नाम और समय सही भरें।");
     }
 
     await addDoc(collection(db, "tests"), {
+
       title,
       durationMinutes,
       questions,
       published: true,
       createdAt: serverTimestamp()
+
     });
 
     $("testForm").reset();
@@ -634,23 +1073,31 @@ $("testForm")?.addEventListener("submit", async event => {
     questionCount = 0;
 
     showMessage("testMessage", "टेस्ट सफलतापूर्वक Publish हो गया!");
-    loadAdminTests();
+
+    window.loadAdminTests();
 
   } catch (error) {
+
     showMessage("testMessage", error.message);
+
   }
+
 });
 
-// Admin test list
+
+// ADMIN TEST LIST
 window.loadAdminTests = async function() {
+
   if (!window.isAdmin) return;
 
   const container = $("adminTestList");
+
   if (!container) return;
 
   container.textContent = "Loading...";
 
   try {
+
     const snapshot = await getDocs(collection(db, "tests"));
 
     if (snapshot.empty) {
@@ -658,34 +1105,63 @@ window.loadAdminTests = async function() {
       return;
     }
 
-    container.innerHTML = snapshot.docs.map(item => `
-      <div class="panel">
-        <strong>${safeText(item.data().title)}</strong>
-        <p>${item.data().durationMinutes} मिनट</p>
-        <button class="danger" data-delete-test="${item.id}">Delete Test</button>
-      </div>
-    `).join("");
+    container.innerHTML = snapshot.docs.map(item => {
+
+      const data = item.data();
+
+      return `
+        <div class="panel">
+          <h3>${safeText(data.title)}</h3>
+          <p>समय: ${Number(data.durationMinutes)} मिनट</p>
+
+          <button
+            class="danger"
+            data-delete-test="${item.id}">
+            Delete Test
+          </button>
+        </div>
+      `;
+
+    }).join("");
 
     container.querySelectorAll("[data-delete-test]").forEach(button => {
+
       button.addEventListener("click", async () => {
-        if (!confirm("क्या यह टेस्ट हटाना चाहते हैं?")) return;
+
+        if (!confirm("क्या आप यह टेस्ट हटाना चाहते हैं?")) {
+          return;
+        }
 
         try {
-          await deleteDoc(doc(db, "tests", button.dataset.deleteTest));
-          loadAdminTests();
+
+          await deleteDoc(
+            doc(db, "tests", button.dataset.deleteTest)
+          );
+
+          window.loadAdminTests();
+
         } catch (error) {
+
           alert(error.message);
+
         }
+
       });
+
     });
 
   } catch (error) {
+
     container.textContent = error.message;
+
   }
+
 };
 
-// Student test list
+
+// STUDENT TEST LIST
 window.loadStudentTests = async function() {
+
   const containers = [
     $("studentTestList"),
     $("categoryTestList")
@@ -694,137 +1170,190 @@ window.loadStudentTests = async function() {
   if (!containers.length) return;
 
   containers.forEach(container => {
-    container.textContent = "Loading tests...";
+    container.textContent = "Loading Tests...";
   });
 
   try {
+
     const snapshot = await getDocs(collection(db, "tests"));
 
-    const tests = snapshot.docs
-      .filter(item => item.data().published === true);
+    const tests = snapshot.docs.filter(item => {
+      return item.data().published === true;
+    });
 
-    const html = tests.length
-      ? tests.map(item => `
-          <div class="panel">
-            <h3>${safeText(item.data().title)}</h3>
-            <p>समय: ${item.data().durationMinutes} मिनट</p>
-            <button class="primary" data-start-test="${item.id}">Start Test</button>
-          </div>
-        `).join("")
-      : "अभी कोई टेस्ट उपलब्ध नहीं है।";
+    if (tests.length === 0) {
 
-    containers.forEach(container => {
-      container.innerHTML = html;
-
-      container.querySelectorAll("[data-start-test]").forEach(button => {
-        button.addEventListener("click", () => {
-          startTest(button.dataset.startTest);
-        });
+      containers.forEach(container => {
+        container.textContent = "अभी कोई टेस्ट उपलब्ध नहीं है।";
       });
-    });
 
-  } catch (error) {
-    containers.forEach(container => {
-      container.textContent = error.message;
-    });
-  }
-};
-
-// Start test
-async function startTest(testId) {
-  try {
-    if (!window.currentUser) {
-      alert("पहले Student Login करें।");
-      showPage("login");
       return;
     }
 
+    const html = tests.map(item => {
+
+      const data = item.data();
+
+      return `
+        <div class="panel">
+          <h3>${safeText(data.title)}</h3>
+          <p>समय: ${Number(data.durationMinutes)} मिनट</p>
+
+          <button
+            class="primary"
+            data-start-test="${item.id}">
+            Start Test
+          </button>
+        </div>
+      `;
+
+    }).join("");
+
+    containers.forEach(container => {
+
+      container.innerHTML = html;
+
+      container.querySelectorAll("[data-start-test]").forEach(button => {
+
+        button.addEventListener("click", () => {
+          window.startTest(button.dataset.startTest);
+        });
+
+      });
+
+    });
+
+  } catch (error) {
+
+    containers.forEach(container => {
+      container.textContent = error.message;
+    });
+
+  }
+
+};
+
+
+// START TEST
+window.startTest = async function(testId) {
+
+  if (!window.currentUser) {
+    window.showPage("login");
+    return;
+  }
+
+  try {
+
     const snapshot = await getDoc(doc(db, "tests", testId));
 
-    if (!snapshot.exists() || snapshot.data().published !== true) {
-      alert("यह टेस्ट उपलब्ध नहीं है।");
+    if (!snapshot.exists()) {
+      alert("टेस्ट उपलब्ध नहीं है।");
       return;
     }
 
     const test = snapshot.data();
+
+    if (test.published !== true) {
+      alert("यह टेस्ट अभी प्रकाशित नहीं है।");
+      return;
+    }
+
     const questions = test.questions || [];
 
-    if (!questions.length) {
+    if (questions.length === 0) {
       alert("इस टेस्ट में प्रश्न नहीं हैं।");
       return;
     }
 
     const container = $("testArea");
+
     if (!container) {
       alert("Test Area नहीं मिला।");
       return;
     }
 
-    showPage("test");
+    window.showPage("test");
 
     container.innerHTML = `
       <div class="panel">
         <h2>${safeText(test.title)}</h2>
+
         <h3 id="testTimer"></h3>
+
         <form id="attemptForm">
+
           <div id="attemptQuestions"></div>
-          <button class="primary" type="submit">Submit Test</button>
+
+          <button type="submit" class="primary">
+            Submit Test
+          </button>
+
         </form>
+
         <div id="testResult"></div>
       </div>
     `;
 
     const questionContainer = $("attemptQuestions");
 
-    questionContainer.innerHTML = questions.map((question, index) => `
-      <div class="panel">
-        <h3>Q${index + 1}. ${safeText(question.question)}</h3>
-        ${question.options.map((option, optionIndex) => `
-          <label style="display:block;margin:10px 0">
-            <input type="radio" name="question${index}" value="${optionIndex}">
-            ${safeText(option)}
-          </label>
-        `).join("")}
-      </div>
-    `).join("");
+    questionContainer.innerHTML = questions.map((question, index) => {
 
+      return `
+        <div class="panel">
+
+          <h3>
+            Q${index + 1}. ${safeText(question.question)}
+          </h3>
+
+          ${question.options.map((option, optionIndex) => {
+
+            return `
+              <label style="display:block;margin:12px 0;font-weight:normal">
+                <input
+                  type="radio"
+                  name="question${index}"
+                  value="${optionIndex}"
+                  style="width:auto;margin-right:8px">
+
+                ${safeText(option)}
+              </label>
+            `;
+
+          }).join("")}
+
+        </div>
+      `;
+
+    }).join("");
+
+
+    // TIMER AND RESULT
     let remaining = Number(test.durationMinutes) * 60;
     let submitted = false;
+    let timer;
 
-    const timer = setInterval(() => {
-      remaining--;
+    function submitTest() {
 
-      const minutes = Math.floor(Math.max(remaining, 0) / 60);
-      const seconds = Math.max(remaining, 0) % 60;
-
-      $("testTimer").textContent =
-        `समय शेष: ${minutes}:${String(seconds).padStart(2, "0")}`;
-
-      if (remaining <= 0) {
-        clearInterval(timer);
-        submitTest();
-      }
-    }, 1000);
-
-    async function submitTest() {
       if (submitted) return;
+
       submitted = true;
       clearInterval(timer);
-
-      const answers = questions.map((question, index) => {
-        const selected = document.querySelector(
-          `input[name="question${index}"]:checked`
-        );
-
-        return selected ? Number(selected.value) : -1;
-      });
 
       let score = 0;
 
       questions.forEach((question, index) => {
-        if (answers[index] === Number(question.correctIndex)) {
+
+        const selected = document.querySelector(
+          `input[name="question${index}"]:checked`
+        );
+
+        if (
+          selected &&
+          Number(selected.value) === Number(question.correctIndex)
+        ) {
           score++;
         }
+
       });
 
       $("attemptForm").querySelectorAll("input,button").forEach(element => {
@@ -832,29 +1361,84 @@ async function startTest(testId) {
       });
 
       $("testResult").innerHTML = `
-        <h2>आपका रिजल्ट</h2>
-        <h3>${score} / ${questions.length}</h3>
-        <p>सही उत्तर: ${score}</p>
-        <p>गलत या छोड़े गए प्रश्न: ${questions.length - score}</p>
-        <button class="primary" onclick="showPage('home')">Home</button>
+        <div class="panel">
+          <h2>आपका रिजल्ट</h2>
+
+          <h3>${score} / ${questions.length}</h3>
+
+          <p>सही उत्तर: ${score}</p>
+
+          <p>
+            गलत या छोड़े गए प्रश्न:
+            ${questions.length - score}
+          </p>
+
+          <button
+            type="button"
+            class="primary"
+            id="resultHomeButton">
+            Home
+          </button>
+        </div>
       `;
+
+      $("resultHomeButton").addEventListener("click", () => {
+        window.showPage("home");
+      });
+
     }
 
+
+    // TIMER DISPLAY
+    function updateTimer() {
+
+      const minutes = Math.floor(remaining / 60);
+      const seconds = remaining % 60;
+
+      $("testTimer").textContent =
+        `समय शेष: ${minutes}:${String(seconds).padStart(2, "0")}`;
+
+    }
+
+    updateTimer();
+
+    timer = setInterval(() => {
+
+      remaining--;
+
+      updateTimer();
+
+      if (remaining <= 0) {
+        submitTest();
+      }
+
+    }, 1000);
+
+
+    // MANUAL SUBMIT
     $("attemptForm").addEventListener("submit", event => {
+
       event.preventDefault();
       submitTest();
+
     });
 
-    $("testTimer").textContent =
-      `समय शेष: ${Math.floor(remaining / 60)}:${String(remaining % 60).padStart(2, "0")}`;
-
   } catch (error) {
-    alert(error.message);
-  }
-}
 
-window.startTest = startTest;
+    alert(error.message);
+
+  }
+
+};
+
+
+// =====================================
+// END OF FIREBASE MODULE
+// =====================================
+
 </script>
+
 </body>
 </html>
- 
+  
+  
