@@ -5,33 +5,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Pankaj Shaktiwala</title>
-
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,sans-serif;background:#f2f5fa;color:#222}
 header{background:#102b59;color:white;text-align:center;padding:22px 10px}
 header h1{margin:0;font-size:25px}
-header p{margin:8px 0 0}
 nav{display:flex;flex-wrap:wrap;justify-content:center;background:#174a88;padding:10px;gap:8px}
 button{border:0;border-radius:7px;padding:11px 15px;background:white;color:#12345c;font-weight:bold;cursor:pointer}
 main{padding:18px;max-width:1000px;margin:auto}
 .section{display:none}
 .section.active{display:block}
-.welcome,.panel{background:white;padding:22px;border-radius:12px;margin-bottom:18px}
+.welcome,.panel{background:white;padding:20px;border-radius:12px;margin-bottom:18px}
 .welcome{text-align:center}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px}
 .card{background:white;border-radius:12px;padding:22px 10px;text-align:center;box-shadow:0 2px 8px #0001;cursor:pointer}
 .card .emoji{font-size:32px}
-.card h3{font-size:15px}
 .back{background:#174a88;color:white;margin-bottom:15px}
-input{width:100%;padding:13px;margin:8px 0;border:1px solid #bbb;border-radius:7px;font-size:16px}
+input,select,textarea{width:100%;padding:12px;margin:8px 0;border:1px solid #bbb;border-radius:7px;font-size:15px}
+textarea{min-height:100px}
 .primary{background:#174a88;color:white;width:100%;margin-top:10px}
+.danger{background:#b42318;color:white}
 .switch{color:#0755a5;text-decoration:underline;cursor:pointer}
-#message{font-weight:bold;margin-top:12px;overflow-wrap:anywhere}
+.item{background:#f3f6fb;padding:14px;border-radius:8px;margin:12px 0;overflow-wrap:anywhere}
+.item a{color:#0755a5}
+#message{font-weight:bold;overflow-wrap:anywhere}
 footer{background:#102b59;color:white;text-align:center;padding:18px;margin-top:35px}
 </style>
 </head>
-
 <body>
 
 <header>
@@ -43,6 +43,7 @@ footer{background:#102b59;color:white;text-align:center;padding:18px;margin-top:
 <button onclick="showPage('home')">Home</button>
 <button onclick="showPage('study')">Study Material</button>
 <button onclick="showPage('login')">Student Login</button>
+<button onclick="showPage('adminLogin')">Admin Login</button>
 </nav>
 
 <main>
@@ -53,7 +54,6 @@ footer{background:#102b59;color:white;text-align:center;padding:18px;margin-top:
 <p>आपकी पढ़ाई, आपकी सफलता!</p>
 <p id="homeStatus">पढ़ाई शुरू करने के लिए Login करें।</p>
 </div>
-
 <div class="cards">
 <div class="card" onclick="openCategory('Current Affairs')"><div class="emoji">📰</div><h3>Current Affairs</h3></div>
 <div class="card" onclick="openCategory('Notes & PDF')"><div class="emoji">📚</div><h3>Notes & PDF</h3></div>
@@ -68,7 +68,6 @@ footer{background:#102b59;color:white;text-align:center;padding:18px;margin-top:
 <button class="back" onclick="showPage('home')">← Home</button>
 <div class="panel">
 <h2>Study Material</h2>
-<p>अपनी पसंद की कैटेगरी चुनें।</p>
 <div id="studyLinks"></div>
 </div>
 </section>
@@ -76,39 +75,93 @@ footer{background:#102b59;color:white;text-align:center;padding:18px;margin-top:
 <section id="category" class="section">
 <button class="back" onclick="showPage('home')">← Home</button>
 <div class="panel">
-<h2 id="categoryTitle">Category</h2>
-<p id="categoryMessage">इस सेक्शन में सामग्री जल्द उपलब्ध होगी।</p>
+<h2 id="categoryTitle"></h2>
+<div id="categoryContent">सामग्री लोड हो रही है...</div>
 </div>
 </section>
 
 <section id="login" class="section">
 <button class="back" onclick="showPage('home')">← Home</button>
 <div class="panel">
-
 <div id="authForms">
 <h2 id="formTitle">Student Login</h2>
-
 <form id="authForm">
 <input id="email" type="email" placeholder="अपना Email लिखें" required>
 <input id="password" type="password" placeholder="Password (कम से कम 6 अक्षर)" minlength="6" required>
 <button class="primary" id="submitButton" type="submit">Login करें</button>
 </form>
-
-<p id="switchText">
-नया अकाउंट बनाना है?
-<span class="switch" onclick="toggleForm()">Registration करें</span>
-</p>
+<p id="switchText">नया अकाउंट बनाना है? <span class="switch" onclick="toggleForm()">Registration करें</span></p>
 <p id="message"></p>
 </div>
-
 <div id="studentPanel" style="display:none">
 <h2>Student Dashboard</h2>
-<p>आप सफलतापूर्वक Login हो गए हैं।</p>
 <p id="studentEmail"></p>
 <button class="primary" onclick="showPage('study')">Study Material देखें</button>
 <button class="primary" onclick="studentLogout()">Logout</button>
 </div>
+</div>
+</section>
 
+<section id="adminLogin" class="section">
+<button class="back" onclick="showPage('home')">← Home</button>
+<div class="panel">
+<h2>Admin Login</h2>
+<form id="adminForm">
+<input id="adminEmail" type="email" placeholder="Admin Email" required>
+<input id="adminPassword" type="password" placeholder="Admin Password" required>
+<button class="primary" type="submit">Admin Login करें</button>
+</form>
+<p id="adminMessage"></p>
+</div>
+</section>
+
+<section id="admin" class="section">
+<div class="panel">
+<h2>Admin Dashboard</h2>
+<p id="adminWelcome"></p>
+<button class="primary" onclick="showPage('home')">Home</button>
+<button class="primary" onclick="adminLogout()">Admin Logout</button>
+</div>
+
+<div class="panel">
+<h3>नई सामग्री अपलोड करें</h3>
+
+<form id="uploadForm">
+<label>सामग्री का शीर्षक</label>
+<input id="contentTitle" placeholder="जैसे: आज के Current Affairs" required>
+
+<label>कैटेगरी चुनें</label>
+<select id="contentCategory" required>
+<option value="Current Affairs">Current Affairs</option>
+<option value="Notes & PDF">Notes & PDF</option>
+<option value="Online Test">Online Test</option>
+<option value="Course">Course</option>
+<option value="Audio & Video">Audio & Video</option>
+<option value="Digital Store">Digital Store</option>
+</select>
+
+<label>सामग्री का प्रकार</label>
+<select id="contentType">
+<option value="text">Text / सामान्य सामग्री</option>
+<option value="link">PDF / Video Link</option>
+<option value="txt">TXT File</option>
+</select>
+
+<label>विवरण या लिंक</label>
+<textarea id="contentBody" placeholder="यहाँ सामग्री लिखें या PDF/Video का लिंक डालें"></textarea>
+
+<label>TXT फाइल (केवल TXT प्रकार के लिए)</label>
+<input id="txtFile" type="file" accept=".txt,text/plain">
+
+<button class="primary" id="uploadButton" type="submit">सामग्री अपलोड करें</button>
+<p id="uploadMessage"></p>
+</form>
+</div>
+
+<div class="panel">
+<h3>अपलोड की गई सामग्री</h3>
+<button class="primary" onclick="loadAdminContent()">Refresh List</button>
+<div id="adminContentList">सूची लोड हो रही है...</div>
 </div>
 </section>
 
@@ -120,63 +173,61 @@ footer{background:#102b59;color:white;text-align:center;padding:18px;margin-top:
 </footer>
 
 <script>
-window.currentStudent = null;
+window.currentUser=null;
+window.isAdmin=false;
+
+const categories=['Current Affairs','Notes & PDF','Online Test','Course','Audio & Video','Digital Store'];
 
 function showPage(page){
  const protectedPages=['study','category'];
-
- if(protectedPages.includes(page) && !window.currentStudent){
-  document.getElementById('message').innerText=
-   'Study Material देखने के लिए पहले Student Login करें।';
+ if(protectedPages.includes(page) && !window.currentUser){
+  document.getElementById('message').innerText='पहले Student Login करें।';
   page='login';
  }
+ if(page==='admin' && !window.isAdmin) page='adminLogin';
 
- document.querySelectorAll('.section').forEach(function(s){
-  s.classList.remove('active');
- });
-
+ document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
  document.getElementById(page).classList.add('active');
  window.scrollTo(0,0);
 }
 
 function openCategory(name){
- if(!window.currentStudent){
-  document.getElementById('message').innerText=
-   'इस सामग्री को देखने के लिए पहले Login करें।';
+ if(!window.currentUser){
+  document.getElementById('message').innerText='पहले Student Login करें।';
   showPage('login');
   return;
  }
-
  document.getElementById('categoryTitle').innerText=name;
- document.getElementById('categoryMessage').innerText=
-  name+' की सामग्री जल्द उपलब्ध होगी।';
-
  showPage('category');
+ window.loadCategoryContent(name);
 }
 
-var categories=[
- 'Current Affairs','Notes & PDF','Online Test',
- 'Course','Audio & Video','Digital Store'
-];
+document.getElementById('studyLinks').innerHTML=categories.map(name=>
+ '<p><button onclick="openCategory(\''+name+'\')">'+name+'</button></p>'
+).join('');
 
-document.getElementById('studyLinks').innerHTML=
- categories.map(function(name){
-  return '<p><button onclick="openCategory(\''+
-   name+'\')">'+name+'</button></p>';
- }).join('');
-
+let isRegister=false;
+window.toggleForm=function(){
+ isRegister=!isRegister;
+ document.getElementById('formTitle').innerText=isRegister?'Student Registration':'Student Login';
+ document.getElementById('submitButton').innerText=isRegister?'Account बनाएं':'Login करें';
+ document.getElementById('switchText').innerHTML=isRegister?
+ 'पहले से अकाउंट है? <span class="switch" onclick="toggleForm()">Login करें</span>':
+ 'नया अकाउंट बनाना है? <span class="switch" onclick="toggleForm()">Registration करें</span>';
+ document.getElementById('message').innerText='';
+};
 </script>
 
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-
 import {
- getAuth,
- createUserWithEmailAndPassword,
- signInWithEmailAndPassword,
- signOut,
- onAuthStateChanged
+ getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,
+ signOut,onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import {
+ getFirestore,collection,addDoc,getDocs,deleteDoc,doc,
+ query,orderBy,serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
 const firebaseConfig={
  apiKey:"AIzaSyCJzzHsKAxdCpj5rbwkTDf2g4Jpk3OQp0s",
@@ -188,96 +239,219 @@ const firebaseConfig={
  measurementId:"G-HXR2HPE3MT"
 };
 
+const ADMIN_UID="qCYZY955m1eRkZ1brmSMTZzznmH3";
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
+const db=getFirestore(app);
 
-let isRegister=false;
+function showError(error){
+ return error.code==='permission-denied'
+ ?'Firebase Permission Denied: Firestore Rules जाँचें।'
+ :error.message;
+}
 
-window.toggleForm=function(){
- isRegister=!isRegister;
-
- document.getElementById('formTitle').innerText=
-  isRegister?'Student Registration':'Student Login';
-
- document.getElementById('submitButton').innerText=
-  isRegister?'Account बनाएं':'Login करें';
-
- document.getElementById('switchText').innerHTML=isRegister?
-  'पहले से अकाउंट है? <span class="switch" onclick="toggleForm()">Login करें</span>':
-  'नया अकाउंट बनाना है? <span class="switch" onclick="toggleForm()">Registration करें</span>';
-
- document.getElementById('message').innerText='';
-};
-
-document.getElementById('authForm').addEventListener('submit',async function(e){
+document.getElementById('authForm').addEventListener('submit',async e=>{
  e.preventDefault();
-
  const email=document.getElementById('email').value.trim();
  const password=document.getElementById('password').value;
  const message=document.getElementById('message');
  const button=document.getElementById('submitButton');
-
  button.disabled=true;
  message.innerText='कृपया प्रतीक्षा करें...';
-
  try{
-  if(isRegister){
-   await createUserWithEmailAndPassword(auth,email,password);
-  }else{
-   await signInWithEmailAndPassword(auth,email,password);
-  }
-  message.innerText='सफलता! आपका अकाउंट तैयार है।';
+  if(isRegister) await createUserWithEmailAndPassword(auth,email,password);
+  else await signInWithEmailAndPassword(auth,email,password);
+  message.innerText='सफलता!';
  }catch(error){
   const errors={
-   'auth/email-already-in-use':'यह Email पहले से रजिस्टर है। Login करें।',
+   'auth/email-already-in-use':'यह Email पहले से रजिस्टर है।',
    'auth/invalid-email':'Email सही नहीं है।',
-   'auth/weak-password':'Password कम से कम 6 अक्षर का रखें।',
-   'auth/invalid-credential':'Email या Password गलत है।',
-   'auth/network-request-failed':'Internet कनेक्शन जाँचें।'
+   'auth/weak-password':'Password कम से कम 6 अक्षर रखें।',
+   'auth/invalid-credential':'Email या Password गलत है।'
   };
+  message.innerText=errors[error.code]||showError(error);
+ }finally{button.disabled=false;}
+});
 
-  message.innerText=errors[error.code]||('Error: '+error.message);
- }finally{
-  button.disabled=false;
+document.getElementById('adminForm').addEventListener('submit',async e=>{
+ e.preventDefault();
+ const message=document.getElementById('adminMessage');
+ message.innerText='Login जाँच रहे हैं...';
+ try{
+  await signInWithEmailAndPassword(
+   auth,
+   document.getElementById('adminEmail').value.trim(),
+   document.getElementById('adminPassword').value
+  );
+  if(auth.currentUser.uid!==ADMIN_UID){
+   await signOut(auth);
+   message.innerText='यह अकाउंट Admin नहीं है।';
+  }
+ }catch(error){
+  message.innerText=showError(error);
  }
 });
 
-onAuthStateChanged(auth,function(user){
- window.currentStudent=user;
+onAuthStateChanged(auth,user=>{
+ window.currentUser=user;
+ window.isAdmin=!!user && user.uid===ADMIN_UID;
 
  const forms=document.getElementById('authForms');
- const panel=document.getElementById('studentPanel');
+ const student=document.getElementById('studentPanel');
 
- if(user){
+ if(window.isAdmin){
   forms.style.display='none';
-  panel.style.display='block';
-
-  document.getElementById('studentEmail').innerText=
-   'आपका Email: '+user.email;
-
-  document.getElementById('homeStatus').innerText=
-   'आप Login हैं: '+user.email;
-
+  student.style.display='none';
+  document.getElementById('adminWelcome').innerText='Admin: '+user.email;
+  showPage('admin');
+  loadAdminContent();
+ }else if(user){
+  forms.style.display='none';
+  student.style.display='block';
+  document.getElementById('studentEmail').innerText='Email: '+user.email;
+  document.getElementById('homeStatus').innerText='Login हैं: '+user.email;
   showPage('home');
  }else{
   forms.style.display='block';
-  panel.style.display='none';
-
-  document.getElementById('homeStatus').innerText=
-   'पढ़ाई शुरू करने के लिए Login करें।';
+  student.style.display='none';
+  document.getElementById('homeStatus').innerText='पढ़ाई शुरू करने के लिए Login करें।';
  }
 });
 
-window.studentLogout=async function(){
- try{
-  await signOut(auth);
-  showPage('home');
- }catch(error){
-  alert('Logout नहीं हुआ: '+error.message);
+window.studentLogout=async()=>{
+ await signOut(auth);
+ showPage('home');
+};
+
+window.adminLogout=async()=>{
+ await signOut(auth);
+ showPage('home');
+};
+
+document.getElementById('uploadForm').addEventListener('submit',async e=>{
+ e.preventDefault();
+ if(!window.isAdmin || !auth.currentUser || auth.currentUser.uid!==ADMIN_UID){
+  alert('केवल Admin सामग्री अपलोड कर सकता है।');
+  return;
  }
+
+ const title=document.getElementById('contentTitle').value.trim();
+ const category=document.getElementById('contentCategory').value;
+ const type=document.getElementById('contentType').value;
+ let textContent=document.getElementById('contentBody').value.trim();
+ const file=document.getElementById('txtFile').files[0];
+ const message=document.getElementById('uploadMessage');
+ const button=document.getElementById('uploadButton');
+
+ if(type==='txt'){
+  if(!file){message.innerText='पहले TXT फाइल चुनें।';return;}
+  if(file.size>700*1024){message.innerText='TXT फाइल 700 KB से छोटी रखें।';return;}
+  try{textContent=await file.text();}
+  catch(error){message.innerText='TXT फाइल पढ़ी नहीं जा सकी।';return;}
+ }
+
+ if(!textContent){
+  message.innerText='सामग्री या लिंक लिखें।';
+  return;
+ }
+
+ if(type==='link' && !/^https?:\/\/\S+/i.test(textContent)){
+  message.innerText='सही HTTP या HTTPS लिंक डालें।';
+  return;
+ }
+
+ button.disabled=true;
+ message.innerText='अपलोड हो रहा है...';
+
+ try{
+  await addDoc(collection(db,'content'),{
+   title,category,type,textContent,
+   createdAt:serverTimestamp(),
+   createdBy:auth.currentUser.uid
+  });
+  message.innerText='सामग्री सफलतापूर्वक अपलोड हो गई!';
+  document.getElementById('uploadForm').reset();
+  await loadAdminContent();
+ }catch(error){
+  message.innerText=showError(error);
+ }finally{button.disabled=false;}
+});
+
+window.loadAdminContent=async()=>{
+ if(!window.isAdmin)return;
+ const list=document.getElementById('adminContentList');
+ list.innerText='लोड हो रहा है...';
+
+ try{
+  const q=query(collection(db,'content'),orderBy('createdAt','desc'));
+  const snapshot=await getDocs(q);
+  if(snapshot.empty){list.innerText='अभी कोई सामग्री अपलोड नहीं है।';return;}
+
+  list.innerHTML='';
+  snapshot.forEach(item=>{
+   const data=item.data();
+   const box=document.createElement('div');
+   box.className='item';
+
+   const heading=document.createElement('h4');
+   heading.textContent=data.title||'बिना शीर्षक';
+   const info=document.createElement('p');
+   info.textContent=(data.category||'')+' | '+(data.type||'');
+   const del=document.createElement('button');
+   del.className='danger';
+   del.textContent='Delete';
+   del.onclick=()=>window.deleteContent(item.id);
+
+   box.append(heading,info,del);
+   list.appendChild(box);
+  });
+ }catch(error){list.innerText=showError(error);}
+};
+
+window.deleteContent=async id=>{
+ if(!window.isAdmin || !confirm('क्या यह सामग्री Delete करनी है?'))return;
+ try{
+  await deleteDoc(doc(db,'content',id));
+  await loadAdminContent();
+ }catch(error){alert(showError(error));}
+};
+
+window.loadCategoryContent=async category=>{
+ const area=document.getElementById('categoryContent');
+ area.innerText='सामग्री लोड हो रही है...';
+ try{
+  const snapshot=await getDocs(collection(db,'content'));
+  area.innerHTML='';
+  let count=0;
+  snapshot.forEach(item=>{
+   const data=item.data();
+   if(data.category!==category)return;
+   count++;
+   const box=document.createElement('div');
+   box.className='item';
+   const title=document.createElement('h3');
+   title.textContent=data.title||'सामग्री';
+   box.appendChild(title);
+
+   if(data.type==='link'){
+    const a=document.createElement('a');
+    a.href=data.textContent;
+    a.target='_blank';
+    a.rel='noopener noreferrer';
+    a.textContent='सामग्री खोलें';
+    box.appendChild(a);
+   }else{
+    const content=document.createElement('p');
+    content.style.whiteSpace='pre-wrap';
+    content.textContent=data.textContent||'';
+    box.appendChild(content);
+   }
+   area.appendChild(box);
+  });
+  if(!count)area.innerText='इस कैटेगरी में अभी कोई सामग्री उपलब्ध नहीं है।';
+ }catch(error){area.innerText=showError(error);}
 };
 </script>
-
 </body>
  </html>
  
