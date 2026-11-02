@@ -205,7 +205,154 @@ document.getElementById('addQuestionBtn').addEventListener('click',addQuestionEd
 
 addQuestionEditor();
 <h3>📝 Online Test बनाएँ</h3>
+let activeTest = null;
+let quizTimer = null;
+let secondsLeft = 0;
 
+window.startOnlineTest = async function(testId) {
+  if (!auth.currentUser || window.isAdmin) {
+    alert('टेस्ट देने के लिए Student Login करें।');
+    return;
+  }
+
+  try {
+    const snapshot = await getDocs(collection(db, 'tests'));
+    const found = snapshot.docs.find(d => d.id === testId);
+
+    if (!found) {
+      alert('टेस्ट नहीं मिला।');
+      return;
+    }
+
+    activeTest = found.data();
+
+    if (!activeTest.questions || !activeTest.questions.length) {
+      alert('इस टेस्ट में प्रश्न उपलब्ध नहीं हैं।');
+      return;
+    }
+
+    clearInterval(quizTimer);
+
+    secondsLeft = Number(activeTest.durationMinutes) * 60;
+
+    const runner = document.getElementById('testRunner');
+    runner.style.display = 'block';
+    runner.innerHTML = '';
+
+    const heading = document.createElement('h2');
+    heading.textContent = activeTest.title;
+
+    const timer = document.createElement('h3');
+    timer.id = 'quizTimer';
+
+    runner.append(heading, timer);
+
+    const form = document.createElement('form');
+    form.id = 'onlineQuizForm';
+
+    activeTest.questions.forEach((q, index) => {
+      const box = document.createElement('div');
+      box.className = 'item';
+
+      const question = document.createElement('h3');
+      question.textContent = (index + 1) + '. ' + q.question;
+      box.appendChild(question);
+
+      q.options.forEach((option, optionIndex) => {
+        const label = document.createElement('label');
+        const radio = document.createElement('input');
+
+        radio.type = 'radio';
+        radio.name = 'question_' + index;
+        radio.value = optionIndex;
+
+        label.append(radio, document.createTextNode(' ' + option));
+        box.appendChild(label);
+      });
+
+      form.appendChild(box);
+    });
+
+    const submit = document.createElement('button');
+    submit.type = 'submit';
+    submit.className = 'primary';
+    submit.textContent = 'टेस्ट Submit करें';
+
+    form.appendChild(submit);
+    runner.appendChild(form);
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      submitOnlineTest();
+    });
+
+    updateQuizTimer();
+
+    quizTimer = setInterval(() => {
+      secondsLeft--;
+      updateQuizTimer();
+
+      if (secondsLeft <= 0) {
+        submitOnlineTest(true);
+      }
+    }, 1000);
+
+    runner.scrollIntoView({ behavior: 'smooth' });
+
+  } catch (error) {
+    alert('टेस्ट शुरू नहीं हुआ: ' + showError(error));
+  }
+};
+
+function updateQuizTimer() {
+  const timer = document.getElementById('quizTimer');
+  if (!timer) return;
+
+  const minutes = Math.floor(secondsLeft / 60);
+  const seconds = secondsLeft % 60;
+
+  timer.textContent = 'शेष समय: ' +
+    minutes + ':' + String(seconds).padStart(2, '0');
+}
+
+function submitOnlineTest(autoSubmit = false) {
+  if (!activeTest) return;
+
+  clearInterval(quizTimer);
+
+  let score = 0;
+  let attempted = 0;
+
+  activeTest.questions.forEach((q, index) => {
+    const selected = document.querySelector(
+      'input[name="question_' + index + '"]:checked'
+    );
+
+    if (selected) {
+      attempted++;
+
+      if (Number(selected.value) === Number(q.correctIndex)) {
+        score++;
+      }
+    }
+  });
+
+  const total = activeTest.questions.length;
+  const runner = document.getElementById('testRunner');
+
+  runner.innerHTML = `
+    <h2>टेस्ट परिणाम</h2>
+    <h3>कुल प्रश्न: ${total}</h3>
+    <h3>हल किए गए: ${attempted}</h3>
+    <h3>सही उत्तर: ${score}</h3>
+    <h3>गलत उत्तर: ${attempted - score}</h3>
+    <h2>आपका स्कोर: ${score} / ${total}</h2>
+    <p>${autoSubmit ? 'समय पूरा होने पर टेस्ट अपने आप जमा हुआ।' : 'टेस्ट सफलतापूर्वक जमा हुआ।'}</p>
+    <button class="primary" onclick="loadStudentTests()">वापस जाएँ</button>
+  `;
+
+  activeTest = null;
+}
 <form id="testForm">
 <label>टेस्ट का नाम</label>
 <input id="testTitle" placeholder="जैसे: इतिहास टेस्ट 01" required>
