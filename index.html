@@ -141,6 +141,23 @@ footer{background:#102b59;color:white;text-align:center;padding:18px;margin-top:
 </select>
 
 <label>सामग्री का प्रकार</label>
+ <label>Current Affairs की तारीख</label>
+ await addDoc(collection(db,"content"),{
+category:$("contentCategory").value,
+title:$("contentTitle").value.trim(),
+description:$("contentDescription").value.trim(),
+accessType:$("accessType").value,
+currentAffairsDate:$("contentCategory").value==="करेंट अफेयर्स"?$("currentAffairsDate").value:"",
+createdAt:serverTimestamp()
+});
+ div.append(tag,cat,h);
+ if(d.category==="करेंट अफेयर्स" && d.currentAffairsDate){
+const date=document.createElement("small");
+date.className="muted";
+date.textContent="📅 तारीख: "+d.currentAffairsDate.split("-").reverse().join("-");
+div.append(date);
+}
+<input type="date" id="currentAffairsDate">
 <select id="contentType">
 <option value="text">Text / सामान्य सामग्री</option>
 <option value="link">PDF / Video Link</option>
